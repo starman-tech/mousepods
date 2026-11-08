@@ -101,6 +101,32 @@ Requirements: Linux with BlueZ, AirPods paired and connected, write access to `/
 .venv/bin/python -m unittest discover -s tests               # 159 tests, no hardware needed
 ```
 
+### Immutable distros (Bazzite, Fedora Atomic): use a distrobox
+
+On Bazzite the host Python cannot build `evdev` (no wheel on PyPI, and no `Python.h` on the
+read-only system), and Homebrew's Python has no `socket.AF_BLUETOOTH`. A Fedora distrobox has
+both. It shares Bluetooth, `/dev/uinput` and your home directory with the host.
+
+```bash
+distrobox create -n mousepods -i registry.fedoraproject.org/fedora-toolbox:43 -Y
+distrobox enter mousepods
+sudo dnf install -y python3-devel gcc
+sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/bluetoothctl   # use the host's bluetoothctl
+git clone https://github.com/starman-tech/mousepods && cd mousepods
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+.venv/bin/python airpods_mouse_controller.py --ui
+```
+
+Without the `bluetoothctl` link (or `sudo dnf install bluez` inside the box) MousePods cannot list
+the paired AirPods and says so. Tested on Bazzite with AirPods Pro 2. SteamOS 3.5+ ships distrobox
+too, so the same steps should work there in Desktop Mode (untested).
+
+**Proton games (Assetto Corsa tested):** run the Windows build of opentrack inside the game's
+Proton prefix with [opentrack-launcher](https://github.com/markx86/opentrack-launcher): set the
+game's Steam launch option to `$HOME/.local/bin/opentrack-launcher %command%` (exactly one
+`%command%`). In opentrack: input *UDP over network* port 4242, output *freetrack 2.0 Enhanced*
+with *Enable both*. Assetto Corsa follows the head in the cockpit camera.
+
 ## Status: what is real, what is not
 
 | | |
@@ -110,7 +136,8 @@ Requirements: Linux with BlueZ, AirPods paired and connected, write access to `/
 | ✅ Mouse mode (head and bud in hand), app, shortcuts | tried on hardware, still being tuned. 159 automated tests (protocol, engine under random orientations, calibration, replay of real captures) |
 | ⚠️ Pointer mode with corner calibration | tested in simulation only |
 | ⚠️ Glide mode | works stroke by stroke. On real slides: drift of 4 cm over 5 strokes after tuning, on **one** capture. A bud is round and rolls, and its sensors freeze when it lies still: it will never match an optical mouse |
-| ⚠️ Head tracking for simulators (opentrack, virtual joystick) | packet format, joystick and angle maths tested, quaternion checked on a real capture; not yet tried in a game |
+| ✅ Head tracking for simulators via opentrack | tried in a game: Assetto Corsa under Proton on Bazzite (AirPods Pro 2, opentrack inside the game's prefix) |
+| ⚠️ Virtual joystick for native games | packet format, joystick and angle maths tested; not yet tried in a game |
 | ⚠️ Garmin watch as a mouse (optional module) | first tests on hardware. Accelerometer only, 25 Hz: see below |
 | ❌ Case as a mouse (buds inside) | impossible on AirPods 3: the sensors are powered off in the case |
 | ❓ Apple PnP DeviceID | changed before the first success; probably not needed (the MTU is), not isolated yet |
