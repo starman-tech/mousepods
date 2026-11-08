@@ -5,6 +5,7 @@
 Tourne dans le processus du contrôleur, dans un thread :
   GET  /                 application (ui/index.html)
   GET  /api/ping
+  GET  /api/i18n         {"lang", "setting", "strings"} for the UI language
   GET  /api/state        état complet (appareil, batteries, capteurs, réglages, journal…)
   GET  /api/stream       télémétrie temps réel (Server-Sent Events, 30 Hz)
   POST /api/cmd          {"cmd": "recenter" | "toggle" | "mode" | "scroll" | ...}
@@ -41,37 +42,74 @@ from urllib.parse import parse_qs
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 import airpods_mouse_controller as m
+import i18n
+from i18n import tr
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 UI_FILE = os.path.join(HERE, "ui", "index.html")
 
-MODELS = {"2013": "AirPods (3ᵉ génération)", "2014": "AirPods Pro (2ᵉ génération)",
-          "200e": "AirPods Pro", "200f": "AirPods (2ᵉ génération)", "2002": "AirPods (1ʳᵉ génération)",
-          "200a": "AirPods Max", "2019": "AirPods 4", "201b": "AirPods 4 (ANC)", "2024": "AirPods Pro 2 (USB-C)",
-          "2027": "AirPods Pro 3", "202d": "AirPods Max (USB-C)"}
-INFO_LABELS = ["Nom", "Modèle", "Fabricant", "N° de série", "Firmware", "Firmware (2)", "Matériel",
-               "Updater", "N° de série gauche", "N° de série droit", "Version marketing"]
-CONTROL_NAMES = {0x01: "Mode micro", 0x05: "Mode envoi bouton", 0x0A: "Détection oreille",
-                 0x0C: "Mode clic simple", 0x0D: "Contrôle du bruit", 0x0E: "ANC un écouteur",
-                 0x14: "Configs du mode d'écoute", 0x16: "Appui prolongé (action)",
-                 0x17: "Intervalle double-clic", 0x18: "Intervalle appui prolongé", 0x1A: "Modes d'écoute",
-                 0x1B: "ANC un écouteur (mode)", 0x1C: "Volume des sons", 0x1D: "Intervalle glissement volume",
-                 0x1F: "Gestion des appels", 0x20: "Glissement volume", 0x23: "Volume adaptatif",
-                 0x24: "Mise en sourdine logicielle", 0x25: "Détection de conversation", 0x28: "Aide auditive",
-                 0x39: "Gestes bruts (rapport à l'hôte)"}
-BATTERY_PART = {0x01: "Simple", 0x02: "Droit", 0x04: "Gauche", 0x08: "Boîtier"}
-BATTERY_STATE = {0x00: "inconnu", 0x01: "en charge", 0x02: "sur batterie", 0x04: "déconnecté"}
-EAR_STATE = {0: "dans l'oreille", 1: "hors de l'oreille", 2: "dans le boîtier", 3: "absent"}
+MODELS = ["2013", "2014", "200e", "200f", "2002", "200a", "2019", "201b", "2024", "2027", "202d"]  # -> model.<pid>
+INFO_LABEL_KEYS = ["info.name", "info.model", "info.manufacturer", "info.serial", "info.firmware", "info.firmware2",
+                   "info.hardware", "info.updater", "info.serial_left", "info.serial_right",
+                   "info.marketing_version"]
+CONTROL_NAMES = {0x01: "mic_mode", 0x05: "button_send_mode", 0x0A: "ear_detection",
+                 0x0C: "single_click_mode", 0x0D: "noise_control", 0x0E: "one_bud_anc",
+                 0x14: "listening_mode_configs", 0x16: "long_press_action",
+                 0x17: "double_click_interval", 0x18: "long_press_interval", 0x1A: "listening_modes",
+                 0x1B: "one_bud_anc_mode", 0x1C: "tone_volume", 0x1D: "volume_swipe_interval",
+                 0x1F: "call_management", 0x20: "volume_swipe", 0x23: "adaptive_volume",
+                 0x24: "software_mute", 0x25: "conversation_detection", 0x28: "hearing_aid",
+                 0x39: "raw_gestures"}                       # -> info.control.<id>
+BATTERY_PART = {0x01: "single", 0x02: "right", 0x04: "left", 0x08: "case"}          # -> info.part.<id>
+BATTERY_STATE = {0x00: "unknown", 0x01: "charging", 0x02: "battery", 0x04: "disconnected"}  # -> info.battery.<id>
+EAR_STATE = {0: "in_ear", 1: "out_of_ear", 2: "in_case", 3: "absent"}             # -> info.ear.<id>
 USAGE_NAMES = {(0x20, 0x30E): "Report Interval", (0x20, 0x31B): "Report Latency",
-               (0x20, 0x31A): "Max FIFO Events", (0x20, 0x73): "Accéléromètre 3D", (0x20, 0x7A): "Gyroscope 3D",
-               (0x20, 0x453): "Accél. X", (0x20, 0x454): "Accél. Y", (0x20, 0x455): "Accél. Z",
-               (0x20, 0x457): "Vitesse ang. X", (0x20, 0x458): "Vitesse ang. Y", (0x20, 0x459): "Vitesse ang. Z",
-               (0x20, 0x434): "Horodatage", (0x20, 0x316): "Reporting State", (0x20, 0x319): "Power State"}
-SERVICE_DESC = {"devmotion6": "Mouvement fusionné (attitude, gyro, gravité, accélération)",
-                "accel": "Accéléromètre (capteur HID standard)", "gyro": "Gyroscope (capteur HID standard)",
-                "cma": "CoreMotion Activity", "kadabra": "Capteur « Kadabra » (inconnu)",
-                "iedrelay": "Relais IED (inconnu)", "neorelay": "Relais NEO (inconnu)",
-                "mando": "Mando (inconnu)"}
+               (0x20, 0x31A): "Max FIFO Events", (0x20, 0x73): "info.usage.accel_3d",
+               (0x20, 0x7A): "info.usage.gyro_3d",
+               (0x20, 0x453): "info.usage.accel_x", (0x20, 0x454): "info.usage.accel_y",
+               (0x20, 0x455): "info.usage.accel_z", (0x20, 0x457): "info.usage.ang_vel_x",
+               (0x20, 0x458): "info.usage.ang_vel_y", (0x20, 0x459): "info.usage.ang_vel_z",
+               (0x20, 0x434): "info.usage.timestamp", (0x20, 0x316): "Reporting State",
+               (0x20, 0x319): "Power State"}                # "info.*" entries are translation keys
+SERVICE_DESC = ("devmotion6", "accel", "gyro", "cma", "kadabra", "iedrelay", "neorelay", "mando")  # -> info.service.<name>
+REPORT_KIND = {0x80: "input", 0x90: "output", 0xB0: "feature"}                     # -> info.report.<id>
+
+def _usage_name(u):
+    name = USAGE_NAMES.get(u)
+    if name is None:
+        return f"0x{u[0]:04x}:0x{u[1]:04x}"
+    return tr(name) if name.startswith("info.") else name
+
+
+def model_name(pid):
+    return tr(f"model.{pid}") if pid in MODELS else f"Apple 0x{pid}"
+
+
+def info_view(info):
+    """Device info for the UI: stable `key` (compared by the script) + translated `label`."""
+    out = []
+    for i, v in enumerate(info):
+        key = INFO_LABEL_KEYS[i] if i < len(INFO_LABEL_KEYS) else "info.field"
+        out.append({"key": key, "label": tr(key, n=i + 1), "value": v})
+    return out
+
+
+def battery_view(battery):
+    return [{"part": tr(f"info.part.{b['part']}") if b["part"] in BATTERY_PART.values() else b["part"],
+             "level": b["level"], "state": b["state"],
+             "state_label": tr(f"info.battery.{b['state']}") if b["state"] in BATTERY_STATE.values() else b["state"]}
+            for b in battery]
+
+
+def ear_view(ear):
+    if ear is None:
+        return None
+    return [tr(f"info.ear.{e}") if e in EAR_STATE.values() else e for e in ear]
+
+
+def control_view(c):
+    name = CONTROL_NAMES.get(c["ident"])
+    return {**c, "name": tr(f"info.control.{name}") if name else tr("info.unknown")}
 
 
 def hid_reports(desc):
@@ -95,9 +133,9 @@ def hid_reports(desc):
         elif tag == 0x08:
             usages.append((v >> 16, v & 0xFFFF) if sz == 4 else (page, v))
         elif tag in (0x80, 0x90, 0xB0):
-            kind = {0x80: "entrée", 0x90: "sortie", 0xB0: "feature"}[tag]
-            out.append({"kind": kind, "id": rid, "bits": size * count,
-                        "usages": [USAGE_NAMES.get(u, f"0x{u[0]:04x}:0x{u[1]:04x}") for u in usages]})
+            kind = REPORT_KIND[tag]
+            out.append({"kind": kind, "kind_label": tr(f"info.report.{kind}"), "id": rid, "bits": size * count,
+                        "usages": [_usage_name(u) for u in usages]})
             usages = []
         elif tag == 0xC0:
             usages = []
@@ -149,28 +187,23 @@ class DeviceState:
                     e = pkt[7 + 5 * k:12 + 5 * k]
                     if len(e) == 5:
                         bat.append({"part": BATTERY_PART.get(e[0], hex(e[0])), "level": e[2],
-                                    "state": BATTERY_STATE.get(e[3], hex(e[3]))})
+                                    "state": BATTERY_STATE.get(e[3], hex(e[3]))})   # ids, see battery_view
                 self.battery = bat
             elif op == 0x06 and len(pkt) >= 8:
                 self.ear = [EAR_STATE.get(pkt[6], str(pkt[6])), EAR_STATE.get(pkt[7], str(pkt[7]))]
             elif op == 0x1D:
                 parts = [p.decode(errors="replace") for p in pkt[11:].split(b"\x00")]
                 vals = [p for p in parts if p and all(32 <= ord(c) < 127 or ord(c) > 160 for c in p)]
-                self.info = [{"label": INFO_LABELS[i] if i < len(INFO_LABELS) else f"Champ {i + 1}",
-                              "value": v} for i, v in enumerate(vals[:14])]
+                self.info = vals[:14]                       # labels: info_view
             elif op == 0x09 and len(pkt) >= 11:
                 ident = pkt[6]
-                self.controls[ident] = {"ident": ident, "name": CONTROL_NAMES.get(ident, "inconnu"),
-                                        "values": list(pkt[7:11])}
+                self.controls[ident] = {"ident": ident, "values": list(pkt[7:11])}   # name: control_view
 
 
-AIM_TEXT = {"aim_center": "Vise le CENTRE de l'écran et ne bouge plus",
-            "aim_tl": "Vise le coin HAUT-GAUCHE de l'écran et ne bouge plus",
-            "aim_br": "Vise le coin BAS-DROIT de l'écran et ne bouge plus"}
-GLIDE_TEXT = {"flat": "Pose le boîtier À PLAT sur la table, immobile",
-              "slide_right": "Fais-le GLISSER vers la DROITE (≈ 10 cm), puis arrête",
-              "slide_fwd": "Fais-le GLISSER vers l'AVANT, loin de toi (≈ 10 cm), puis arrête",
-              "flat_back": "Immobile"}
+AIM_TEXT = {"aim_center": "calib.step.aim_center", "aim_tl": "calib.step.aim_tl",
+            "aim_br": "calib.step.aim_br"}                  # translation keys
+GLIDE_TEXT = {"flat": "calib.step.flat", "slide_right": "calib.step.slide_right",
+              "slide_fwd": "calib.step.slide_fwd", "flat_back": "calib.step.flat_back"}
 FLOWS = {"souris": m.CALIB_STEPS, "pointeur": m.CALIB_STEPS + ["aim_center", "aim_tl", "aim_br"],
          "glisse": ["flat", "slide_right", "flat_back", "slide_fwd", "flat_back"]}
 
@@ -210,13 +243,13 @@ class CalibSession:
 
     def text(self):
         if self.done:
-            return "Calibration réussie"
+            return tr("calib.done")
         st = self.step
         if st in AIM_TEXT:
-            return AIM_TEXT[st]
+            return tr(AIM_TEXT[st])
         if st in GLIDE_TEXT:
-            return GLIDE_TEXT[st]
-        return m.CALIB_TEXT[self.source][st]
+            return tr(GLIDE_TEXT[st])
+        return tr(m.CALIB_TEXT[self.source][st])
 
     def _still(self, now, need=1.0, with_acc=False):
         ws = [r[1] for r in self.recent]
@@ -261,8 +294,7 @@ class CalibSession:
                 if st == "aim_br":
                     rng = m.corner_range(self.aims.get("aim_tl", (0, 0)), self.aims["aim_br"])
                     if rng is None:
-                        self.message = ("Les coins ne correspondent pas aux directions calibrées : "
-                                        "recommence la visée (centre, haut-gauche, bas-droit).")
+                        self.message = i18n.tr_lazy("calib.corners_mismatch")
                         self.i = self.steps.index("aim_center")
                         self.still_since, self.progress = None, 0.0
                         return
@@ -341,7 +373,8 @@ class WebUI:
         self.dev = DeviceState()
         self.q = queue.Queue()
         self.aap = None
-        self.status = "Démarrage…"
+        i18n.apply_config(getattr(ctl, "cfg", None))
+        self.status = i18n.tr_lazy("srv.status.starting")
         self.calib = None
         self.t_start = time.time()
         self.server = None
@@ -382,7 +415,7 @@ class WebUI:
         self.aap = aap
         self.dev.reset()
         aap.on_raw = lambda d, p: self.dev.feed(p, d)
-        self.status = "Connecté"
+        self.status = i18n.tr_lazy("srv.status.connected")
 
     def set_status(self, s):
         self.status = s
@@ -557,7 +590,7 @@ class WebUI:
     def garmin_state(self, paired=False):
         g = self.garmin
         if g is None:
-            return {"available": False, "missing": [], "error": self.garmin_error or "module Garmin absent"}
+            return {"available": False, "missing": [], "error": self.garmin_error or tr("srv.error.garmin_missing")}
         d = g.state()
         if paired:
             d["paired"] = g.paired_devices()
@@ -566,7 +599,7 @@ class WebUI:
     def garmin_action(self, body):
         g = self.garmin
         if g is None:
-            raise RuntimeError("module Garmin non installé")
+            raise RuntimeError(tr("srv.error.garmin_not_installed"))
         a = body.get("action")
         if a == "connect":
             g.connect(body.get("address") or None, bool(body.get("full")))
@@ -581,7 +614,7 @@ class WebUI:
         elif a == "set":
             return {"ok": True, "values": g.set(body.get("values", {}))}
         else:
-            raise ValueError("action inconnue")
+            raise ValueError(tr("srv.error.unknown_action"))
         return {"ok": True}
 
     def _unhook(self):
@@ -619,7 +652,7 @@ class WebUI:
             "vel": [round(v) for v in ctl.vel],
             "series": [[round(h[3][0], 1), round(h[3][1], 1), round(h[3][2], 1)] for h in hist[::3]],
             "calib": self.calib.as_dict() if self.calib else None,
-            "battery": self.dev.battery, "ear": self.dev.ear,
+            "battery": battery_view(self.dev.battery), "ear": ear_view(self.dev.ear),
             "gestures": self._gest_summary(),
             "speech": self.speech.as_dict() if self.speech else None,
         }
@@ -640,7 +673,7 @@ class WebUI:
                 info, desc = plist_info(aap.rhid_plist.get(dev, b""))
                 last = aap.rhid_last.get(dev)
                 services.append({
-                    "name": name, "dev": dev, "desc": SERVICE_DESC.get(name, ""),
+                    "name": name, "dev": dev, "desc": tr(f"info.service.{name}") if name in SERVICE_DESC else "",
                     "max_report": info.get("MaxReportSize"), "keys": info,
                     "reports": hid_reports(desc), "count": aap.rhid_counts.get(dev, 0),
                     "last_age": round(time.monotonic() - last[0], 2) if last else None,
@@ -655,17 +688,18 @@ class WebUI:
                                 "dev": dev, "hex": pl.hex(" ")})
         with self.dev.lock:
             log = list(self.dev.log[-150:])
-            counts = {("0x%02x" % k if k >= 0 else ("handshake" if k == -2 else "autre")): v
+            counts = {("0x%02x" % k if k >= 0 else ("handshake" if k == -2 else tr("info.opcode_other"))): v
                       for k, v in self.dev.counts.items()}
         cfg = {k: v for k, v in ctl.cfg.items()}
         return {
             "addr": aap.addr if aap else None, "pid": aap.pid if aap else None,
-            "model": MODELS.get(aap.pid, f"Apple 0x{aap.pid}") if aap else None,
+            "model": model_name(aap.pid) if aap else None,
             "protocol": ("RemoteHID (0x800)" if aap and aap.rhid_devs else "SensorDataWX (0x100000)")
             if aap else None,
             "interval_us": aap.interval_us if aap else None,
-            "info": self.dev.info, "battery": self.dev.battery, "ear": self.dev.ear,
-            "controls": sorted(self.dev.controls.values(), key=lambda c: c["ident"]),
+            "info": info_view(self.dev.info), "battery": battery_view(self.dev.battery),
+            "ear": ear_view(self.dev.ear),
+            "controls": [control_view(c) for c in sorted(self.dev.controls.values(), key=lambda c: c["ident"])],
             "services": services, "replies": replies, "log": log, "counts": counts,
             "config": cfg, "profiles": ctl.cfg.get("profiles", {}),
             "profile_key": ctl.profile_key(), "calibrated": ctl.profile_key() in ctl.cfg.get("profiles", {}),
@@ -682,7 +716,7 @@ class WebUI:
                 pass
 
             def _json(self, obj, code=200):
-                data = json.dumps(obj, ensure_ascii=False).encode()
+                data = i18n.encode_json(obj).encode()
                 self.send_response(code)
                 self.send_header("Content-Type", "application/json; charset=utf-8")
                 self.send_header("Cache-Control", "no-store")
@@ -703,12 +737,14 @@ class WebUI:
                     self.wfile.write(data)
                 elif self.path == "/api/ping":
                     self._json({"ok": True})
+                elif self.path == "/api/i18n":
+                    self._json(i18n.i18n_payload(ui.ctl.cfg, i18n.env_lang()))
                 elif self.path == "/api/state":
                     self._json(ui.state())
                 elif self.path == "/api/gestures":
                     g = getattr(ui.ctl, "gestures", None)
                     if g is None:
-                        return self._json({"error": "module gestes indisponible"}, 503)
+                        return self._json({"error": tr("srv.error.gestures_unavailable")}, 503)
                     d = g.summary()
                     d["events"] = list(g.events)
                     d["stats"] = g.buf.stats()
@@ -732,24 +768,29 @@ class WebUI:
                     self.end_headers()
                     try:
                         while True:
-                            self.wfile.write(b"data: " + json.dumps(ui.telemetry()).encode() + b"\n\n")
+                            self.wfile.write(b"data: " + i18n.encode_json(ui.telemetry()).encode() + b"\n\n")
                             self.wfile.flush()
                             time.sleep(1 / 30)
                     except (BrokenPipeError, ConnectionResetError):
                         return
                 else:
-                    self._json({"error": "introuvable"}, 404)
+                    self._json({"error": tr("srv.error.not_found")}, 404)
 
             def do_POST(self):
                 n = int(self.headers.get("Content-Length", 0))
                 try:
                     body = json.loads(self.rfile.read(n) or b"{}")
                 except ValueError:
-                    return self._json({"error": "JSON invalide"}, 400)
+                    return self._json({"error": tr("srv.error.invalid_json")}, 400)
                 if self.path == "/api/cmd":
                     ui.q.put(("cmd", str(body.get("cmd", ""))))
                 elif self.path == "/api/config":
+                    if "ui_lang" in body and body["ui_lang"] not in i18n.SETTINGS:
+                        return self._json({"error": tr("srv.error.bad_language")}, 400)
                     m.update_config_file(ui.cfg_path, body)
+                    if "ui_lang" in body:              # language follows at once (full reload is queued)
+                        ui.ctl.cfg["ui_lang"] = body["ui_lang"]
+                        i18n.apply_config(ui.ctl.cfg)
                     ui.q.put(("cmd", "reload"))
                 elif self.path == "/api/calib":
                     ui.q.put(("calib", body.get("action", "start"), body.get("source", "auto"), body.get("flow")))
@@ -789,7 +830,7 @@ class WebUI:
                     ui.q.put(("speech", body))
                 elif self.path == "/api/labo":
                     if ui.labo_tap is None:
-                        return self._json({"error": "Labo indisponible (module gestes absent)"}, 503)
+                        return self._json({"error": tr("srv.error.labo_unavailable")}, 503)
                     a = body.get("action")
                     try:
                         if a == "start":
@@ -825,7 +866,7 @@ class WebUI:
                     except RuntimeError as e:
                         return self._json({"error": str(e)}, 503)
                 else:
-                    return self._json({"error": "introuvable"}, 404)
+                    return self._json({"error": tr("srv.error.not_found")}, 404)
                 self._json({"ok": True})
 
         self.server = ThreadingHTTPServer(("127.0.0.1", self.port), Handler)

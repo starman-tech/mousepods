@@ -14,6 +14,7 @@ import unittest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import gestures as gz  # noqa: E402
+import i18n  # noqa: E402
 import labo  # noqa: E402
 
 FS = 200.0
@@ -42,7 +43,7 @@ class TestStats(unittest.TestCase):
         self.assertEqual(r["accuracy"], 1.0)
         self.assertEqual(r["chance"], 0.5)
         self.assertLess(r["p_value"], 0.001)
-        self.assertEqual(r["verdict"], "séparables")
+        self.assertEqual(r["verdict"], i18n.tr("labo.verdict.separable"))
 
     def test_random_labels_are_chance(self):
         rng = random.Random(2)
@@ -71,7 +72,7 @@ class TestStats(unittest.TestCase):
         # bruit plus fort que les claquements doux : seuil limité par le bruit, honnêtement signalé
         q = labo.propose_threshold([0.3, 0.35, 0.4], [0.5], 0.2)
         self.assertAlmostEqual(q["click_thresh"], 0.6)
-        self.assertIn("bruit", q["reason"])
+        self.assertEqual(q["reason"], i18n.tr("labo.reason.noise_limited"))
         self.assertEqual(q["soft_detect"], 0.0)
         self.assertIsNone(labo.propose_threshold([], [0.1])["click_thresh"])
 
@@ -179,7 +180,7 @@ class TestSession(unittest.TestCase):
             self.assertIn(k, c)
         d = sess.as_dict()
         self.assertTrue(d["done"])
-        json.dumps(d)                                    # sérialisable pour /api/labo
+        i18n.encode_json(d)                              # serializable for /api/labo
 
     def test_movement_session(self):
         clock = Clock()
@@ -280,7 +281,7 @@ class TestWebRecording(unittest.TestCase):
                 self.assertEqual(rec[0]["label"], "repos")
                 st = ui.labo_state()
                 self.assertTrue(st["session"]["cancelled"])
-                json.dumps(st)
+                i18n.encode_json(st)
             finally:
                 mw.HERE = old
 

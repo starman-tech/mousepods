@@ -15,6 +15,7 @@ import unittest
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import airpods_mouse_controller as m  # noqa: E402
 import gestures as gz  # noqa: E402
+import i18n  # noqa: E402
 
 CAPTURES = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "captures")
 FS = 200.0
@@ -230,7 +231,7 @@ class TestActivation(unittest.TestCase):
         ev, _, _, _ = gz.replay(s.rows, {})
         self.assertEqual(types(ev), ["nod"])
         self.assertIsNone(ev[0]["action"])
-        self.assertEqual(ev[0]["blocked"], "hors fenêtre")
+        self.assertEqual(ev[0]["blocked"], i18n.tr("gest.blocked.outside_window"))
 
     def test_double_click_opens_window(self):
         s = Synth().still(1).click().still(0.2).click().still(0.7)

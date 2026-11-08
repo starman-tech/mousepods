@@ -23,6 +23,8 @@ import random
 
 import numpy as np
 
+from i18n import tr, tr_lazy
+
 FRAME_HZ = 50.0
 # planchers d'écart-type par groupe (bruit capteur) : évite d'amplifier un canal immobile
 STD_FLOOR = np.array([0.03] * 3 + [0.8] * 3 + [0.3] * 3)
@@ -124,15 +126,15 @@ class Recognizer:
             d = dtw(X, T, self.band)
             best[w] = min(best.get(w, float("inf")), d)
         if not best:
-            return None, None, None, "aucun modèle"
+            return None, None, None, tr_lazy("speech.reason.no_model")
         ranked = sorted(best.items(), key=lambda kv: kv[1])
         w1, d1 = ranked[0]
         d2 = ranked[1][1] if len(ranked) > 1 else float("inf")
         margin = (d2 - d1) / d2 if d2 not in (0.0, float("inf")) else 1.0
         if d1 > self.max_dist:
-            return None, d1, margin, "trop éloigné de tous les modèles"
+            return None, d1, margin, tr_lazy("speech.reason.too_far")
         if margin < self.min_margin:
-            return None, d1, margin, "ambigu (marge trop faible)"
+            return None, d1, margin, tr_lazy("speech.reason.ambiguous")
         return w1, d1, margin, "ok"
 
     def distance_matrix(self):
@@ -148,7 +150,7 @@ class Recognizer:
         labels = [w for w, _ in self.templates]
         n = len(labels)
         if n < 4 or len(set(labels)) < 2:
-            return {"n": n, "error": "il faut au moins 2 mots et 4 prises"}
+            return {"n": n, "error": tr("speech.error.too_few_takes")}
         D = self.distance_matrix()
         np.fill_diagonal(D, np.inf)
         nn = D.argmin(axis=1)
@@ -172,8 +174,8 @@ class Recognizer:
         chance = sum((c / n) * ((c - 1) / (n - 1)) for c in counts.values())
         return {"n": n, "words": counts, "loo_accuracy": round(a, 3), "chance": round(chance, 3),
                 "p_value": round(p, 4), "n_perm": n_perm, "confusion": conf,
-                "verdict": ("signal probablement réel" if p < 0.01 else
-                            "indice faible" if p < 0.05 else "pas mieux que le hasard")}
+                "verdict": tr_lazy("speech.verdict.likely_real" if p < 0.01 else
+                              "speech.verdict.weak" if p < 0.05 else "speech.verdict.chance")}
 
     # ---- persistance
     def save(self, path):
@@ -224,7 +226,7 @@ class SpeechSession:
             samples, self.buf = self.buf, None
             X, fs = features(samples)
             if len(X) < 20:
-                self.last = {"error": "prise trop courte"}
+                self.last = {"error": tr("speech.error.too_short")}
                 return self.last
             P = preprocess(X, fs)
             if self.word:

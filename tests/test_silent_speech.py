@@ -9,6 +9,7 @@ import tempfile
 import unittest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import i18n  # noqa: E402
 try:
     import numpy as np
     import silent_speech as ss
@@ -77,7 +78,7 @@ class TestSilentSpeech(unittest.TestCase):
         ev = rec.evaluate(n_perm=200)
         self.assertGreaterEqual(ev["loo_accuracy"], 0.9, ev)
         self.assertLess(ev["p_value"], 0.01)
-        self.assertEqual(ev["verdict"], "signal probablement réel")
+        self.assertEqual(ev["verdict"], i18n.tr("speech.verdict.likely_real"))
 
     def test_permutation_detects_no_signal(self):
         rng = random.Random(7)

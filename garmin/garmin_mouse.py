@@ -46,6 +46,9 @@ ROOT = Path(__file__).resolve().parent.parent
 CFG_PATH = ROOT / "garmin_mouse.json"        # git-ignored (watch address)
 CALIB_PATH = ROOT / "garmin_calib.json"      # git-ignored
 SAMPLE_DT = 0.040            # 3 samples per 120 ms packet
+if str(ROOT) not in sys.path:  # i18n.py lives at the repository root (also when run as python -m garmin.…)
+    sys.path.insert(0, str(ROOT))
+from i18n import tr, tr_lazy  # noqa: E402
 
 DEFAULTS = {
     "address": None,
@@ -114,14 +117,14 @@ def tangent(v, g0):
 
 
 # --------------------------------------------------------------------------- calibration
-STEPS = [
-    ("neutral", "Position souris : main posée, détendue, IMMOBILE"),
-    ("right", "Incline le poignet à DROITE (max confortable) et TIENS"),
-    ("left", "Incline le poignet à GAUCHE et TIENS"),
-    ("up", "LÈVE la main (doigts vers le haut) et TIENS"),
-    ("down", "BAISSE la main (doigts vers le bas) et TIENS"),
+STEPS = [                    # (pose, prompt translation key)
+    ("neutral", "garmin.calib.neutral"),
+    ("right", "garmin.calib.right"),
+    ("left", "garmin.calib.left"),
+    ("up", "garmin.calib.up"),
+    ("down", "garmin.calib.down"),
 ]
-NEUTRAL_ONLY = [("neutral", "Position neutre : main posée, IMMOBILE 1 s")]
+NEUTRAL_ONLY = [("neutral", "garmin.calib.neutral_only")]
 
 
 class Calibrator:
@@ -146,7 +149,7 @@ class Calibrator:
 
     @property
     def prompt(self):
-        return "Calibré !" if self.done else self.steps[self.i][1]
+        return tr("garmin.calib.done") if self.done else tr(self.steps[self.i][1])
 
     @property
     def progress(self):
@@ -201,12 +204,12 @@ class Calibrator:
         t = tangent(v, g0)
         opposite = {"left": "right", "down": "up"}.get(key)
         if opposite and t @ tangent(self.poses[opposite], g0) > 0:
-            self.error = "Mauvais côté : fais l'inverse de l'étape d'avant"
+            self.error = tr("garmin.calib.wrong_side")
             return False
         if key in ("up", "down"):
             ex = unit(tangent(self.poses["right"], g0) - tangent(self.poses["left"], g0))
             if abs(unit(t) @ ex) > 0.75:
-                self.error = "Ça ressemble à gauche/droite : lève ou baisse la main plutôt"
+                self.error = tr("garmin.calib.not_up_down")
                 return False
         self.error = ""
         return True
@@ -483,7 +486,8 @@ class App:
         self.eng = self.ren = self.ptr = None
         self.enabled = True
         self.connected = False
-        self.status = "Connexion à la montre…"
+        self.status = tr_lazy("garmin.status.connecting")
+        self.failed = False          # status is an error message (the UI shows it in red)
         self.rate = 0.0
         self.cmds = queue.Queue()
         self.stop = threading.Event()
@@ -498,7 +502,7 @@ class App:
 
     def toggle(self):
         self.enabled = not self.enabled
-        self._say("Souris activée" if self.enabled else "Souris en pause")
+        self._say(tr("garmin.msg.mouse_on") if self.enabled else tr("garmin.msg.mouse_paused"))
 
     def on_sample(self, a):
         self._n += 1
@@ -511,15 +515,15 @@ class App:
                 self.ren = Renderer(eng, self.ptr, self.cfg)
                 self.eng = eng
                 r = self.cal.result["range_deg"]
-                self._say(f"Calibré (droite {r['right']}°, gauche {r['left']}°, haut {r['up']}°, "
-                          f"bas {r['down']}°). Double tape = clic.")
+                self._say(tr("garmin.msg.calibrated", right=r["right"], left=r["left"], up=r["up"],
+                             down=r["down"]))
             elif self.cal.i != prev:
-                self._say(f"OK ! Étape {self.cal.step_label} : {self.cal.prompt}")
+                self._say(tr("garmin.msg.step_ok", step=self.cal.step_label, prompt=self.cal.prompt))
             return
         was = self.eng.paused
         self.eng.feed(a)
         if was != self.eng.paused:
-            self.status = "Pause (bras baissé)" if self.eng.paused else "Actif"
+            self.status = tr_lazy("garmin.status.paused_arm") if self.eng.paused else tr_lazy("garmin.status.active")
 
     def _handle_cmds(self):
         while not self.cmds.empty():
@@ -527,7 +531,7 @@ class App:
             base = None if full or self.eng is None else self.eng.cal
             self.eng = self.ren = None
             self.cal = Calibrator(STEPS) if base is None else Calibrator(NEUTRAL_ONLY, base)
-            self._say(f"Calibration {self.cal.step_label} : {self.cal.prompt}")
+            self._say(tr("garmin.msg.calib_step", step=self.cal.step_label, prompt=self.cal.prompt))
 
     def tick(self, dt, now):
         """One output step (called at render_hz by main(); also used by the tests)."""
@@ -542,7 +546,8 @@ class App:
         try:
             self.ptr = self.pointer_factory()
         except Exception as exc:          # no /dev/uinput access, evdev missing…
-            self.status = f"Erreur : souris virtuelle impossible ({exc})"
+            self.status = tr_lazy("garmin.status.error_pointer", error=exc)
+            self.failed = True
             self._say(self.status)
             return
 
@@ -555,8 +560,8 @@ class App:
             async with glink.session(self.address, reconnect="exponential") as watch:
                 watch.on_frame(on_frame)
                 self.connected = True
-                self.status = "Connectée"
-                self._say(f"Connectée. Calibration {self.cal.step_label} : {self.cal.prompt}")
+                self.status = tr_lazy("garmin.status.connected")
+                self._say(tr("garmin.msg.connected", step=self.cal.step_label, prompt=self.cal.prompt))
 
                 async def drain():
                     async for _ in watch.stream(metrics.ACCELEROMETER):
@@ -573,9 +578,10 @@ class App:
                         self.rate = (self._n - n_rate) / (now - t_rate)
                         n_rate, t_rate = self._n, now
                 task.cancel()
-            self.status = "Déconnectée"
+            self.status = tr_lazy("garmin.status.disconnected")
         except Exception as exc:          # show it in the UI instead of dying silently
-            self.status = f"Erreur : {exc}"
+            self.status = tr_lazy("garmin.status.error", error=exc)
+            self.failed = True
             self._say(self.status)
         finally:
             self.connected = False
@@ -600,7 +606,7 @@ class App:
     def state(self):
         """Snapshot for a UI (JSON-serializable)."""
         e, ren, cal = self.eng, self.ren, self.cal
-        d = {"status": self.status, "connected": self.connected, "running": self.running,
+        d = {"status": self.status, "failed": self.failed, "connected": self.connected, "running": self.running,
              "rate": round(self.rate, 1), "enabled": self.enabled, "clicks": ren.clicks if ren else 0,
              "calibrating": e is None}
         if e is None:
@@ -632,9 +638,9 @@ def run_window(app: App):
     stat.pack()
     bar = tk.Frame(root, bg="#111")
     bar.pack(pady=8)
-    for txt, fn in (("Recentrer", lambda: app.recalibrate(False)),
-                    ("Recalibrer tout", lambda: app.recalibrate(True)),
-                    ("Pause / reprise", app.toggle)):
+    for txt, fn in ((tr("garmin.recenter"), lambda: app.recalibrate(False)),
+                    (tr("garmin.recalibrate_all"), lambda: app.recalibrate(True)),
+                    (tr("garmin.win.pause_resume"), app.toggle)):
         tk.Button(bar, text=txt, command=fn, font=("Sans", 11)).pack(side="left", padx=6)
 
     # live settings (saved to garmin_mouse.json)
@@ -648,10 +654,10 @@ def run_window(app: App):
                      bg="#111", fg="#ddd", highlightthickness=0,
                      command=lambda v: (app.cfg.__setitem__(key, float(v)), save_cfg(app.cfg)))
         s.set(app.cfg[key]); s.pack(side="left")
-    slider("Vitesse max", "max_speed", 300, 5000, 100)
-    slider("Zone morte", "deadzone", 0.05, 0.5, 0.01)
-    slider("Lissage (s)", "velocity_tau_s", 0.02, 0.25, 0.01)
-    slider("Force de tape", "tap_g", 0.2, 1.2, 0.05)
+    slider(tr("garmin.win.max_speed"), "max_speed", 300, 5000, 100)
+    slider(tr("garmin.win.deadzone"), "deadzone", 0.05, 0.5, 0.01)
+    slider(tr("garmin.win.smoothing"), "velocity_tau_s", 0.02, 0.25, 0.01)
+    slider(tr("garmin.win.tap_strength"), "tap_g", 0.2, 1.2, 0.05)
     mode = tk.StringVar(value=app.cfg["mode"])
     mf = tk.Frame(sets, bg="#111"); mf.pack(pady=4)
     for m in ("joystick", "pointeur"):
@@ -681,11 +687,11 @@ def run_window(app: App):
             off = e.paused or not app.enabled
             col = "#666" if off else ("#ff3b30" if e.frozen() else "#4cd964")
             cv.create_oval(x - 10, y - 10, x + 10, y + 10, fill=col, outline="")
-            big.config(text=f"Souris {'PAUSE' if off else 'active'} ({app.cfg['mode']})")
-            sub.config(text="incline pour bouger · double tape = clic · bras baissé = pause")
+            big.config(text=tr("garmin.win.mouse_paused" if off else "garmin.win.mouse_active", mode=app.cfg["mode"]))
+            sub.config(text=tr("garmin.win.usage"))
         ren = app.ren
-        stat.config(text=f"{app.status} · {app.rate:.0f} échantillons/s"
-                         + (f" · clics {ren.clicks}" if ren else ""))
+        stat.config(text=tr("garmin.win.stats", status=app.status, rate=f"{app.rate:.0f}")
+                         + (tr("garmin.win.clicks", n=ren.clicks) if ren else ""))
         root.after(33, tick)
 
     def close():
@@ -717,6 +723,8 @@ if __name__ == "__main__":
     ap.add_argument("--calibrate", action="store_true", help="redo the full guided calibration")
     ap.add_argument("--replay")
     a = ap.parse_args()
+    import i18n
+    i18n.apply_config({"ui_lang": i18n.setting_from_file(str(ROOT / "config.json"))})   # MousePods' saved language
     cfg = load_cfg()
     if a.mode:
         cfg["mode"] = a.mode

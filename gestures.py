@@ -41,18 +41,20 @@ import time
 from collections import deque
 
 import airpods_mouse_controller as m
+from i18n import tr, tr_lazy
 
 GRAVITY = 9.81
 CSV_COLUMNS = ["t_sensor", "arrival", "qw", "qx", "qy", "qz", "gx", "gy", "gz", "ax", "ay", "az",
                "grx", "gry", "grz", "label", "yaw", "pitch", "roll", "src"]
 GESTURES = ["teeth_click", "teeth_double", "nod", "shake", "tilt_left", "tilt_right", "look_up",
             "look_down", "jaw_clench", "jaw_slide_left", "jaw_slide_right"]
-GESTURE_NAMES = {"teeth_click": "Claquement de dents", "teeth_double": "Double claquement",
-                 "nod": "Hochement (oui)", "shake": "Secouement (non)", "tilt_left": "Inclinaison gauche",
-                 "tilt_right": "Inclinaison droite", "look_up": "Regard haut (maintenu)",
-                 "look_down": "Regard bas (maintenu)", "jaw_clench": "Mâchoire serrée (expérimental)",
-                 "jaw_slide_left": "Mâchoire à gauche (expérimental)",
-                 "jaw_slide_right": "Mâchoire à droite (expérimental)"}
+GESTURE_NAMES = {g: f"gest.name.{g}" for g in GESTURES}   # translation keys (tr)
+
+
+def _gesture_name(g):
+    return tr(GESTURE_NAMES[g]) if g in GESTURE_NAMES else g
+
+
 # calibration : geste répété -> clé de seuil, événements acceptés
 CALIB_KEYS = {"teeth_click": ("click_thresh", ("teeth_click", "teeth_double")),
               "nod": ("nod_deg", ("nod",)), "shake": ("shake_deg", ("shake",)),
@@ -765,7 +767,7 @@ class GestureRouter:
                 return None
             if not self.armed(t):
                 ev["action"] = None
-                ev["blocked"] = "hors fenêtre"
+                ev["blocked"] = tr_lazy("gest.blocked.outside_window")
                 return None
             if action == "none":
                 ev["action"] = None
@@ -876,7 +878,7 @@ class GestureEngine:
             if self.save:
                 self.save({cal["key"]: val})
             if self.notifier:
-                self.notifier(f"Calibration {GESTURE_NAMES.get(cal['gesture'], cal['gesture'])} : {cal['key']} = {val}")
+                self.notifier(tr("gest.calib_done", name=_gesture_name(cal["gesture"]), key=cal["key"], value=val))
             self.det = GestureDetector(gesture_cfg({**self.cfg_get(), cal["key"]: val}))
 
     # ---- flux
@@ -953,10 +955,10 @@ class GestureEngine:
         else:
             action = self.router.route(ev, c)
             if ev.get("action") == "activation" and self.notifier:
-                self.notifier("Gestes : prêt (2 s)")
+                self.notifier(tr("gest.ready"))
             if action:
                 if self.notifier:
-                    self.notifier(f"{GESTURE_NAMES.get(ev['type'], ev['type'])} → {action}")
+                    self.notifier(tr("gest.action", name=_gesture_name(ev["type"]), action=action))
                 if self.command:
                     self.command(action)
         self.events.append(ev)

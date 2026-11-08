@@ -14,6 +14,7 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import i18n  # noqa: E402
 try:
     import numpy as np
     from garmin import garmin_mouse as gm
@@ -109,7 +110,7 @@ class TestEngine(unittest.TestCase):
         hold(c, tilt(20, 0))                       # right ok
         hold(c, tilt(20, 0))                       # "left" done on the right side: refused
         self.assertEqual(c.i, 2)
-        self.assertIn("Mauvais", c.error)
+        self.assertEqual(c.error, i18n.tr("garmin.calib.wrong_side"))
 
     def test_neutral_only_recalibration_keeps_axes(self):
         cal = calibrate((20, 0), (-20, 0), (0, 15), (0, -15))
@@ -198,7 +199,7 @@ class TestHeadlessApp(unittest.TestCase):
         st = self.app.state()
         self.assertFalse(st["calibrating"])
         self.assertTrue(self.calib.exists())
-        self.assertTrue(any("Calibré" in s for s in self.said))
+        self.assertTrue(any(s.startswith(i18n.tr("garmin.msg.calibrated").split("{")[0]) for s in self.said))
         self.assertIn("norm", st)
 
     def test_tick_moves_pointer_and_pause_stops_it(self):

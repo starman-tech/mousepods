@@ -16,6 +16,7 @@ import time
 from collections import deque
 
 from . import garmin_mouse as gm
+from i18n import tr, tr_lazy  # noqa: E402  (importable once garmin_mouse has put the repository root on sys.path)
 
 MAC_RE = re.compile(r"^[0-9A-Fa-f]{2}(:[0-9A-Fa-f]{2}){5}$")
 # settings editable from the page: key -> (min, max) for numbers, None for booleans / choices
@@ -77,14 +78,14 @@ class GarminService:
     def connect(self, address=None, full=False):
         miss = missing_modules()
         if miss:
-            raise RuntimeError("module Garmin non installé (" + ", ".join(miss) + ")")
+            raise RuntimeError(tr("garmin.error.not_installed", missing=", ".join(miss)))
         if address:
             if not MAC_RE.match(address.strip()):
-                raise ValueError("adresse Bluetooth invalide (format XX:XX:XX:XX:XX:XX)")
+                raise ValueError(tr("garmin.error.bad_address"))
             self.cfg["address"] = address.strip().upper()
             self.save()
         if not self.cfg.get("address"):
-            raise ValueError("indique l'adresse Bluetooth de la montre")
+            raise ValueError(tr("garmin.error.no_address"))
         if self.app is not None and self.app.running:
             return
         full = full or self.full_next or gm.load_calib(self.calib_path) is None
@@ -96,12 +97,12 @@ class GarminService:
     def disconnect(self):
         app = self.app
         if app is not None:
-            app.status = "Déconnexion…"
+            app.status = tr_lazy("garmin.status.disconnecting")
             app.close(timeout=3.0)
 
     def recenter(self):
         if self.app is None or not self.app.running:
-            raise RuntimeError("montre non connectée")
+            raise RuntimeError(tr("garmin.error.not_connected"))
         self.app.recalibrate(False)
 
     def recalibrate_all(self):
@@ -112,7 +113,7 @@ class GarminService:
 
     def pause(self):
         if self.app is None or not self.app.running:
-            raise RuntimeError("montre non connectée")
+            raise RuntimeError(tr("garmin.error.not_connected"))
         self.app.toggle()
         return self.app.enabled
 

@@ -22,16 +22,18 @@ import threading
 from collections import deque
 
 import gestures as gz
+from i18n import tr, tr_lazy
 
-TEETH_GROUPS = (("inc", "Incisives", "Claquez les INCISIVES (dents de devant)"),
-                ("mol_g", "Molaires gauches", "Serrez d'un coup les MOLAIRES GAUCHES"),
-                ("mol_d", "Molaires droites", "Serrez d'un coup les MOLAIRES DROITES"))
-FORCE_LEVELS = (("doux", "DOUX"), ("moyen", "MOYEN"), ("fort", "FORT"))
-MOVES = (("hoche", ("nod",), "Hochez la tête (oui)"), ("secoue", ("shake",), "Secouez la tête (non)"),
-         ("penche_g", ("tilt_left",), "Penchez la tête à GAUCHE, revenez"),
-         ("penche_d", ("tilt_right",), "Penchez la tête à DROITE, revenez"),
-         ("haut", ("look_up",), "Regardez en HAUT 1 s, revenez"),
-         ("bas", ("look_down",), "Regardez en BAS 1 s, revenez"))
+# (id, name, instruction) — names and instructions are translation keys (tr)
+TEETH_GROUPS = (("inc", "labo.group.inc", "labo.cue.inc"),
+                ("mol_g", "labo.group.mol_g", "labo.cue.mol_g"),
+                ("mol_d", "labo.group.mol_d", "labo.cue.mol_d"))
+FORCE_LEVELS = (("doux", "labo.level.doux"), ("moyen", "labo.level.moyen"), ("fort", "labo.level.fort"))
+MOVES = (("hoche", ("nod",), "labo.cue.hoche"), ("secoue", ("shake",), "labo.cue.secoue"),
+         ("penche_g", ("tilt_left",), "labo.cue.penche_g"),
+         ("penche_d", ("tilt_right",), "labo.cue.penche_d"),
+         ("haut", ("look_up",), "labo.cue.haut"),
+         ("bas", ("look_down",), "labo.cue.bas"))
 DEFAULT_WORDS = ("oui", "non", "clic", "menu", "stop")
 CLICK_TYPES = ("teeth_click", "teeth_double")
 # détecteur du Labo : seuil plancher bas, le seuil adaptatif (k × bruit) protège du bruit de fond
@@ -74,7 +76,7 @@ def loo_nearest_centroid(X, y):
     n = len(y)
     classes = sorted(set(y))
     if n < 4 or len(classes) < 2:
-        return {"n": n, "error": "il faut au moins 2 classes et 4 exemples"}
+        return {"n": n, "error": tr_lazy("labo.error.too_few_examples")}
     ok = 0
     for i in range(n):
         cents = {}
@@ -88,8 +90,8 @@ def loo_nearest_centroid(X, y):
     p = binom_sf(ok, n, chance)
     return {"n": n, "classes": {c: y.count(c) for c in classes}, "accuracy": round(ok / n, 3),
             "chance": round(chance, 3), "p_value": round(p, 4),
-            "verdict": ("séparables" if p < 0.01 else "indice faible" if p < 0.05 else
-                        "pas mieux que le hasard")}
+            "verdict": tr_lazy("labo.verdict.separable" if p < 0.01 else "labo.verdict.weak" if p < 0.05 else
+                          "labo.verdict.chance")}
 
 
 def force_summary(clicks):
@@ -128,12 +130,11 @@ def propose_threshold(soft_peaks, noise_peaks, noise_p99=None, lo=0.2, hi=3.0):
         floor = max(floor, 1.5 * noise_p99)
     floor = max(floor, 0.25)
     if not soft_peaks:
-        return {"click_thresh": None, "floor": round(floor, 3), "reason": "aucun claquement doux mesuré"}
+        return {"click_thresh": None, "floor": round(floor, 3), "reason": tr_lazy("labo.reason.no_soft")}
     target = 0.8 * percentile(soft_peaks, 0.1)
     thr = min(max(target, floor, lo), hi)
     det = sum(p >= thr for p in soft_peaks) / len(soft_peaks)
-    reason = ("au-dessus du bruit, sous 80 % des claquements doux les plus faibles" if target >= floor else
-              "limité par le bruit : certains claquements doux resteront sous le seuil")
+    reason = tr_lazy("labo.reason.above_noise" if target >= floor else "labo.reason.noise_limited")
     return {"click_thresh": round(thr, 3), "floor": round(floor, 3), "soft_detect": round(det, 3),
             "soft_p10": round(percentile(soft_peaks, 0.1), 3), "n_soft": len(soft_peaks), "reason": reason}
 
@@ -161,43 +162,47 @@ def detection_rates(cues, events):
 def build_protocol(name, reps=None, words=None, seed=None):
     """-> liste d'étapes {phase, title, sub, dur, kind, ...}. Chaque claquement / geste / mot a sa
     consigne (repérage précis ; les impulsions sont attribuées à la consigne active)."""
-    steps = [{"phase": "repos", "title": "Ne bougez plus", "sub": "mesure du bruit de fond — tête immobile, "
-              "bouche fermée, sans parler", "dur": 6.0, "kind": "rest"}]
+    steps = [{"phase": "repos", "title": tr_lazy("labo.cue.rest"), "sub": tr_lazy("labo.cue.rest_sub"), "dur": 6.0,
+              "kind": "rest"}]
     rng = random.Random(seed)
     if name == "dents":
         n = int(reps or 8)
         for g, gname, instr in TEETH_GROUPS:
             for lv, lvname in FORCE_LEVELS:
-                steps.append({"phase": "pause", "title": f"{gname} · {lvname}", "sub": instr + f" — {n} fois, "
-                              "une par consigne", "dur": 3.0, "kind": "intro"})
+                title = tr_lazy("labo.cue.pair", a=tr_lazy(gname), b=tr_lazy(lvname))
+                steps.append({"phase": "pause", "title": title, "sub": tr_lazy("labo.cue.teeth_intro", cue=tr_lazy(instr), n=n),
+                              "dur": 3.0, "kind": "intro"})
                 for i in range(n):
-                    steps.append({"phase": f"dents_{g}_{lv}", "title": f"{gname} · {lvname}",
-                                  "sub": f"claquement {i + 1}/{n} — maintenant", "dur": 1.6, "kind": "click",
+                    steps.append({"phase": f"dents_{g}_{lv}", "title": title,
+                                  "sub": tr_lazy("labo.cue.click_now", i=i + 1, n=n), "dur": 1.6, "kind": "click",
                                   "group": g, "level": lv, "rep": i + 1, "expect": CLICK_TYPES})
     elif name == "mouvements":
         n = int(reps or 5)
         for ph, exp, instr in MOVES:
-            steps.append({"phase": "pause", "title": instr, "sub": f"{n} fois, une par consigne", "dur": 3.0,
+            title = tr_lazy(instr)
+            steps.append({"phase": "pause", "title": title, "sub": tr_lazy("labo.cue.n_times", n=n), "dur": 3.0,
                           "kind": "intro"})
             for i in range(n):
-                steps.append({"phase": ph, "title": instr, "sub": f"{i + 1}/{n} — maintenant", "dur": 3.0,
+                steps.append({"phase": ph, "title": title, "sub": tr_lazy("labo.cue.move_now", i=i + 1, n=n), "dur": 3.0,
                               "kind": "move", "expect": exp, "rep": i + 1})
-                steps.append({"phase": "pause", "title": "Revenez au centre", "sub": "immobile", "dur": 1.0,
-                              "kind": "rest"})
+                steps.append({"phase": "pause", "title": tr_lazy("labo.cue.back_center"), "sub": tr_lazy("labo.cue.still"),
+                              "dur": 1.0, "kind": "rest"})
     elif name == "mots":
         n = int(reps or 10)
         ws = [w.strip() for w in (words or DEFAULT_WORDS) if w and w.strip()][:8] or list(DEFAULT_WORDS)
         order = [w for w in ws for _ in range(n)]
         rng.shuffle(order)
-        steps.append({"phase": "pause", "title": "Articulez SANS VOIX", "sub": "le mot affiché, une fois, "
-                      "dès qu'il apparaît — expérimental", "dur": 3.0, "kind": "intro"})
+        steps.append({"phase": "pause", "title": tr_lazy("labo.cue.words_intro"), "sub": tr_lazy("labo.cue.words_intro_sub"),
+                      "dur": 3.0, "kind": "intro"})
         for i, w in enumerate(order):
-            steps.append({"phase": f"mot_{w}", "title": w.upper(), "sub": f"articulez sans voix · {i + 1}/{len(order)}",
-                          "dur": 2.2, "kind": "word", "word": w})
-            steps.append({"phase": "pause", "title": "…", "sub": "bouche fermée", "dur": 0.8, "kind": "rest"})
+            steps.append({"phase": f"mot_{w}", "title": w.upper(),
+                          "sub": tr_lazy("labo.cue.word_now", i=i + 1, n=len(order)), "dur": 2.2, "kind": "word", "word": w})
+            steps.append({"phase": "pause", "title": "…", "sub": tr_lazy("labo.cue.mouth_closed"), "dur": 0.8,
+                          "kind": "rest"})
     else:
-        raise ValueError(f"protocole inconnu : {name}")
-    steps.append({"phase": "fin", "title": "Terminé", "sub": "analyse en cours", "dur": 1.0, "kind": "rest"})
+        raise ValueError(tr_lazy("labo.error.unknown_protocol", name=name))
+    steps.append({"phase": "fin", "title": tr_lazy("labo.cue.done"), "sub": tr_lazy("labo.cue.analysing"), "dur": 1.0,
+                  "kind": "rest"})
     t = 0.0
     for s in steps:
         s["t0"], t = t, t + s["dur"]
@@ -415,7 +420,7 @@ class LaboSession:
             res["words"] = {}
             for w, smp in self.word_samples:
                 res["words"][w] = res["words"].get(w, 0) + 1
-            res["speech"] = self.speech_eval or {"status": "en attente"}
+            res["speech"] = self.speech_eval or {"status": tr_lazy("labo.status.waiting")}
         return res
 
     def evaluate_words(self, n_perm=500, save_path=None):
@@ -423,7 +428,7 @@ class LaboSession:
         try:
             import silent_speech as ss
         except Exception as e:  # noqa: BLE001  (numpy absent…)
-            self.speech_eval = {"error": f"silent_speech indisponible : {e}"}
+            self.speech_eval = {"error": tr_lazy("labo.error.speech_unavailable", error=e)}
             return self.speech_eval
         rec = ss.Recognizer()
         short = 0

@@ -1,6 +1,6 @@
 <!doctype html>
 <!-- SPDX-License-Identifier: Apache-2.0 · Copyright 2026 Matteo Gaudioso (starman-tech) -->
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -153,21 +153,21 @@ code{background:var(--card2);padding:1px 6px;border-radius:5px}
 <aside>
   <div class="brand">
     <div class="logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 4a3 3 0 0 0-3 3v1a3 3 0 0 0 3 3h.5v8a1.5 1.5 0 0 0 3 0V7a3 3 0 0 0-3-3H7zM17 4a3 3 0 0 1 3 3v1a3 3 0 0 1-3 3h-.5v8a1.5 1.5 0 0 1-3 0V7a3 3 0 0 1 3-3h.5z"/></svg></div>
-    <div><b>AirPods Mouse</b><small id="side-model">—</small></div>
+    <div><b data-i18n="side.airpods_mouse">AirPods Mouse</b><small id="side-model">—</small></div>
   </div>
   <nav id="nav">
-    <a data-p="overview" class="on"><span class="ic" style="background:#0a84ff">◉</span>Aperçu</a>
-    <a data-p="motion"><span class="ic" style="background:#30d158">∿</span>Mouvement</a>
-    <a data-p="settings"><span class="ic" style="background:#8e8e93">⚙︎</span>Réglages</a>
-    <a data-p="calib"><span class="ic" style="background:#ff9f0a">◎</span>Calibration</a>
-    <a data-p="gestures"><span class="ic" style="background:#ff375f">☺︎</span>Gestes</a>
-    <a data-p="labo"><span class="ic" style="background:#64d2ff">⚗︎</span>Labo</a>
-    <a data-p="sims"><span class="ic" style="background:#ff9500">✈︎</span>Simulateurs</a>
-    <a data-p="garmin"><span class="ic" style="background:#007aff">⌚︎</span>Garmin</a>
-    <a data-p="sensors"><span class="ic" style="background:#af52de">⌬</span>Capteurs</a>
-    <a data-p="device"><span class="ic" style="background:#ff375f">ⓘ</span>AirPods</a>
-    <a data-p="log"><span class="ic" style="background:#5e5ce6">≡</span>Journal</a>
-    <a data-p="about"><span class="ic" style="background:#30b0c7">★</span>Découvertes</a>
+    <a data-p="overview" class="on"><span class="ic" style="background:#0a84ff" data-i18n="side.text">◉</span><span data-i18n="side.overview">Aperçu</span></a>
+    <a data-p="motion"><span class="ic" style="background:#30d158" data-i18n="side.text_2">∿</span><span data-i18n="side.motion">Mouvement</span></a>
+    <a data-p="settings"><span class="ic" style="background:#8e8e93" data-i18n="side.text_3">⚙︎</span><span data-i18n="side.settings">Réglages</span></a>
+    <a data-p="calib"><span class="ic" style="background:#ff9f0a" data-i18n="side.text_4">◎</span><span data-i18n="side.calibration">Calibration</span></a>
+    <a data-p="gestures"><span class="ic" style="background:#ff375f" data-i18n="side.text_5">☺︎</span><span data-i18n="side.gestures">Gestes</span></a>
+    <a data-p="labo"><span class="ic" style="background:#64d2ff" data-i18n="side.text_6">⚗︎</span><span data-i18n="side.lab">Labo</span></a>
+    <a data-p="sims"><span class="ic" style="background:#ff9500" data-i18n="side.text_7">✈︎</span><span data-i18n="side.simulators">Simulateurs</span></a>
+    <a data-p="garmin"><span class="ic" style="background:#007aff" data-i18n="side.text_8">⌚︎</span>Garmin</a>
+    <a data-p="sensors"><span class="ic" style="background:#af52de" data-i18n="side.text_9">⌬</span><span data-i18n="side.sensors">Capteurs</span></a>
+    <a data-p="device"><span class="ic" style="background:#ff375f" data-i18n="side.i">ⓘ</span>AirPods</a>
+    <a data-p="log"><span class="ic" style="background:#5e5ce6" data-i18n="side.text_10">≡</span><span data-i18n="side.log">Journal</span></a>
+    <a data-p="about"><span class="ic" style="background:#30b0c7" data-i18n="side.text_11">★</span><span data-i18n="side.findings">Découvertes</span></a>
   </nav>
   <div class="side-foot"><div><span class="dot" id="side-dot"></span><span id="side-status">—</span></div>
     <div id="side-rate" class="mono" style="margin-top:4px"></div></div>
@@ -177,381 +177,383 @@ code{background:var(--card2);padding:1px 6px;border-radius:5px}
 <!-- =============================== APERÇU -->
 <section class="page on" id="p-overview">
   <h1 id="ov-name">AirPods</h1>
-  <div class="sub" id="ov-sub">Connexion…</div>
+  <div class="sub" id="ov-sub" data-i18n="overview.connecting">Connexion…</div>
   <div class="grid g4" id="ov-bat"></div>
-  <h2>Contrôle</h2>
+  <h2 data-i18n="overview.control">Contrôle</h2>
   <div class="grid g2">
     <div class="card">
-      <h3>Curseur</h3>
+      <h3 data-i18n="overview.cursor">Curseur</h3>
       <div class="row" style="justify-content:space-between;margin-bottom:14px">
         <div><div class="big" id="ov-state">—</div><div class="hint" id="ov-state-sub"></div></div>
-        <button class="btn p" id="ov-toggle">Pause</button>
+        <button class="btn p" id="ov-toggle" data-i18n="overview.pause">Pause</button>
       </div>
-      <div class="row"><button class="btn" data-cmd="recenter">Recentrer</button>
-        <button class="btn" data-cmd="scroll" id="ov-scroll">Mode défilement</button></div>
+      <div class="row"><button class="btn" data-cmd="recenter" data-i18n="overview.recenter">Recentrer</button>
+        <button class="btn" data-cmd="scroll" id="ov-scroll" data-i18n="overview.scroll_mode">Mode défilement</button></div>
     </div>
     <div class="card">
-      <h3>Mode & source</h3>
-      <div class="kv"><span>Mode</span><span><div class="seg" data-key="mode">
-        <button data-v="souris">Souris</button><button data-v="pointeur">Pointeur</button><button data-v="glisse">Glisse</button></div></span></div>
-      <div class="kv"><span>Source</span><span><div class="seg" data-key="source">
-        <button data-v="auto">Auto</button><button data-v="head">Tête</button><button data-v="case">Boîtier</button><button data-v="hand">En main</button></div></span></div>
+      <h3 data-i18n="overview.mode_source">Mode & source</h3>
+      <div class="kv"><span data-i18n="overview.mode">Mode</span><span><div class="seg" data-key="mode">
+        <button data-v="souris" data-i18n="overview.mouse">Souris</button><button data-v="pointeur" data-i18n="overview.pointer">Pointeur</button><button data-v="glisse" data-i18n="overview.glide">Glisse</button></div></span></div>
+      <div class="kv"><span data-i18n="overview.source">Source</span><span><div class="seg" data-key="source">
+        <button data-v="auto" data-i18n="overview.auto">Auto</button><button data-v="head" data-i18n="overview.head">Tête</button><button data-v="case" data-i18n="overview.case">Boîtier</button><button data-v="hand" data-i18n="overview.in_hand">En main</button></div></span></div>
       <div class="hint" id="ov-src-hint" style="margin-top:10px"></div>
-      <div class="hint" style="margin-top:6px"><b>Souris</b> : tourner/incliner (tête, boîtier, AirPod) · <b>Pointeur</b> : viser l'écran comme un laser · <b>Glisse</b> : boîtier à plat poussé sur la table</div>
+      <div class="hint" style="margin-top:6px" data-i18n-html="overview.mouse_turn_tilt_head_case_airpod_pointer"><b>Souris</b> : tourner/incliner (tête, boîtier, AirPod) · <b>Pointeur</b> : viser l'écran comme un laser · <b>Glisse</b> : boîtier à plat poussé sur la table</div>
     </div>
   </div>
-  <h2>Liaison</h2>
+  <h2 data-i18n="overview.link">Liaison</h2>
   <div class="grid g4">
-    <div class="card"><div class="hint">Mesures / seconde</div><div class="big" id="ov-rate">—</div></div>
-    <div class="card"><div class="hint">Coupures (&gt;50 ms, 2 s)</div><div class="big" id="ov-gaps">—</div></div>
-    <div class="card"><div class="hint">Protocole</div><div style="font-size:17px;font-weight:650;margin-top:6px" id="ov-proto">—</div></div>
-    <div class="card"><div class="hint">Profil d'axes</div><div style="font-size:17px;font-weight:650;margin-top:6px" id="ov-prof">—</div></div>
+    <div class="card"><div class="hint" data-i18n="overview.samples_second">Mesures / seconde</div><div class="big" id="ov-rate">—</div></div>
+    <div class="card"><div class="hint" data-i18n="overview.dropouts_gt_50_ms_2_s">Coupures (&gt;50 ms, 2 s)</div><div class="big" id="ov-gaps">—</div></div>
+    <div class="card"><div class="hint" data-i18n="overview.protocol">Protocole</div><div style="font-size:17px;font-weight:650;margin-top:6px" id="ov-proto">—</div></div>
+    <div class="card"><div class="hint" data-i18n="overview.axis_profile">Profil d'axes</div><div style="font-size:17px;font-weight:650;margin-top:6px" id="ov-prof">—</div></div>
   </div>
 </section>
 
 <!-- =============================== MOUVEMENT -->
 <section class="page" id="p-motion">
-  <h1>Mouvement</h1><div class="sub">Données brutes et calculées, en direct.</div>
+  <h1 data-i18n="motion.motion">Mouvement</h1><div class="sub" data-i18n="motion.raw_and_computed_data_live">Données brutes et calculées, en direct.</div>
   <div class="grid g2">
-    <div class="card"><h3>Orientation (quaternion de l'écouteur) <button class="btn sm" id="m-zero" style="margin-left:auto">Zéro</button></h3>
+    <div class="card"><h3><span data-i18n="motion.orientation_earbud_quaternion">Orientation (quaternion de l'écouteur)</span> <button class="btn sm" id="m-zero" style="margin-left:auto" data-i18n="motion.zero">Zéro</button></h3>
       <div class="stage"><div class="pod" id="pod">
         <div class="axisx"></div><div class="axisy"></div><div class="axisz"></div>
       </div></div></div>
-    <div class="card"><h3>Curseur</h3>
+    <div class="card"><h3 data-i18n="motion.cursor">Curseur</h3>
       <div class="screen" id="scr"><div class="t" id="scr-t"></div><div class="c" id="scr-c"></div></div>
-      <div class="kv" style="margin-top:8px"><span>Vitesse curseur</span><span class="mono" id="m-vel">—</span></div>
+      <div class="kv" style="margin-top:8px"><span data-i18n="motion.cursor_speed">Vitesse curseur</span><span class="mono" id="m-vel">—</span></div>
     </div>
   </div>
-  <div class="card" style="margin-top:16px"><h3>Vitesses angulaires (°/s)</h3>
+  <div class="card" style="margin-top:16px"><h3 data-i18n="motion.angular_rates_s">Vitesses angulaires (°/s)</h3>
     <canvas id="chart" height="220"></canvas>
-    <div class="legend"><span><i style="background:var(--accent)"></i>Lacet (horizontal)</span><span><i style="background:var(--green)"></i>Tangage (vertical)</span><span><i style="background:var(--orange)"></i>Roulis (inclinaison)</span></div>
+    <div class="legend"><span><i style="background:var(--accent)"></i><span data-i18n="motion.yaw_horizontal">Lacet (horizontal)</span></span><span><i style="background:var(--green)"></i><span data-i18n="motion.pitch_vertical">Tangage (vertical)</span></span><span><i style="background:var(--orange)"></i><span data-i18n="motion.roll_tilt">Roulis (inclinaison)</span></span></div>
   </div>
   <div class="grid g3" style="margin-top:16px">
-    <div class="card"><h3>Gyroscope (°/s, repère écouteur)</h3><div class="vec" id="m-w"></div></div>
-    <div class="card"><h3>Gravité (g, repère écouteur)</h3><div class="vec" id="m-g"></div></div>
-    <div class="card"><h3>Biais gyroscope</h3><div class="vec" id="m-b"></div><div class="hint" id="m-bok" style="margin-top:8px"></div></div>
-    <div class="card"><h3>Accélération (m/s², sans gravité)</h3><div class="vec" id="m-a"></div></div>
-    <div class="card"><h3>Glisse : vitesse estimée (cm/s)</h3><div class="vec" id="m-gv"></div></div>
+    <div class="card"><h3 data-i18n="motion.gyroscope_s_earbud_frame">Gyroscope (°/s, repère écouteur)</h3><div class="vec" id="m-w"></div></div>
+    <div class="card"><h3 data-i18n="motion.gravity_g_earbud_frame">Gravité (g, repère écouteur)</h3><div class="vec" id="m-g"></div></div>
+    <div class="card"><h3 data-i18n="motion.gyroscope_bias">Biais gyroscope</h3><div class="vec" id="m-b"></div><div class="hint" id="m-bok" style="margin-top:8px"></div></div>
+    <div class="card"><h3 data-i18n="motion.acceleration_m_s2_without_gravity">Accélération (m/s², sans gravité)</h3><div class="vec" id="m-a"></div></div>
+    <div class="card"><h3 data-i18n="motion.glide_estimated_speed_cm_s">Glisse : vitesse estimée (cm/s)</h3><div class="vec" id="m-gv"></div></div>
   </div>
 </section>
 
 <!-- =============================== RÉGLAGES -->
 <section class="page" id="p-settings">
-  <h1>Réglages</h1><div class="sub">Tout s'applique instantanément.</div>
-  <div class="card"><h3>Sensibilité</h3>
-    <div class="set"><label>Horizontale</label><input type="range" data-k="sensitivity_x" min="0.1" max="5" step="0.05"><output></output></div>
-    <div class="set"><label>Verticale</label><input type="range" data-k="sensitivity_y" min="0.1" max="5" step="0.05"><output></output></div>
-    <div class="set toggle"><label>Inverser l'horizontale</label><label class="sw"><input type="checkbox" data-k="invert_x"><span></span></label></div>
-    <div class="set toggle"><label>Inverser la verticale</label><label class="sw"><input type="checkbox" data-k="invert_y"><span></span></label></div>
+  <h1 data-i18n="settings.settings">Réglages</h1><div class="sub" data-i18n="settings.everything_applies_instantly">Tout s'applique instantanément.</div>
+  <div class="card"><div class="kv"><span data-i18n="settings.language">Langue</span><span><div class="seg" data-key="ui_lang">
+    <button data-v="auto" data-i18n="lang.auto">Automatique</button><button data-v="en" data-i18n="lang.en">English</button><button data-v="fr" data-i18n="lang.fr">Français</button></div></span></div></div>
+  <div class="card"><h3 data-i18n="settings.sensitivity">Sensibilité</h3>
+    <div class="set"><label data-i18n="settings.horizontal">Horizontale</label><input type="range" data-k="sensitivity_x" min="0.1" max="5" step="0.05"><output></output></div>
+    <div class="set"><label data-i18n="settings.vertical">Verticale</label><input type="range" data-k="sensitivity_y" min="0.1" max="5" step="0.05"><output></output></div>
+    <div class="set toggle"><label data-i18n="settings.invert_horizontal">Inverser l'horizontale</label><label class="sw"><input type="checkbox" data-k="invert_x"><span></span></label></div>
+    <div class="set toggle"><label data-i18n="settings.invert_vertical">Inverser la verticale</label><label class="sw"><input type="checkbox" data-k="invert_y"><span></span></label></div>
   </div>
-  <h2>Mode souris</h2>
+  <h2 data-i18n="settings.mouse_mode">Mode souris</h2>
   <div class="card">
-    <div class="set"><label>Vitesse<small>pixels par degré de rotation</small></label><input type="range" data-k="souris.px_per_deg" min="2" max="80" step="0.5"><output></output></div>
-    <div class="set"><label>Accélération<small>les gestes rapides vont plus loin</small></label><input type="range" data-k="souris.acceleration" min="0" max="4" step="0.05"><output></output></div>
-    <div class="set"><label>Zone morte<small>°/s ignorés (stabilité)</small></label><input type="range" data-k="souris.rate_deadzone_dps" min="0" max="15" step="0.1"><output></output></div>
+    <div class="set"><label data-i18n-html="settings.speed_pixels_per_degree_of_rotation">Vitesse<small>pixels par degré de rotation</small></label><input type="range" data-k="souris.px_per_deg" min="2" max="80" step="0.5"><output></output></div>
+    <div class="set"><label data-i18n-html="settings.acceleration_fast_movements_go_further">Accélération<small>les gestes rapides vont plus loin</small></label><input type="range" data-k="souris.acceleration" min="0" max="4" step="0.05"><output></output></div>
+    <div class="set"><label data-i18n-html="settings.dead_zone_s_ignored_stability">Zone morte<small>°/s ignorés (stabilité)</small></label><input type="range" data-k="souris.rate_deadzone_dps" min="0" max="15" step="0.1"><output></output></div>
   </div>
-  <h2>Mode pointeur</h2>
+  <h2 data-i18n="settings.pointer_mode">Mode pointeur</h2>
   <div class="card">
-    <div class="set"><label>Amplitude<small>% de l'écran par degré</small></label><input type="range" data-k="pointeur.screen_pct_per_deg" min="0.3" max="10" step="0.05"><output></output></div>
+    <div class="set"><label data-i18n-html="settings.amplitude_of_the_screen_per_degree">Amplitude<small>% de l'écran par degré</small></label><input type="range" data-k="pointeur.screen_pct_per_deg" min="0.3" max="10" step="0.05"><output></output></div>
   </div>
-  <h2>Mode glisse (boîtier à plat sur la table)</h2>
+  <h2 data-i18n="settings.glide_mode_case_flat_on_the_table">Mode glisse (boîtier à plat sur la table)</h2>
   <div class="card">
-    <div class="set"><label>Vitesse<small>pixels par centimètre glissé</small></label><input type="range" data-k="glisse.px_per_cm" min="5" max="200" step="1"><output></output></div>
-    <div class="set"><label>Seuil de mouvement<small>m/s² ignorés (bruit)</small></label><input type="range" data-k="glisse.accel_deadzone" min="0" max="0.6" step="0.01"><output></output></div>
-    <div class="set"><label>Détection d'arrêt<small>m/s² sous lesquels le boîtier est considéré immobile</small></label><input type="range" data-k="glisse.still_acc" min="0.1" max="1.5" step="0.05"><output></output></div>
-    <div class="set"><label>Inertie<small>secondes ; plus grand = glisse plus longtemps</small></label><input type="range" data-k="glisse.leak_s" min="0.2" max="6" step="0.1"><output></output></div>
+    <div class="set"><label data-i18n-html="settings.speed_pixels_per_centimeter_glided">Vitesse<small>pixels par centimètre glissé</small></label><input type="range" data-k="glisse.px_per_cm" min="5" max="200" step="1"><output></output></div>
+    <div class="set"><label data-i18n-html="settings.motion_threshold_m_s2_ignored_noise">Seuil de mouvement<small>m/s² ignorés (bruit)</small></label><input type="range" data-k="glisse.accel_deadzone" min="0" max="0.6" step="0.01"><output></output></div>
+    <div class="set"><label data-i18n-html="settings.stop_detection_m_s2_below_which_the_case">Détection d'arrêt<small>m/s² sous lesquels le boîtier est considéré immobile</small></label><input type="range" data-k="glisse.still_acc" min="0.1" max="1.5" step="0.05"><output></output></div>
+    <div class="set"><label data-i18n-html="settings.inertia_seconds_larger_glides_longer">Inertie<small>secondes ; plus grand = glisse plus longtemps</small></label><input type="range" data-k="glisse.leak_s" min="0.2" max="6" step="0.1"><output></output></div>
   </div>
-  <h2>Fluidité</h2>
+  <h2 data-i18n="settings.smoothness">Fluidité</h2>
   <div class="card">
-    <div class="set"><label>Lissage<small>0 = brut, 1 = très lisse</small></label><input type="range" data-k="smoothing" min="0" max="1" step="0.01"><output></output></div>
-    <div class="set"><label>Retard d'affichage<small>secondes ; plus petit = plus réactif</small></label><input type="range" data-k="render_lag_s" min="0" max="0.15" step="0.005"><output></output></div>
-    <div class="set"><label>Fréquence capteur<small>µs entre mesures (5000 = 200 Hz)</small></label><input type="range" data-k="sensor_interval_us" min="5000" max="40000" step="1000"><output></output></div>
-    <div class="set"><label>Rafraîchissement curseur<small>images par seconde</small></label><input type="range" data-k="render_hz" min="30" max="240" step="10"><output></output></div>
+    <div class="set"><label data-i18n-html="settings.smoothing_0_raw_1_very_smooth">Lissage<small>0 = brut, 1 = très lisse</small></label><input type="range" data-k="smoothing" min="0" max="1" step="0.01"><output></output></div>
+    <div class="set"><label data-i18n-html="settings.display_delay_seconds_smaller_more_respo">Retard d'affichage<small>secondes ; plus petit = plus réactif</small></label><input type="range" data-k="render_lag_s" min="0" max="0.15" step="0.005"><output></output></div>
+    <div class="set"><label data-i18n-html="settings.sensor_rate_s_between_samples_5000_200_h">Fréquence capteur<small>µs entre mesures (5000 = 200 Hz)</small></label><input type="range" data-k="sensor_interval_us" min="5000" max="40000" step="1000"><output></output></div>
+    <div class="set"><label data-i18n-html="settings.cursor_refresh_frames_per_second">Rafraîchissement curseur<small>images par seconde</small></label><input type="range" data-k="render_hz" min="30" max="240" step="10"><output></output></div>
   </div>
-  <h2>Clics</h2>
+  <h2 data-i18n="settings.clicks">Clics</h2>
   <div class="card">
-    <div class="set toggle"><label>Pression sur la tige<small>simple = clic gauche · double = clic droit · triple = défilement · long = pause</small></label><label class="sw"><input type="checkbox" data-k="stem.enabled"><span></span></label></div>
-    <div class="set toggle"><label>Inclinaison rapide<small>épaule droite = clic gauche · épaule gauche = clic droit</small></label><label class="sw"><input type="checkbox" data-k="roll_click.enabled"><span></span></label></div>
-    <div class="set"><label>Seuil d'inclinaison<small>degrés</small></label><input type="range" data-k="roll_click.trigger_deg" min="6" max="40" step="1"><output></output></div>
-    <div class="set toggle"><label>Clic par immobilité<small>le curseur clique s'il reste immobile</small></label><label class="sw"><input type="checkbox" data-k="dwell_click.enabled"><span></span></label></div>
-    <div class="set"><label>Durée d'immobilité<small>secondes</small></label><input type="range" data-k="dwell_click.time_s" min="0.4" max="3" step="0.1"><output></output></div>
-    <div class="set"><label>Vitesse de défilement</label><input type="range" data-k="scroll.lines_per_deg" min="0.05" max="1.5" step="0.05"><output></output></div>
+    <div class="set toggle"><label data-i18n-html="settings.stem_press_single_left_click_double_righ">Pression sur la tige<small>simple = clic gauche · double = clic droit · triple = défilement · long = pause</small></label><label class="sw"><input type="checkbox" data-k="stem.enabled"><span></span></label></div>
+    <div class="set toggle"><label data-i18n-html="settings.quick_tilt_right_shoulder_left_click_lef">Inclinaison rapide<small>épaule droite = clic gauche · épaule gauche = clic droit</small></label><label class="sw"><input type="checkbox" data-k="roll_click.enabled"><span></span></label></div>
+    <div class="set"><label data-i18n-html="settings.tilt_threshold_degrees">Seuil d'inclinaison<small>degrés</small></label><input type="range" data-k="roll_click.trigger_deg" min="6" max="40" step="1"><output></output></div>
+    <div class="set toggle"><label data-i18n-html="settings.dwell_click_the_cursor_clicks_if_it_stay">Clic par immobilité<small>le curseur clique s'il reste immobile</small></label><label class="sw"><input type="checkbox" data-k="dwell_click.enabled"><span></span></label></div>
+    <div class="set"><label data-i18n-html="settings.dwell_time_seconds">Durée d'immobilité<small>secondes</small></label><input type="range" data-k="dwell_click.time_s" min="0.4" max="3" step="0.1"><output></output></div>
+    <div class="set"><label data-i18n="settings.scroll_speed">Vitesse de défilement</label><input type="range" data-k="scroll.lines_per_deg" min="0.05" max="1.5" step="0.05"><output></output></div>
   </div>
-  <h2>Système</h2>
+  <h2 data-i18n="settings.system">Système</h2>
   <div class="card">
-    <div class="set toggle"><label>Notifications</label><label class="sw"><input type="checkbox" data-k="notifications"><span></span></label></div>
-    <div class="set"><label>Gyroscope<small>°/s par unité (étalonnage d'échelle)</small></label><input type="range" data-k="gyro_dps_per_lsb" min="0.03" max="0.5" step="0.001"><output></output></div>
+    <div class="set toggle"><label data-i18n="settings.notifications">Notifications</label><label class="sw"><input type="checkbox" data-k="notifications"><span></span></label></div>
+    <div class="set"><label data-i18n-html="settings.gyroscope_s_per_unit_scale_calibration">Gyroscope<small>°/s par unité (étalonnage d'échelle)</small></label><input type="range" data-k="gyro_dps_per_lsb" min="0.03" max="0.5" step="0.001"><output></output></div>
   </div>
-  <div class="hint" style="margin:18px 4px 0">Suivi de tête pour simulateurs (OpenTrack, manette virtuelle) : page <a onclick="go('sims')" style="cursor:pointer;color:var(--accent)">Simulateurs</a>.</div>
+  <div class="hint" style="margin:18px 4px 0"><span data-i18n="settings.head_tracking_for_simulators_opentrack_v">Suivi de tête pour simulateurs (OpenTrack, manette virtuelle) : page</span> <a onclick="go('sims')" style="cursor:pointer;color:var(--accent)" data-i18n="settings.simulators">Simulateurs</a>.</div>
 </section>
 
 <!-- =============================== CALIBRATION -->
 <section class="page" id="p-calib">
-  <h1>Calibration</h1><div class="sub">Un profil par modèle et par source (tête, boîtier, en main). Environ 15 secondes.</div>
+  <h1 data-i18n="calib.calibration">Calibration</h1><div class="sub" data-i18n="calib.one_profile_per_model_and_per_source_hea">Un profil par modèle et par source (tête, boîtier, en main). Environ 15 secondes.</div>
   <div class="card calib-hero">
     <div class="row" style="justify-content:center;gap:14px">
-      <div class="seg" id="cal-flow"><button data-v="souris">Rotation (souris)</button><button data-v="pointeur">Pointeur + coins</button><button data-v="glisse">Glisse sur table</button></div>
-      <div class="seg" id="cal-src"><button data-v="auto" class="on">Auto</button><button data-v="head">Tête</button><button data-v="case">Boîtier</button><button data-v="hand">En main</button></div>
+      <div class="seg" id="cal-flow"><button data-v="souris" data-i18n="calib.rotation_mouse">Rotation (souris)</button><button data-v="pointeur" data-i18n="calib.pointer_corners">Pointeur + coins</button><button data-v="glisse" data-i18n="calib.glide_on_table">Glisse sur table</button></div>
+      <div class="seg" id="cal-src"><button data-v="auto" class="on" data-i18n="calib.auto">Auto</button><button data-v="head" data-i18n="calib.head">Tête</button><button data-v="case" data-i18n="calib.case">Boîtier</button><button data-v="hand" data-i18n="calib.in_hand">En main</button></div>
     </div>
-    <div class="instr" id="cal-instr">Prêt à calibrer</div>
-    <div class="hint" id="cal-hint">Le curseur est mis en pause pendant la calibration.</div>
+    <div class="instr" id="cal-instr" data-i18n="calib.ready_to_calibrate">Prêt à calibrer</div>
+    <div class="hint" id="cal-hint" data-i18n="calib.the_cursor_is_paused_during_calibration">Le curseur est mis en pause pendant la calibration.</div>
     <div class="hint" id="cal-msg" style="color:var(--orange);margin-top:8px;font-weight:600"></div>
     <svg class="pring" viewBox="0 0 120 120" style="margin-top:18px"><circle class="bg" cx="60" cy="60" r="50"/><circle class="fg" id="cal-ring" cx="60" cy="60" r="50" stroke-dasharray="314.16" stroke-dashoffset="314.16"/></svg>
     <div class="steps" id="cal-steps"></div>
-    <div class="row" style="justify-content:center;margin-top:22px"><button class="btn p" id="cal-start">Commencer</button><button class="btn" id="cal-cancel">Annuler</button></div>
+    <div class="row" style="justify-content:center;margin-top:22px"><button class="btn p" id="cal-start" data-i18n="calib.start">Commencer</button><button class="btn" id="cal-cancel" data-i18n="calib.cancel">Annuler</button></div>
   </div>
-  <h2>Profils enregistrés</h2>
-  <div class="card"><table><thead><tr><th>Profil</th><th>Contenu</th></tr></thead><tbody id="cal-prof"></tbody></table></div>
+  <h2 data-i18n="calib.saved_profiles">Profils enregistrés</h2>
+  <div class="card"><table><thead><tr><th data-i18n="calib.profile">Profil</th><th data-i18n="calib.content">Contenu</th></tr></thead><tbody id="cal-prof"></tbody></table></div>
 </section>
 
 <!-- =============================== GESTES -->
 <section class="page" id="p-gestures">
-  <h1>Gestes</h1><div class="sub">Tête et mâchoire. Un double claquement des dents ouvre une fenêtre de 2 s ; hors fenêtre, aucune action n'est exécutée.</div>
+  <h1 data-i18n="gestures.gestures">Gestes</h1><div class="sub" data-i18n="gestures.head_and_jaw_a_double_teeth_click_opens">Tête et mâchoire. Un double claquement des dents ouvre une fenêtre de 2 s ; hors fenêtre, aucune action n'est exécutée.</div>
   <div class="grid g3">
-    <div class="card"><h3>État</h3>
-      <div class="set toggle" style="padding-top:0"><label>Gestes actifs</label><label class="sw"><input type="checkbox" id="g-en"><span></span></label></div>
-      <div class="set toggle"><label>Exiger l'activation<small>double claquement avant chaque action</small></label><label class="sw"><input type="checkbox" data-g="require_activation"><span></span></label></div>
-      <div class="kv"><span>Fenêtre d'action</span><span id="g-armed">—</span></div>
-      <div class="kv"><span>Rejet</span><span id="g-flags">—</span></div>
+    <div class="card"><h3 data-i18n="gestures.status">État</h3>
+      <div class="set toggle" style="padding-top:0"><label data-i18n="gestures.active_gestures">Gestes actifs</label><label class="sw"><input type="checkbox" id="g-en"><span></span></label></div>
+      <div class="set toggle"><label data-i18n-html="gestures.require_activation_double_teeth_click_be">Exiger l'activation<small>double claquement avant chaque action</small></label><label class="sw"><input type="checkbox" data-g="require_activation"><span></span></label></div>
+      <div class="kv"><span data-i18n="gestures.action_window">Fenêtre d'action</span><span id="g-armed">—</span></div>
+      <div class="kv"><span data-i18n="gestures.rejected">Rejet</span><span id="g-flags">—</span></div>
     </div>
-    <div class="card"><h3>Capteur (horodatage interne)</h3>
-      <div class="kv"><span>Source</span><span id="g-src">—</span></div>
-      <div class="kv"><span>Fréquence réelle</span><span class="mono" id="g-rate">—</span></div>
-      <div class="kv"><span>Trous (> 30 ms)</span><span class="mono" id="g-gaps">—</span></div>
-      <div class="kv"><span>Interpolés</span><span class="mono" id="g-interp">—</span></div>
-      <div class="kv"><span>Doublons</span><span class="mono" id="g-dup">—</span></div>
+    <div class="card"><h3 data-i18n="gestures.sensor_internal_timestamp">Capteur (horodatage interne)</h3>
+      <div class="kv"><span data-i18n="gestures.source">Source</span><span id="g-src">—</span></div>
+      <div class="kv"><span data-i18n="gestures.actual_rate">Fréquence réelle</span><span class="mono" id="g-rate">—</span></div>
+      <div class="kv"><span data-i18n="gestures.gaps_30_ms">Trous (> 30 ms)</span><span class="mono" id="g-gaps">—</span></div>
+      <div class="kv"><span data-i18n="gestures.interpolated">Interpolés</span><span class="mono" id="g-interp">—</span></div>
+      <div class="kv"><span data-i18n="gestures.duplicates">Doublons</span><span class="mono" id="g-dup">—</span></div>
     </div>
-    <div class="card"><h3>Enregistrement étiqueté (CSV)</h3>
-      <div class="row" style="margin-bottom:10px"><input type="text" id="g-rec-name" placeholder="nom du fichier" style="flex:1"><input type="text" id="g-rec-label" placeholder="étiquette (ex. nod)" style="width:130px"></div>
-      <div class="row"><button class="btn p sm" id="g-rec-start">Enregistrer</button><button class="btn sm" id="g-rec-lab">Changer l'étiquette</button><button class="btn d sm" id="g-rec-stop">Arrêter</button></div>
-      <div class="hint" id="g-rec-info" style="margin-top:8px">captures/private/*.csv — rejouer : <code>python gestures.py --replay fichier.csv</code></div>
+    <div class="card"><h3 data-i18n="gestures.labeled_recording_csv">Enregistrement étiqueté (CSV)</h3>
+      <div class="row" style="margin-bottom:10px"><input type="text" id="g-rec-name" placeholder="nom du fichier" style="flex:1" data-i18n-attr="placeholder=gestures.file_name"><input type="text" id="g-rec-label" placeholder="étiquette (ex. nod)" style="width:130px" data-i18n-attr="placeholder=gestures.label_e_g_nod"></div>
+      <div class="row"><button class="btn p sm" id="g-rec-start" data-i18n="gestures.record">Enregistrer</button><button class="btn sm" id="g-rec-lab" data-i18n="gestures.change_label">Changer l'étiquette</button><button class="btn d sm" id="g-rec-stop" data-i18n="gestures.stop">Arrêter</button></div>
+      <div class="hint" id="g-rec-info" style="margin-top:8px" data-i18n-html="gestures.captures_private_csv_replay_python_gestu">captures/private/*.csv — rejouer : <code>python gestures.py --replay fichier.csv</code></div>
     </div>
   </div>
-  <div class="card" style="margin-top:16px"><h3>Signaux en direct <span class="hint" style="margin-left:auto">4 dernières secondes · repères = gestes détectés</span></h3>
+  <div class="card" style="margin-top:16px"><h3><span data-i18n="gestures.live_signals">Signaux en direct</span> <span class="hint" style="margin-left:auto" data-i18n="gestures.last_4_seconds_markers_detected_gestures">4 dernières secondes · repères = gestes détectés</span></h3>
     <canvas id="g-chart" height="220"></canvas>
-    <div class="legend"><span><i style="background:var(--red)"></i>Accél. passe-haut (m/s² ×20)</span><span><i style="background:var(--accent)"></i>Lacet</span><span><i style="background:var(--green)"></i>Tangage</span><span><i style="background:var(--orange)"></i>Roulis (°/s)</span></div>
+    <div class="legend"><span><i style="background:var(--red)"></i><span data-i18n="gestures.high_pass_accel_m_s2_20">Accél. passe-haut (m/s² ×20)</span></span><span><i style="background:var(--accent)"></i><span data-i18n="gestures.yaw">Lacet</span></span><span><i style="background:var(--green)"></i><span data-i18n="gestures.pitch">Tangage</span></span><span><i style="background:var(--orange)"></i><span data-i18n="gestures.roll_s">Roulis (°/s)</span></span></div>
   </div>
   <div class="grid g2" style="margin-top:16px">
-    <div class="card"><h3>Derniers gestes</h3><table><thead><tr><th>Geste</th><th>Confiance</th><th>Action</th></tr></thead><tbody id="g-events"><tr><td colspan="3" class="empty">Aucun geste</td></tr></tbody></table></div>
-    <div class="card"><h3>Calibration personnelle</h3>
-      <div class="hint" style="margin-bottom:10px">Répète le geste 10 fois : le seuil est réglé à 60 % de ton pic médian. Détection assouplie et aucune action pendant la calibration.</div>
-      <div class="row"><select id="g-cal-g"><option value="teeth_click">Claquement de dents</option><option value="nod">Hochement (oui)</option><option value="shake">Secouement (non)</option><option value="tilt">Inclinaison</option><option value="look">Regard haut/bas maintenu</option><option value="jaw_clench">Mâchoire serrée (expérimental)</option></select>
-        <button class="btn p sm" id="g-cal-start">Commencer</button><button class="btn sm" id="g-cal-cancel">Annuler</button></div>
+    <div class="card"><h3 data-i18n="gestures.recent_gestures">Derniers gestes</h3><table><thead><tr><th data-i18n="gestures.gesture">Geste</th><th data-i18n="gestures.confidence">Confiance</th><th data-i18n="gestures.action">Action</th></tr></thead><tbody id="g-events"><tr><td colspan="3" class="empty" data-i18n="gestures.no_gestures">Aucun geste</td></tr></tbody></table></div>
+    <div class="card"><h3 data-i18n="gestures.personal_calibration">Calibration personnelle</h3>
+      <div class="hint" style="margin-bottom:10px" data-i18n="gestures.repeat_the_gesture_10_times_the_threshol">Répète le geste 10 fois : le seuil est réglé à 60 % de ton pic médian. Détection assouplie et aucune action pendant la calibration.</div>
+      <div class="row"><select id="g-cal-g"><option value="teeth_click" data-i18n="gestures.teeth_click">Claquement de dents</option><option value="nod" data-i18n="gestures.nod_yes">Hochement (oui)</option><option value="shake" data-i18n="gestures.shake_no">Secouement (non)</option><option value="tilt" data-i18n="gestures.tilt">Inclinaison</option><option value="look" data-i18n="gestures.held_look_up_down">Regard haut/bas maintenu</option><option value="jaw_clench" data-i18n="gestures.jaw_clench_experimental">Mâchoire serrée (expérimental)</option></select>
+        <button class="btn p sm" id="g-cal-start" data-i18n="gestures.start">Commencer</button><button class="btn sm" id="g-cal-cancel" data-i18n="gestures.cancel">Annuler</button></div>
       <div class="big" id="g-cal-prog" style="margin-top:12px">—</div><div class="hint" id="g-cal-res"></div>
     </div>
   </div>
-  <h2>Seuils</h2>
+  <h2 data-i18n="gestures.thresholds">Seuils</h2>
   <div class="card" id="g-sliders">
-    <div class="set"><label>Claquement : seuil<small>m/s² (pic passe-haut)</small></label><input type="range" data-g="click_thresh" min="0.2" max="6" step="0.05"><output></output></div>
-    <div class="set"><label>Double : écart maximal<small>secondes entre les deux claquements</small></label><input type="range" data-g="double_max_s" min="0.2" max="0.8" step="0.01"><output></output></div>
-    <div class="set"><label>Fenêtre d'action<small>secondes après le double claquement</small></label><input type="range" data-g="window_s" min="0.5" max="5" step="0.1"><output></output></div>
-    <div class="set"><label>Hochement : amplitude<small>degrés par aller</small></label><input type="range" data-g="nod_deg" min="2" max="30" step="0.5"><output></output></div>
-    <div class="set"><label>Secouement : amplitude<small>degrés par aller</small></label><input type="range" data-g="shake_deg" min="2" max="30" step="0.5"><output></output></div>
-    <div class="set"><label>Vitesse minimale d'un aller<small>°/s</small></label><input type="range" data-g="lobe_dps" min="10" max="150" step="1"><output></output></div>
-    <div class="set"><label>Inclinaison : angle<small>degrés, maintenu 0,25 s</small></label><input type="range" data-g="tilt_deg" min="5" max="40" step="0.5"><output></output></div>
-    <div class="set"><label>Regard haut/bas : angle<small>degrés, maintenu</small></label><input type="range" data-g="look_deg" min="5" max="40" step="0.5"><output></output></div>
-    <div class="set"><label>Regard : durée de maintien<small>secondes</small></label><input type="range" data-g="look_hold_s" min="0.2" max="2" step="0.05"><output></output></div>
-    <div class="set"><label>Marche : seuil<small>m/s² RMS vertical (1,4–2,6 Hz)</small></label><input type="range" data-g="walk_rms" min="0.1" max="3" step="0.05"><output></output></div>
-    <div class="set"><label>Mastication : impulsions<small>en 3 s pour suspendre les claquements</small></label><input type="range" data-g="chew_count" min="3" max="10" step="1"><output></output></div>
-    <div class="set toggle"><label>IMU brute ~200 Hz<small>accéléro + gyro HID ; la souris (devmotion6) passe à 50 Hz tant que les gestes sont actifs</small></label><label class="sw"><input type="checkbox" data-g="use_raw_imu"><span></span></label></div>
-    <div class="set toggle"><label>Mâchoire serrée (expérimental)<small>vibration faible soutenue > 0,6 s ; non vérifié sur AirPods</small></label><label class="sw"><input type="checkbox" data-g="clench_enabled"><span></span></label></div>
+    <div class="set"><label data-i18n-html="gestures.teeth_click_threshold_m_s2_high_pass_pea">Claquement : seuil<small>m/s² (pic passe-haut)</small></label><input type="range" data-g="click_thresh" min="0.2" max="6" step="0.05"><output></output></div>
+    <div class="set"><label data-i18n-html="gestures.double_max_gap_seconds_between_the_two_c">Double : écart maximal<small>secondes entre les deux claquements</small></label><input type="range" data-g="double_max_s" min="0.2" max="0.8" step="0.01"><output></output></div>
+    <div class="set"><label data-i18n-html="gestures.action_window_seconds_after_the_double_t">Fenêtre d'action<small>secondes après le double claquement</small></label><input type="range" data-g="window_s" min="0.5" max="5" step="0.1"><output></output></div>
+    <div class="set"><label data-i18n-html="gestures.nod_amplitude_degrees_per_stroke">Hochement : amplitude<small>degrés par aller</small></label><input type="range" data-g="nod_deg" min="2" max="30" step="0.5"><output></output></div>
+    <div class="set"><label data-i18n-html="gestures.shake_amplitude_degrees_per_stroke">Secouement : amplitude<small>degrés par aller</small></label><input type="range" data-g="shake_deg" min="2" max="30" step="0.5"><output></output></div>
+    <div class="set"><label data-i18n-html="gestures.minimum_speed_of_a_stroke_s">Vitesse minimale d'un aller<small>°/s</small></label><input type="range" data-g="lobe_dps" min="10" max="150" step="1"><output></output></div>
+    <div class="set"><label data-i18n-html="gestures.tilt_angle_degrees_held_0_25_s">Inclinaison : angle<small>degrés, maintenu 0,25 s</small></label><input type="range" data-g="tilt_deg" min="5" max="40" step="0.5"><output></output></div>
+    <div class="set"><label data-i18n-html="gestures.look_up_down_angle_degrees_held">Regard haut/bas : angle<small>degrés, maintenu</small></label><input type="range" data-g="look_deg" min="5" max="40" step="0.5"><output></output></div>
+    <div class="set"><label data-i18n-html="gestures.look_hold_time_seconds">Regard : durée de maintien<small>secondes</small></label><input type="range" data-g="look_hold_s" min="0.2" max="2" step="0.05"><output></output></div>
+    <div class="set"><label data-i18n-html="gestures.walking_threshold_vertical_rms_m_s2_1_42">Marche : seuil<small>m/s² RMS vertical (1,4–2,6 Hz)</small></label><input type="range" data-g="walk_rms" min="0.1" max="3" step="0.05"><output></output></div>
+    <div class="set"><label data-i18n-html="gestures.chewing_impulses_within_3_s_to_suspend_t">Mastication : impulsions<small>en 3 s pour suspendre les claquements</small></label><input type="range" data-g="chew_count" min="3" max="10" step="1"><output></output></div>
+    <div class="set toggle"><label data-i18n-html="gestures.raw_imu_200_hz_hid_accel_gyro_the_mouse">IMU brute ~200 Hz<small>accéléro + gyro HID ; la souris (devmotion6) passe à 50 Hz tant que les gestes sont actifs</small></label><label class="sw"><input type="checkbox" data-g="use_raw_imu"><span></span></label></div>
+    <div class="set toggle"><label data-i18n-html="gestures.jaw_clench_experimental_sustained_weak_v">Mâchoire serrée (expérimental)<small>vibration faible soutenue > 0,6 s ; non vérifié sur AirPods</small></label><label class="sw"><input type="checkbox" data-g="clench_enabled"><span></span></label></div>
   </div>
-  <h2>Actions</h2>
-  <div class="card"><table><thead><tr><th>Geste</th><th>Commande</th></tr></thead><tbody id="g-map"></tbody></table>
-    <div class="hint" style="margin-top:8px">Glissement latéral de la mâchoire : non détecté (aucun signal plausible identifié) — réservé, expérimental. Le côté gauche/droit d'un claquement est inconnu tant que <code>click_side_axis</code> n'est pas réglé.</div></div>
-  <h2>Parole silencieuse — expérimental</h2>
+  <h2 data-i18n="gestures.actions">Actions</h2>
+  <div class="card"><table><thead><tr><th data-i18n="gestures.gesture">Geste</th><th data-i18n="gestures.command">Commande</th></tr></thead><tbody id="g-map"></tbody></table>
+    <div class="hint" style="margin-top:8px" data-i18n-html="gestures.sideways_jaw_slide_not_detected_no_plaus">Glissement latéral de la mâchoire : non détecté (aucun signal plausible identifié) — réservé, expérimental. Le côté gauche/droit d'un claquement est inconnu tant que <code>click_side_axis</code> n'est pas réglé.</div></div>
+  <h2 data-i18n="gestures.silent_speech_experimental">Parole silencieuse — expérimental</h2>
   <div class="card">
-    <div class="hint" style="margin-bottom:10px">Articule un mot sans voix en maintenant le bouton. ~10 prises par mot. « Évaluer » mesure la précision (leave-one-out) et la compare au hasard (500 permutations) : si p &gt; 0,05, l'IMU ne capte pas le mot et il ne faut pas s'en servir.</div>
-    <div class="row"><input type="text" id="sp-word" placeholder="mot à apprendre (vide = reconnaître)" style="flex:1">
-      <button class="btn p" id="sp-hold">Maintenir pour enregistrer</button><button class="btn sm" id="sp-eval">Évaluer</button><button class="btn d sm" id="sp-clear">Tout effacer</button></div>
-    <div class="kv" style="margin-top:8px"><span>Mots appris</span><span id="sp-words">—</span></div>
-    <div class="kv"><span>Dernier résultat</span><span id="sp-last">—</span></div>
-    <div class="kv"><span>Évaluation</span><span id="sp-eval-res">—</span></div>
+    <div class="hint" style="margin-bottom:10px" data-i18n="gestures.mouth_a_word_silently_while_holding_the">Articule un mot sans voix en maintenant le bouton. ~10 prises par mot. « Évaluer » mesure la précision (leave-one-out) et la compare au hasard (500 permutations) : si p &gt; 0,05, l'IMU ne capte pas le mot et il ne faut pas s'en servir.</div>
+    <div class="row"><input type="text" id="sp-word" placeholder="mot à apprendre (vide = reconnaître)" style="flex:1" data-i18n-attr="placeholder=gestures.word_to_learn_empty_recognize">
+      <button class="btn p" id="sp-hold" data-i18n="gestures.hold_to_record">Maintenir pour enregistrer</button><button class="btn sm" id="sp-eval" data-i18n="gestures.evaluate">Évaluer</button><button class="btn d sm" id="sp-clear" data-i18n="gestures.clear_all">Tout effacer</button></div>
+    <div class="kv" style="margin-top:8px"><span data-i18n="gestures.learned_words">Mots appris</span><span id="sp-words">—</span></div>
+    <div class="kv"><span data-i18n="gestures.last_result">Dernier résultat</span><span id="sp-last">—</span></div>
+    <div class="kv"><span data-i18n="gestures.evaluation">Évaluation</span><span id="sp-eval-res">—</span></div>
   </div>
 </section>
 
 <section class="page" id="p-labo">
-  <h1>Labo</h1><div class="sub">Mesures en direct et sessions guidées. Détecteur du Labo volontairement permissif (seuil 0,15 m/s² + seuil adaptatif 3 × bruit) : il montre aussi les claquements trop doux pour le seuil réel. Les consignes s'affichent en grand à l'écran (pas de notifications).</div>
+  <h1 data-i18n="labo.lab">Labo</h1><div class="sub" data-i18n="labo.live_measurements_and_guided_sessions_th">Mesures en direct et sessions guidées. Détecteur du Labo volontairement permissif (seuil 0,15 m/s² + seuil adaptatif 3 × bruit) : il montre aussi les claquements trop doux pour le seuil réel. Les consignes s'affichent en grand à l'écran (pas de notifications).</div>
   <div class="grid g3">
-    <div class="card"><h3>Signal</h3>
-      <div class="kv"><span>Source</span><span id="lb-src">—</span></div>
-      <div class="kv"><span>Bruit de fond (p90)</span><span class="mono" id="lb-noise">—</span></div>
-      <div class="kv"><span>Seuil du Labo</span><span class="mono" id="lb-thr">—</span></div>
-      <div class="kv"><span>Seuil réel (click_thresh)</span><span class="mono" id="lb-real">—</span></div>
+    <div class="card"><h3 data-i18n="labo.signal">Signal</h3>
+      <div class="kv"><span data-i18n="labo.source">Source</span><span id="lb-src">—</span></div>
+      <div class="kv"><span data-i18n="labo.noise_floor_p90">Bruit de fond (p90)</span><span class="mono" id="lb-noise">—</span></div>
+      <div class="kv"><span data-i18n="labo.lab_threshold">Seuil du Labo</span><span class="mono" id="lb-thr">—</span></div>
+      <div class="kv"><span data-i18n="labo.real_threshold_click_thresh">Seuil réel (click_thresh)</span><span class="mono" id="lb-real">—</span></div>
       <div class="hint" id="lb-warn" style="margin-top:6px"></div>
     </div>
-    <div class="card" style="grid-column:span 2"><h3>Session guidée</h3>
-      <div class="row" style="margin-bottom:10px"><div class="seg" id="lb-proto"><button data-v="dents" class="on">Dents</button><button data-v="mouvements">Mouvements</button><button data-v="mots">Mots <span class="exp">β</span></button></div>
-        <label class="hint">répétitions <input type="number" id="lb-reps" min="2" max="20" placeholder="auto" style="width:70px"></label></div>
-      <div class="row" id="lb-words-row" style="display:none;margin-bottom:10px"><input type="text" id="lb-words" value="oui, non, clic, menu, stop" style="flex:1"><span class="hint">5 mots, 10 fois chacun (ordre aléatoire)</span></div>
+    <div class="card" style="grid-column:span 2"><h3 data-i18n="labo.guided_session">Session guidée</h3>
+      <div class="row" style="margin-bottom:10px"><div class="seg" id="lb-proto"><button data-v="dents" class="on" data-i18n="labo.teeth">Dents</button><button data-v="mouvements" data-i18n="labo.movements">Mouvements</button><button data-v="mots"><span data-i18n="labo.words">Mots</span> <span class="exp" data-i18n="labo.text">β</span></button></div>
+        <label class="hint"><span data-i18n="labo.repetitions">répétitions</span> <input type="number" id="lb-reps" min="2" max="20" placeholder="auto" style="width:70px"></label></div>
+      <div class="row" id="lb-words-row" style="display:none;margin-bottom:10px"><input type="text" id="lb-words" value="oui, non, clic, menu, stop" style="flex:1"><span class="hint" data-i18n="labo.5_words_10_times_each_random_order">5 mots, 10 fois chacun (ordre aléatoire)</span></div>
       <div class="hint" id="lb-proto-desc" style="margin-bottom:10px"></div>
-      <div class="row"><button class="btn p" id="lb-start">Démarrer la session</button><span class="hint" id="lb-sess-info"></span></div>
+      <div class="row"><button class="btn p" id="lb-start" data-i18n="labo.start_session">Démarrer la session</button><span class="hint" id="lb-sess-info"></span></div>
     </div>
   </div>
-  <div class="card" style="margin-top:16px"><h3>En direct <span class="hint" style="margin-left:auto">5 dernières secondes · pleine cadence</span></h3>
+  <div class="card" style="margin-top:16px"><h3><span data-i18n="labo.live">En direct</span> <span class="hint" style="margin-left:auto" data-i18n="labo.last_5_seconds_full_rate">5 dernières secondes · pleine cadence</span></h3>
     <canvas id="lb-chart" height="240"></canvas>
-    <div class="legend"><span><i style="background:var(--red)"></i>|Accél. passe-haut| (m/s², échelle gauche)</span><span><i style="background:var(--accent)"></i>|Gyro| (°/s, échelle droite)</span><span><i style="background:var(--text2)"></i>impulsion</span><span><i style="background:var(--purple)"></i>geste détecté (Labo)</span></div>
+    <div class="legend"><span><i style="background:var(--red)"></i><span data-i18n="labo.high_pass_accel_m_s2_left_scale">|Accél. passe-haut| (m/s², échelle gauche)</span></span><span><i style="background:var(--accent)"></i><span data-i18n="labo.gyro_s_right_scale">|Gyro| (°/s, échelle droite)</span></span><span><i style="background:var(--text2)"></i><span data-i18n="labo.impulse">impulsion</span></span><span><i style="background:var(--purple)"></i><span data-i18n="labo.detected_gesture_lab">geste détecté (Labo)</span></span></div>
   </div>
-  <div class="card" style="margin-top:16px"><h3>Dernières impulsions brèves</h3>
-    <table><thead><tr><th>il y a</th><th>Force (pic)</th><th>Durée</th><th>Axe dominant</th><th>Gyro moy. / max</th><th>Seuil Labo</th><th>Seuil réel</th></tr></thead><tbody id="lb-spikes"><tr><td colspan="7" class="empty">Aucune impulsion</td></tr></tbody></table>
+  <div class="card" style="margin-top:16px"><h3 data-i18n="labo.recent_short_impulses">Dernières impulsions brèves</h3>
+    <table><thead><tr><th data-i18n="labo.age">il y a</th><th data-i18n="labo.strength_peak">Force (pic)</th><th data-i18n="labo.duration">Durée</th><th data-i18n="labo.dominant_axis">Axe dominant</th><th data-i18n="labo.gyro_avg_max">Gyro moy. / max</th><th data-i18n="labo.lab_threshold_2">Seuil Labo</th><th data-i18n="labo.real_threshold">Seuil réel</th></tr></thead><tbody id="lb-spikes"><tr><td colspan="7" class="empty" data-i18n="labo.no_impulses">Aucune impulsion</td></tr></tbody></table>
   </div>
-  <h2>Résultats</h2>
-  <div class="card" id="lb-res"><div class="empty">Lance une session : le bilan s'affiche ici. Chaque session est enregistrée dans captures/private/labo_*.json (trames brutes étiquetées, rejouables) + *_bilan.json.</div></div>
+  <h2 data-i18n="labo.results">Résultats</h2>
+  <div class="card" id="lb-res"><div class="empty" data-i18n="labo.run_a_session_the_summary_shows_up_here">Lance une session : le bilan s'affiche ici. Chaque session est enregistrée dans captures/private/labo_*.json (trames brutes étiquetées, rejouables) + *_bilan.json.</div></div>
 </section>
 <div class="cue" id="lb-cue"><div class="hint" id="cue-prog"></div><div class="t" id="cue-t"></div><div class="s" id="cue-s"></div>
   <div class="cd" id="cue-cd"></div><div class="pb"><i id="cue-pb"></i></div><div class="hint" id="cue-n"></div><div class="hint" id="cue-next"></div>
-  <button class="btn d" id="cue-cancel">Annuler la session</button></div>
+  <button class="btn d" id="cue-cancel" data-i18n="app.cancel_session">Annuler la session</button></div>
 
 <!-- =============================== CAPTEURS -->
 <!-- =============================== SIMULATEURS -->
 <section class="page" id="p-sims">
-  <h1>Simulateurs</h1><div class="sub">Les AirPods comme un TrackIR : la caméra du jeu suit la tête. AirPods 3 et AirPods Pro, orientation calculée par les écouteurs. Guide pas à pas : <a href="https://github.com/starman-tech/mousepods/blob/main/docs/SIMS.md" target="_blank" rel="noopener">docs/SIMS.md</a>.</div>
+  <h1 data-i18n="sims.simulators">Simulateurs</h1><div class="sub"><span data-i18n="sims.airpods_as_a_trackir_the_in_game_camera">Les AirPods comme un TrackIR : la caméra du jeu suit la tête. AirPods 3 et AirPods Pro, orientation calculée par les écouteurs. Guide pas à pas :</span> <a href="https://github.com/starman-tech/mousepods/blob/main/docs/SIMS.md" target="_blank" rel="noopener" data-i18n="sims.docs_sims_md">docs/SIMS.md</a>.</div>
   <div class="grid g2">
-    <div class="card"><h3>Pose de la tête</h3>
+    <div class="card"><h3 data-i18n="sims.head_pose">Pose de la tête</h3>
       <div class="vec" id="sim-angles" style="margin:4px 0 12px"></div>
-      <div class="kv"><span>Source</span><span id="sim-src">—</span></div>
-      <div class="kv"><span>Sorties actives</span><span id="sim-outs">—</span></div>
-      <div class="row" style="margin-top:12px"><button class="btn p" id="sim-recenter">Recentrer</button><span class="hint">regarder droit devant l'écran ; Ctrl+Alt+C recentre aussi</span></div>
+      <div class="kv"><span data-i18n="sims.source">Source</span><span id="sim-src">—</span></div>
+      <div class="kv"><span data-i18n="sims.active_outputs">Sorties actives</span><span id="sim-outs">—</span></div>
+      <div class="row" style="margin-top:12px"><button class="btn p" id="sim-recenter" data-i18n="sims.recenter">Recentrer</button><span class="hint" data-i18n="sims.look_straight_at_the_screen_ctrl_alt_c_a">regarder droit devant l'écran ; Ctrl+Alt+C recentre aussi</span></div>
     </div>
-    <div class="card"><h3>Vue de dessus · de côté</h3>
+    <div class="card"><h3 data-i18n="sims.top_view_side_view">Vue de dessus · de côté</h3>
       <canvas id="sim-cv" style="height:190px"></canvas>
-      <div class="hint">Lacet + = regarder à droite · tangage + = en haut · roulis + = oreille droite vers l'épaule.</div>
+      <div class="hint" data-i18n="sims.yaw_look_right_pitch_up_roll_right_ear_t">Lacet + = regarder à droite · tangage + = en haut · roulis + = oreille droite vers l'épaule.</div>
     </div>
   </div>
-  <h2>OpenTrack (jeux Proton / Wine, X-Plane, FlightGear…)</h2>
+  <h2 data-i18n="sims.opentrack_proton_wine_games_x_plane_flig">OpenTrack (jeux Proton / Wine, X-Plane, FlightGear…)</h2>
   <div class="card">
-    <div class="set toggle" style="padding-top:0"><label>Envoyer à OpenTrack<small>paquet « UDP over network » : 6 doubles x, y, z (cm), lacet, tangage, roulis (°)</small></label><label class="sw"><input type="checkbox" data-k="opentrack.enabled" id="ot-en"><span></span></label></div>
-    <div class="set toggle"><label>Destination<small>hôte et port UDP (par défaut 127.0.0.1:4242)</small></label><div class="row"><input type="text" data-k="opentrack.host" id="ot-host" style="width:130px"><input type="number" data-k="opentrack.port" id="ot-port" min="1" max="65535" style="width:84px"><button class="btn sm" id="ot-apply">Appliquer</button></div></div>
-    <div class="kv"><span>État</span><span id="ot-status">—</span></div>
+    <div class="set toggle" style="padding-top:0"><label data-i18n-html="sims.send_to_opentrack_udp_over_network_packe">Envoyer à OpenTrack<small>paquet « UDP over network » : 6 doubles x, y, z (cm), lacet, tangage, roulis (°)</small></label><label class="sw"><input type="checkbox" data-k="opentrack.enabled" id="ot-en"><span></span></label></div>
+    <div class="set toggle"><label data-i18n-html="sims.destination_udp_host_and_port_default_12">Destination<small>hôte et port UDP (par défaut 127.0.0.1:4242)</small></label><div class="row"><input type="text" data-k="opentrack.host" id="ot-host" style="width:130px"><input type="number" data-k="opentrack.port" id="ot-port" min="1" max="65535" style="width:84px"><button class="btn sm" id="ot-apply" data-i18n="sims.apply">Appliquer</button></div></div>
+    <div class="kv"><span data-i18n="sims.status">État</span><span id="ot-status">—</span></div>
     <ol class="disc" style="margin-top:12px;color:var(--text2);font-size:12.5px">
-      <li>OpenTrack : <b>Input</b> = « UDP over network », port 4242. Démarrer avec <b>Start</b>.</li>
-      <li><b>Output</b> : « Wine » (jeux Proton / Wine : DCS, MSFS, IL-2, Elite, Star Citizen… protocole <i>Both</i>, choisir la version de Proton et l'AppID), « X-Plane », « FlightGear », ou « libevdev joystick ».</li>
-      <li>Les courbes et filtres d'OpenTrack restent utiles ; dans ce cas mettre le lissage ci-dessous à 0. Recentrer ici (ou la touche Center d'OpenTrack).</li>
+      <li data-i18n-html="sims.opentrack_input_udp_over_network_port_42">OpenTrack : <b>Input</b> = « UDP over network », port 4242. Démarrer avec <b>Start</b>.</li>
+      <li data-i18n-html="sims.output_wine_proton_wine_games_dcs_msfs_i"><b>Output</b> : « Wine » (jeux Proton / Wine : DCS, MSFS, IL-2, Elite, Star Citizen… protocole <i>Both</i>, choisir la version de Proton et l'AppID), « X-Plane », « FlightGear », ou « libevdev joystick ».</li>
+      <li data-i18n="sims.opentrack_s_curves_and_filters_remain_us">Les courbes et filtres d'OpenTrack restent utiles ; dans ce cas mettre le lissage ci-dessous à 0. Recentrer ici (ou la touche Center d'OpenTrack).</li>
     </ol>
   </div>
-  <h2>Manette virtuelle (jeux Linux natifs, sans OpenTrack)</h2>
+  <h2 data-i18n="sims.virtual_joystick_native_linux_games_no_o">Manette virtuelle (jeux Linux natifs, sans OpenTrack)</h2>
   <div class="card">
-    <div class="set toggle" style="padding-top:0"><label>Créer la manette « MousePods head tracker »<small>ABS_RX = lacet · ABS_RY = tangage · ABS_RZ = roulis (même disposition que la sortie libevdev d'OpenTrack)</small></label><label class="sw"><input type="checkbox" data-k="sim_joystick.enabled" id="js-en"><span></span></label></div>
-    <div class="set"><label>Pleine échelle lacet<small>degrés de tête pour un axe à fond ; plus petit = plus de débattement en jeu</small></label><input type="range" data-k="sim_joystick.full_yaw_deg" min="15" max="180" step="5"><output></output></div>
-    <div class="set"><label>Pleine échelle tangage</label><input type="range" data-k="sim_joystick.full_pitch_deg" min="10" max="180" step="5"><output></output></div>
-    <div class="set"><label>Pleine échelle roulis</label><input type="range" data-k="sim_joystick.full_roll_deg" min="10" max="180" step="5"><output></output></div>
-    <div class="kv"><span>État</span><span id="js-status">—</span></div>
+    <div class="set toggle" style="padding-top:0"><label data-i18n-html="sims.create_the_mousepods_head_tracker_joysti">Créer la manette « MousePods head tracker »<small>ABS_RX = lacet · ABS_RY = tangage · ABS_RZ = roulis (même disposition que la sortie libevdev d'OpenTrack)</small></label><label class="sw"><input type="checkbox" data-k="sim_joystick.enabled" id="js-en"><span></span></label></div>
+    <div class="set"><label data-i18n-html="sims.yaw_full_scale_head_degrees_for_full_axi">Pleine échelle lacet<small>degrés de tête pour un axe à fond ; plus petit = plus de débattement en jeu</small></label><input type="range" data-k="sim_joystick.full_yaw_deg" min="15" max="180" step="5"><output></output></div>
+    <div class="set"><label data-i18n="sims.pitch_full_scale">Pleine échelle tangage</label><input type="range" data-k="sim_joystick.full_pitch_deg" min="10" max="180" step="5"><output></output></div>
+    <div class="set"><label data-i18n="sims.roll_full_scale">Pleine échelle roulis</label><input type="range" data-k="sim_joystick.full_roll_deg" min="10" max="180" step="5"><output></output></div>
+    <div class="kv"><span data-i18n="sims.status">État</span><span id="js-status">—</span></div>
     <ol class="disc" style="margin-top:12px;color:var(--text2);font-size:12.5px">
-      <li>Euro Truck Simulator 2 / American Truck Simulator (natif) : lier le regard aux axes dans <code>controls_linux.sii</code> (guide dans docs/SIMS.md).</li>
-      <li>War Thunder (natif), FlightGear, X-Plane : lier « regard / vue gauche-droite, haut-bas » aux axes RX / RY de la manette.</li>
-      <li>Accès à <code>/dev/uinput</code> nécessaire (le même que pour la souris).</li>
+      <li data-i18n-html="sims.euro_truck_simulator_2_american_truck_si">Euro Truck Simulator 2 / American Truck Simulator (natif) : lier le regard aux axes dans <code>controls_linux.sii</code> (guide dans docs/SIMS.md).</li>
+      <li data-i18n="sims.war_thunder_native_flightgear_x_plane_bi">War Thunder (natif), FlightGear, X-Plane : lier « regard / vue gauche-droite, haut-bas » aux axes RX / RY de la manette.</li>
+      <li data-i18n-html="sims.requires_access_to_dev_uinput_same_as_fo">Accès à <code>/dev/uinput</code> nécessaire (le même que pour la souris).</li>
     </ol>
   </div>
-  <h2>Réglages communs</h2>
+  <h2 data-i18n="sims.common_settings">Réglages communs</h2>
   <div class="card">
-    <div class="set toggle" style="padding-top:0"><label>Source de l'orientation<small>quaternion : fusion interne des AirPods, sans dérive en tangage / roulis · gyro : intégration (repli automatique)</small></label><div class="seg" id="ot-source"><button data-v="quaternion">Quaternion</button><button data-v="gyro">Gyro</button></div></div>
-    <div class="set toggle"><label>Figer la souris pendant le jeu</label><label class="sw"><input type="checkbox" data-k="opentrack.pause_mouse_when_opentrack"><span></span></label></div>
-    <div class="set toggle"><label>Inverser<small>lacet · tangage · roulis</small></label><div class="row"><label class="sw"><input type="checkbox" data-k="opentrack.invert_yaw"><span></span></label><label class="sw"><input type="checkbox" data-k="opentrack.invert_pitch"><span></span></label><label class="sw"><input type="checkbox" data-k="opentrack.invert_roll"><span></span></label></div></div>
-    <div class="set"><label>Gain lacet</label><input type="range" data-k="opentrack.scale_yaw" min="0" max="3" step="0.05"><output></output></div>
-    <div class="set"><label>Gain tangage</label><input type="range" data-k="opentrack.scale_pitch" min="0" max="3" step="0.05"><output></output></div>
-    <div class="set"><label>Gain roulis</label><input type="range" data-k="opentrack.scale_roll" min="0" max="3" step="0.05"><output></output></div>
-    <div class="set"><label>Lissage<small>0 = brut (OpenTrack a aussi ses filtres)</small></label><input type="range" data-k="opentrack.smoothing" min="0" max="1" step="0.01"><output></output></div>
-    <div class="set"><label>Fréquence d'envoi<small>paquets par seconde</small></label><input type="range" data-k="opentrack.rate_hz" min="30" max="250" step="10"><output></output></div>
-    <div class="set"><label>Retour lent du lacet au centre<small>secondes ; 0 = désactivé (le lacet n'a pas de référence absolue)</small></label><input type="range" data-k="opentrack.yaw_autocenter_s" min="0" max="120" step="5"><output></output></div>
-    <div class="set toggle"><label>Correction de dérive (source gyro)<small>la gravité recale tangage et roulis</small></label><label class="sw"><input type="checkbox" data-k="opentrack.drift_correction"><span></span></label></div>
+    <div class="set toggle" style="padding-top:0"><label data-i18n-html="sims.orientation_source_quaternion_airpods_in">Source de l'orientation<small>quaternion : fusion interne des AirPods, sans dérive en tangage / roulis · gyro : intégration (repli automatique)</small></label><div class="seg" id="ot-source"><button data-v="quaternion" data-i18n="sims.quaternion">Quaternion</button><button data-v="gyro" data-i18n="sims.gyro">Gyro</button></div></div>
+    <div class="set toggle"><label data-i18n="sims.freeze_the_mouse_while_gaming">Figer la souris pendant le jeu</label><label class="sw"><input type="checkbox" data-k="opentrack.pause_mouse_when_opentrack"><span></span></label></div>
+    <div class="set toggle"><label data-i18n-html="sims.invert_yaw_pitch_roll">Inverser<small>lacet · tangage · roulis</small></label><div class="row"><label class="sw"><input type="checkbox" data-k="opentrack.invert_yaw"><span></span></label><label class="sw"><input type="checkbox" data-k="opentrack.invert_pitch"><span></span></label><label class="sw"><input type="checkbox" data-k="opentrack.invert_roll"><span></span></label></div></div>
+    <div class="set"><label data-i18n="sims.yaw_gain">Gain lacet</label><input type="range" data-k="opentrack.scale_yaw" min="0" max="3" step="0.05"><output></output></div>
+    <div class="set"><label data-i18n="sims.pitch_gain">Gain tangage</label><input type="range" data-k="opentrack.scale_pitch" min="0" max="3" step="0.05"><output></output></div>
+    <div class="set"><label data-i18n="sims.roll_gain">Gain roulis</label><input type="range" data-k="opentrack.scale_roll" min="0" max="3" step="0.05"><output></output></div>
+    <div class="set"><label data-i18n-html="sims.smoothing_0_raw_opentrack_has_its_own_fi">Lissage<small>0 = brut (OpenTrack a aussi ses filtres)</small></label><input type="range" data-k="opentrack.smoothing" min="0" max="1" step="0.01"><output></output></div>
+    <div class="set"><label data-i18n-html="sims.send_rate_packets_per_second">Fréquence d'envoi<small>paquets par seconde</small></label><input type="range" data-k="opentrack.rate_hz" min="30" max="250" step="10"><output></output></div>
+    <div class="set"><label data-i18n-html="sims.slow_yaw_return_to_center_seconds_0_off">Retour lent du lacet au centre<small>secondes ; 0 = désactivé (le lacet n'a pas de référence absolue)</small></label><input type="range" data-k="opentrack.yaw_autocenter_s" min="0" max="120" step="5"><output></output></div>
+    <div class="set toggle"><label data-i18n-html="sims.drift_correction_gyro_source_gravity_rea">Correction de dérive (source gyro)<small>la gravité recale tangage et roulis</small></label><label class="sw"><input type="checkbox" data-k="opentrack.drift_correction"><span></span></label></div>
   </div>
 </section>
 
 <!-- =============================== GARMIN -->
 <section class="page" id="p-garmin">
-  <h1>Montre Garmin</h1><div class="sub">Incliner le poignet déplace le curseur, une double tape sur la montre clique. Accéléromètre seul, 25 Hz (service BLE 16).</div>
-  <div class="card" id="gm-missing" style="display:none"><h3>Module Garmin non installé</h3>
-    <div class="hint">La liaison avec la montre utilise la bibliothèque <b>garmin-ble</b>, installée à part :
+  <h1 data-i18n="garmin.garmin_watch">Montre Garmin</h1><div class="sub" data-i18n="garmin.tilting_the_wrist_moves_the_cursor_a_dou">Incliner le poignet déplace le curseur, une double tape sur la montre clique. Accéléromètre seul, 25 Hz (service BLE 16).</div>
+  <div class="card" id="gm-missing" style="display:none"><h3 data-i18n="garmin.garmin_module_not_installed">Module Garmin non installé</h3>
+    <div class="hint" data-i18n-html="garmin.the_watch_link_uses_the_garmin_ble_libra">La liaison avec la montre utilise la bibliothèque <b>garmin-ble</b>, installée à part :
       <code>.venv/bin/pip install -r requirements-garmin.txt</code>, puis relancer MousePods.
       garmin-ble est sous licence <b>AGPL-3.0</b> (MousePods reste sous Apache-2.0) : voir <code>docs/GARMIN.md</code>.</div>
     <div class="hint mono" id="gm-missing-why" style="margin-top:8px"></div></div>
   <div id="gm-body">
   <div class="grid g2">
-    <div class="card"><h3>Connexion</h3>
-      <div class="set toggle" style="padding-top:0"><label>Adresse Bluetooth<small>montre déjà appairée avec bluetoothctl</small></label><div class="row"><input type="text" id="gm-addr" placeholder="XX:XX:XX:XX:XX:XX" style="width:170px" spellcheck="false"><button class="btn sm" id="gm-paired">Appairées…</button></div></div>
+    <div class="card"><h3 data-i18n="garmin.connection">Connexion</h3>
+      <div class="set toggle" style="padding-top:0"><label data-i18n-html="garmin.bluetooth_address_watch_already_paired_w">Adresse Bluetooth<small>montre déjà appairée avec bluetoothctl</small></label><div class="row"><input type="text" id="gm-addr" placeholder="XX:XX:XX:XX:XX:XX" style="width:170px" spellcheck="false"><button class="btn sm" id="gm-paired" data-i18n="garmin.paired">Appairées…</button></div></div>
       <div id="gm-paired-list" class="row"></div>
-      <div class="kv"><span>État</span><span id="gm-status">—</span></div>
-      <div class="kv"><span>Échantillons par seconde</span><span id="gm-rate" class="mono">—</span></div>
-      <div class="kv"><span>Souris</span><span id="gm-mouse">—</span></div>
-      <div class="kv"><span>Clics (double tape)</span><span id="gm-clicks" class="mono">0</span></div>
-      <div class="kv"><span>Amplitude calibrée</span><span id="gm-range" class="mono">—</span></div>
-      <div class="set toggle"><label>Connexion au démarrage<small>quand MousePods démarre</small></label><label class="sw"><input type="checkbox" data-gm="autoconnect"><span></span></label></div>
-      <div class="row" style="margin-top:10px"><button class="btn p" id="gm-connect">Connecter</button><button class="btn" id="gm-disconnect">Déconnecter</button></div>
-      <div class="hint" style="margin-top:10px">La montre n'accepte qu'un client BLE : déconnecte-la du téléphone (Bluetooth du téléphone coupé) avant.</div>
+      <div class="kv"><span data-i18n="garmin.status">État</span><span id="gm-status">—</span></div>
+      <div class="kv"><span data-i18n="garmin.samples_per_second">Échantillons par seconde</span><span id="gm-rate" class="mono">—</span></div>
+      <div class="kv"><span data-i18n="garmin.mouse">Souris</span><span id="gm-mouse">—</span></div>
+      <div class="kv"><span data-i18n="garmin.clicks_double_tap">Clics (double tape)</span><span id="gm-clicks" class="mono">0</span></div>
+      <div class="kv"><span data-i18n="garmin.calibrated_amplitude">Amplitude calibrée</span><span id="gm-range" class="mono">—</span></div>
+      <div class="set toggle"><label data-i18n-html="garmin.connect_at_startup_when_mousepods_starts">Connexion au démarrage<small>quand MousePods démarre</small></label><label class="sw"><input type="checkbox" data-gm="autoconnect"><span></span></label></div>
+      <div class="row" style="margin-top:10px"><button class="btn p" id="gm-connect" data-i18n="garmin.connect">Connecter</button><button class="btn" id="gm-disconnect" data-i18n="garmin.disconnect">Déconnecter</button></div>
+      <div class="hint" style="margin-top:10px" data-i18n="garmin.the_watch_accepts_only_one_ble_client_di">La montre n'accepte qu'un client BLE : déconnecte-la du téléphone (Bluetooth du téléphone coupé) avant.</div>
     </div>
-    <div class="card" style="text-align:center"><h3>Calibration et inclinaison</h3>
+    <div class="card" style="text-align:center"><h3 data-i18n="garmin.calibration_and_tilt">Calibration et inclinaison</h3>
       <div id="gm-prompt" style="font-size:19px;font-weight:650;min-height:50px;letter-spacing:-.01em"></div>
       <div class="hint" id="gm-step"></div>
       <div class="hint" id="gm-err" style="color:var(--orange);font-weight:600;min-height:18px"></div>
       <canvas id="gm-canvas" style="width:260px;height:260px;margin:8px auto 0;border-radius:12px;background:var(--card2)"></canvas>
       <div class="steps" id="gm-steps"></div>
-      <div class="row" style="justify-content:center;margin-top:14px"><button class="btn" id="gm-recenter">Recentrer</button><button class="btn" id="gm-recal">Recalibrer tout</button><button class="btn" id="gm-pause">Pause</button></div>
+      <div class="row" style="justify-content:center;margin-top:14px"><button class="btn" id="gm-recenter" data-i18n="garmin.recenter">Recentrer</button><button class="btn" id="gm-recal" data-i18n="garmin.recalibrate_all">Recalibrer tout</button><button class="btn" id="gm-pause" data-i18n="garmin.pause">Pause</button></div>
     </div>
   </div>
-  <h2>Réglages</h2>
+  <h2 data-i18n="garmin.settings">Réglages</h2>
   <div class="card">
-    <div class="set toggle" style="padding-top:0"><label>Mode<small>joystick : l'inclinaison donne une vitesse · pointeur : l'inclinaison donne une position à l'écran</small></label><div class="seg" id="gm-mode"><button data-v="joystick">Joystick</button><button data-v="pointeur">Pointeur</button></div></div>
-    <div class="set"><label>Vitesse max<small>pixels par seconde à fond d'amplitude (joystick)</small></label><input type="range" data-gm="max_speed" min="300" max="5000" step="100"><output></output></div>
-    <div class="set"><label>Zone morte<small>fraction de ton amplitude ignorée autour du neutre</small></label><input type="range" data-gm="deadzone" min="0.05" max="0.5" step="0.01"><output></output></div>
-    <div class="set"><label>Lissage<small>secondes ; plus petit = plus réactif</small></label><input type="range" data-gm="velocity_tau_s" min="0.02" max="0.25" step="0.01"><output></output></div>
-    <div class="set"><label>Force de tape<small>g ; seuil d'une tape sur la montre</small></label><input type="range" data-gm="tap_g" min="0.2" max="1.2" step="0.05"><output></output></div>
-    <div class="set toggle"><label>Inverser<small>horizontal · vertical</small></label><div class="row"><label class="sw"><input type="checkbox" data-gm="invert_x"><span></span></label><label class="sw"><input type="checkbox" data-gm="invert_y"><span></span></label></div></div>
-    <div class="set toggle"><label>Recentrage automatique<small>le neutre suit lentement le poignet au repos (dérive)</small></label><label class="sw"><input type="checkbox" data-gm="auto_center"><span></span></label></div>
+    <div class="set toggle" style="padding-top:0"><label data-i18n-html="garmin.mode_joystick_tilt_sets_a_speed_pointer">Mode<small>joystick : l'inclinaison donne une vitesse · pointeur : l'inclinaison donne une position à l'écran</small></label><div class="seg" id="gm-mode"><button data-v="joystick" data-i18n="garmin.joystick">Joystick</button><button data-v="pointeur" data-i18n="garmin.pointer">Pointeur</button></div></div>
+    <div class="set"><label data-i18n-html="garmin.max_speed_pixels_per_second_at_full_ampl">Vitesse max<small>pixels par seconde à fond d'amplitude (joystick)</small></label><input type="range" data-gm="max_speed" min="300" max="5000" step="100"><output></output></div>
+    <div class="set"><label data-i18n-html="garmin.dead_zone_fraction_of_your_amplitude_ign">Zone morte<small>fraction de ton amplitude ignorée autour du neutre</small></label><input type="range" data-gm="deadzone" min="0.05" max="0.5" step="0.01"><output></output></div>
+    <div class="set"><label data-i18n-html="garmin.smoothing_seconds_smaller_more_responsiv">Lissage<small>secondes ; plus petit = plus réactif</small></label><input type="range" data-gm="velocity_tau_s" min="0.02" max="0.25" step="0.01"><output></output></div>
+    <div class="set"><label data-i18n-html="garmin.tap_strength_g_threshold_for_a_tap_on_th">Force de tape<small>g ; seuil d'une tape sur la montre</small></label><input type="range" data-gm="tap_g" min="0.2" max="1.2" step="0.05"><output></output></div>
+    <div class="set toggle"><label data-i18n-html="garmin.invert_horizontal_vertical">Inverser<small>horizontal · vertical</small></label><div class="row"><label class="sw"><input type="checkbox" data-gm="invert_x"><span></span></label><label class="sw"><input type="checkbox" data-gm="invert_y"><span></span></label></div></div>
+    <div class="set toggle"><label data-i18n-html="garmin.auto_recenter_neutral_slowly_follows_the">Recentrage automatique<small>le neutre suit lentement le poignet au repos (dérive)</small></label><label class="sw"><input type="checkbox" data-gm="auto_center"><span></span></label></div>
   </div>
-  <h2>Limites</h2>
+  <h2 data-i18n="garmin.limits">Limites</h2>
   <div class="card"><ul class="disc">
-    <li>La montre n'envoie en temps réel que l'<b>accéléromètre</b> : 3 échantillons toutes les 120 ms (24,9 Hz), 12 bits, ±8 g. Pas de gyroscope en direct.</li>
-    <li>On mesure donc l'<b>inclinaison</b> (direction de la gravité), pas la rotation autour de la verticale. Le rendu à 120 Hz lisse les marches de 25 Hz.</li>
-    <li>Latence : ~80 ms de mise en lot dans la montre, plus 130 ms médians (240 ms p95) de rafales BLE.</li>
-    <li>Bras baissé (grosse inclinaison) = pause. Une tape fige le curseur 0,35 s et annule le petit déplacement qu'elle a causé.</li>
+    <li data-i18n-html="garmin.the_watch_streams_only_the_accelerometer">La montre n'envoie en temps réel que l'<b>accéléromètre</b> : 3 échantillons toutes les 120 ms (24,9 Hz), 12 bits, ±8 g. Pas de gyroscope en direct.</li>
+    <li data-i18n-html="garmin.so_it_measures_tilt_direction_of_gravity">On mesure donc l'<b>inclinaison</b> (direction de la gravité), pas la rotation autour de la verticale. Le rendu à 120 Hz lisse les marches de 25 Hz.</li>
+    <li data-i18n="garmin.latency_80_ms_of_batching_in_the_watch_p">Latence : ~80 ms de mise en lot dans la montre, plus 130 ms médians (240 ms p95) de rafales BLE.</li>
+    <li data-i18n="garmin.arm_lowered_large_tilt_pause_a_tap_freez">Bras baissé (grosse inclinaison) = pause. Une tape fige le curseur 0,35 s et annule le petit déplacement qu'elle a causé.</li>
   </ul></div>
-  <h2>Messages</h2>
+  <h2 data-i18n="garmin.messages">Messages</h2>
   <div class="card"><table><tbody id="gm-msgs"><tr><td class="empty">—</td></tr></tbody></table></div>
   </div>
 </section>
 
 <section class="page" id="p-sensors">
-  <h1>Capteurs</h1><div class="sub">Services capteurs publiés par les AirPods via Apple RemoteHID (HID sur AACP). Interrogez-les et démarrez-les individuellement.</div>
+  <h1 data-i18n="sensors.sensors">Capteurs</h1><div class="sub" data-i18n="sensors.sensor_services_published_by_the_airpods">Services capteurs publiés par les AirPods via Apple RemoteHID (HID sur AACP). Interrogez-les et démarrez-les individuellement.</div>
   <div class="grid g2" id="sens-list"></div>
-  <h2>Réponses Get/SetReport</h2>
-  <div class="card"><table><thead><tr><th>Il y a</th><th>Type</th><th>Device</th><th>Données</th></tr></thead><tbody id="sens-replies"></tbody></table></div>
+  <h2 data-i18n="sensors.get_setreport_responses">Réponses Get/SetReport</h2>
+  <div class="card"><table><thead><tr><th data-i18n="sensors.age">Il y a</th><th data-i18n="sensors.type">Type</th><th data-i18n="sensors.device">Device</th><th data-i18n="sensors.data">Données</th></tr></thead><tbody id="sens-replies"></tbody></table></div>
 </section>
 
 <!-- =============================== AIRPODS -->
 <section class="page" id="p-device">
-  <h1>AirPods</h1><div class="sub">Informations remontées par les écouteurs.</div>
+  <h1>AirPods</h1><div class="sub" data-i18n="device.information_reported_by_the_earbuds">Informations remontées par les écouteurs.</div>
   <div class="grid g2">
-    <div class="card"><h3>Identité</h3><div id="dev-info"></div></div>
-    <div class="card"><h3>État</h3><div id="dev-state"></div></div>
+    <div class="card"><h3 data-i18n="device.identity">Identité</h3><div id="dev-info"></div></div>
+    <div class="card"><h3 data-i18n="device.status">État</h3><div id="dev-state"></div></div>
   </div>
-  <h2>Réglages internes (opcode 0x09)</h2>
-  <div class="card"><table><thead><tr><th>ID</th><th>Nom</th><th>Valeur</th></tr></thead><tbody id="dev-ctl"></tbody></table>
-    <div class="hint" style="margin-top:12px">Avancé : envoyer une commande de contrôle. Ces réglages sont stockés dans les AirPods.</div>
-    <div class="row" style="margin-top:8px"><input type="text" id="ctl-id" placeholder="ID (ex. 0x17)" style="width:120px"><input type="text" id="ctl-val" placeholder="valeurs (ex. 0 0 0 0)" style="width:180px"><button class="btn sm" id="ctl-send">Envoyer</button></div>
+  <h2 data-i18n="device.internal_settings_opcode_0x09">Réglages internes (opcode 0x09)</h2>
+  <div class="card"><table><thead><tr><th data-i18n="device.id">ID</th><th data-i18n="device.name">Nom</th><th data-i18n="device.value">Valeur</th></tr></thead><tbody id="dev-ctl"></tbody></table>
+    <div class="hint" style="margin-top:12px" data-i18n="device.advanced_send_a_control_command_these_se">Avancé : envoyer une commande de contrôle. Ces réglages sont stockés dans les AirPods.</div>
+    <div class="row" style="margin-top:8px"><input type="text" id="ctl-id" placeholder="ID (ex. 0x17)" style="width:120px" data-i18n-attr="placeholder=device.id_e_g_0x17"><input type="text" id="ctl-val" placeholder="valeurs (ex. 0 0 0 0)" style="width:180px" data-i18n-attr="placeholder=device.values_e_g_0_0_0_0"><button class="btn sm" id="ctl-send" data-i18n="device.send">Envoyer</button></div>
   </div>
-  <h2>Avancé</h2>
-  <div class="card"><div class="hint">Envoyer un paquet AAP brut (hex). À vos risques.</div>
-    <div class="row" style="margin-top:8px"><input type="text" id="raw-hex" class="mono" placeholder="04 00 04 00 ..." style="flex:1"><button class="btn sm" id="raw-send">Envoyer</button><button class="btn sm d" id="reconnect">Reconnecter</button></div></div>
+  <h2 data-i18n="device.advanced">Avancé</h2>
+  <div class="card"><div class="hint" data-i18n="device.send_a_raw_aap_packet_hex_at_your_own_ri">Envoyer un paquet AAP brut (hex). À vos risques.</div>
+    <div class="row" style="margin-top:8px"><input type="text" id="raw-hex" class="mono" placeholder="04 00 04 00 ..." style="flex:1"><button class="btn sm" id="raw-send" data-i18n="device.send">Envoyer</button><button class="btn sm d" id="reconnect" data-i18n="device.reconnect">Reconnecter</button></div></div>
 </section>
 
 <!-- =============================== JOURNAL -->
 <section class="page" id="p-log">
-  <h1>Journal</h1><div class="sub">Paquets AAP échangés (1 paquet de mouvement sur 100 affiché).</div>
-  <div class="card" style="margin-bottom:16px"><h3>Compteurs par opcode</h3><div class="row" id="log-counts"></div></div>
-  <div class="card log"><table><thead><tr><th>Heure</th><th>Sens</th><th>Op</th><th>Long.</th><th>Données</th></tr></thead><tbody id="log-body"></tbody></table></div>
+  <h1 data-i18n="log.log">Journal</h1><div class="sub" data-i18n="log.aap_packets_exchanged_1_motion_packet_in">Paquets AAP échangés (1 paquet de mouvement sur 100 affiché).</div>
+  <div class="card" style="margin-bottom:16px"><h3 data-i18n="log.counters_per_opcode">Compteurs par opcode</h3><div class="row" id="log-counts"></div></div>
+  <div class="card log"><table><thead><tr><th data-i18n="log.time">Heure</th><th data-i18n="log.direction">Sens</th><th data-i18n="log.op">Op</th><th data-i18n="log.len">Long.</th><th data-i18n="log.data">Données</th></tr></thead><tbody id="log-body"></tbody></table></div>
 </section>
 
 <!-- =============================== DÉCOUVERTES -->
 <section class="page" id="p-about">
-  <h1>Découvertes</h1><div class="sub">Ce qu'on a appris en rétro-ingénierie — détails dans REVERSE_ENGINEERING.md.</div>
+  <h1 data-i18n="about.findings">Découvertes</h1><div class="sub" data-i18n="about.what_we_learned_from_reverse_engineering">Ce qu'on a appris en rétro-ingénierie — détails dans REVERSE_ENGINEERING.md.</div>
   <div class="card"><ul class="disc">
-    <li><b>Accélération utilisateur</b> [38:44] (gravité retirée, ~1000 = 1 g) : bruit ≈ 0,02 g au repos — assez propre pour le mode Glisse avec remise à zéro à chaque arrêt.</li>
-    <li><b>MTU L2CAP</b> : avec 672 octets (défaut Linux), les AirPods 3 cachent leurs capteurs ; à <code>2582</code> (comme iOS) ils publient <i>devmotion6, accel, gyro, cma, kadabra</i>.</li>
-    <li><b>Apple RemoteHID</b> (canal RTBuddy <code>0x800</code>) : chaque capteur est un périphérique HID virtuel. En-tête de sous-paquet u32 : deviceID (7 bits), longueur (10 bits), type (3 bits).</li>
-    <li><b>HostConnect</b> <code>00 gg 00 00 | 00 02 00 00</code> → les AirPods publient leurs capteurs (DeviceConnect + plist + descripteur HID).</li>
-    <li><b>SetReport feature 1 = Report Interval (µs)</b> sur devmotion6 → flux de mouvement jusqu'à ~200 Hz.</li>
-    <li>Bloc de 58 octets commun aux AirPods 3 et Pro : quaternion Q15 [20:26], gyroscope [26:32] (~0,122 °/s par unité), accélération [38:44], gravité [44:50] (~1000 = 1 g).</li>
-    <li>AirPods Pro 2 : protocole <i>SensorDataWX</i> (protobuf, <code>0x100000</code>) — ACTIVITY(14) puis DEVMOTION6(16).</li>
+    <li data-i18n-html="about.user_acceleration_38_44_gravity_removed"><b>Accélération utilisateur</b> [38:44] (gravité retirée, ~1000 = 1 g) : bruit ≈ 0,02 g au repos — assez propre pour le mode Glisse avec remise à zéro à chaque arrêt.</li>
+    <li data-i18n-html="about.l2cap_mtu_at_672_bytes_linux_default_air"><b>MTU L2CAP</b> : avec 672 octets (défaut Linux), les AirPods 3 cachent leurs capteurs ; à <code>2582</code> (comme iOS) ils publient <i>devmotion6, accel, gyro, cma, kadabra</i>.</li>
+    <li data-i18n-html="about.apple_remotehid_rtbuddy_channel_0x800_ea"><b>Apple RemoteHID</b> (canal RTBuddy <code>0x800</code>) : chaque capteur est un périphérique HID virtuel. En-tête de sous-paquet u32 : deviceID (7 bits), longueur (10 bits), type (3 bits).</li>
+    <li data-i18n-html="about.hostconnect_00_gg_00_00_00_02_00_00_the"><b>HostConnect</b> <code>00 gg 00 00 | 00 02 00 00</code> → les AirPods publient leurs capteurs (DeviceConnect + plist + descripteur HID).</li>
+    <li data-i18n-html="about.setreport_feature_1_report_interval_s_on"><b>SetReport feature 1 = Report Interval (µs)</b> sur devmotion6 → flux de mouvement jusqu'à ~200 Hz.</li>
+    <li data-i18n="about.58_byte_block_shared_by_airpods_3_and_pr">Bloc de 58 octets commun aux AirPods 3 et Pro : quaternion Q15 [20:26], gyroscope [26:32] (~0,122 °/s par unité), accélération [38:44], gravité [44:50] (~1000 = 1 g).</li>
+    <li data-i18n-html="about.airpods_pro_2_sensordatawx_protocol_prot">AirPods Pro 2 : protocole <i>SensorDataWX</i> (protobuf, <code>0x100000</code>) — ACTIVITY(14) puis DEVMOTION6(16).</li>
   </ul></div>
 </section>
 </main>
@@ -560,9 +562,21 @@ code{background:var(--card2);padding:1px 6px;border-radius:5px}
 <script>
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 let T={}, S={}, page="overview", series=[], q0=null;
+// ---------- i18n (strings from /api/i18n; English is the fallback)
+let I18N={};
+function t(key,vars){let s=I18N[key];if(s===undefined)return key;
+  if(vars)s=s.replace(/\{(\w+)\}/g,(m,k)=>vars[k]!==undefined?vars[k]:m);return s}
+function applyI18n(root=document){
+  root.querySelectorAll("[data-i18n]").forEach(e=>{e.textContent=t(e.dataset.i18n)});
+  root.querySelectorAll("[data-i18n-html]").forEach(e=>{e.innerHTML=t(e.dataset.i18nHtml)});
+  root.querySelectorAll("[data-i18n-attr]").forEach(e=>e.dataset.i18nAttr.split(";").forEach(p=>{
+    const [a,k]=p.split("=");if(a&&k)e.setAttribute(a.trim(),t(k.trim()))}))}
+async function loadI18n(){try{const j=await (await fetch("/api/i18n")).json();I18N=j.strings||{};
+  document.documentElement.lang=j.lang||"en";lbLastRes=null;applyI18n();
+  $$(".seg[data-key=ui_lang] button").forEach(b=>b.classList.toggle("on",b.dataset.v===(j.setting||"auto")))}catch(e){}}
 const post=(u,b)=>fetch(u,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b||{})});
 function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("on");clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove("on"),1600)}
-const SRC={head:"Tête",case:"Boîtier",hand:"En main",auto:"Auto"};
+const SRC=k=>({head:t("js.src.head"),case:t("js.src.case"),hand:t("js.src.hand"),auto:t("js.src.auto")})[k];
 // ---------- navigation
 function go(p){page=p;$$("#nav a").forEach(x=>x.classList.toggle("on",x.dataset.p===p));
   $$(".page").forEach(e=>e.classList.toggle("on",e.id==="p-"+p));if(location.hash!=="#"+p)history.replaceState(null,"","#"+p);refreshState()}
@@ -573,7 +587,8 @@ $$("[data-cmd]").forEach(b=>b.onclick=()=>{post("/api/cmd",{cmd:b.dataset.cmd});
 $("#ov-toggle").onclick=()=>post("/api/cmd",{cmd:"toggle"});
 function setCfg(obj,msg){post("/api/config",obj).then(()=>msg&&toast(msg))}
 $$(".seg[data-key]").forEach(seg=>seg.querySelectorAll("button").forEach(b=>b.onclick=()=>{
-  setCfg({[seg.dataset.key]:b.dataset.v},(seg.dataset.key==="mode"?"Mode ":"Source ")+b.textContent);
+  if(seg.dataset.key==="ui_lang"){post("/api/config",{ui_lang:b.dataset.v}).then(()=>loadI18n()).then(()=>{refreshState();toast(t("js.toast.language"))});return}
+  setCfg({[seg.dataset.key]:b.dataset.v},seg.dataset.key==="mode"?t("js.toast.mode",{name:b.textContent}):t("js.toast.source",{name:b.textContent}));
   seg.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b))}));
 // ---------- réglages
 function getK(cfg,k){return k.split(".").reduce((o,p)=>o&&o[p],cfg)}
@@ -584,7 +599,7 @@ $$("#p-settings input[data-k], #p-sims input[data-k]").forEach(inp=>{
   const out=inp.parentElement.querySelector("output");
   if(inp.type==="range"){inp.oninput=()=>{editing=k;out.textContent=fmt(+inp.value,inp.step)};
     inp.onchange=()=>{setCfg(mkObj(k,+inp.value));setTimeout(()=>editing=null,800)}}
-  else inp.onchange=()=>setCfg(mkObj(k,inp.checked),"Enregistré");
+  else inp.onchange=()=>setCfg(mkObj(k,inp.checked),t("js.toast.saved"));
 });
 function fmt(v,step){const d=(step+"").includes(".")?(step+"").split(".")[1].length:0;return v.toFixed(Math.min(d,3))}
 function fillSettings(cfg){$$("#p-settings input[data-k], #p-sims input[data-k]").forEach(inp=>{const k=inp.dataset.k;if(k===editing)return;const v=getK(cfg,k);
@@ -594,13 +609,13 @@ function fillSettings(cfg){$$("#p-settings input[data-k], #p-sims input[data-k]"
 let calSrc="auto",calFlow=null;
 $$("#cal-flow button").forEach(b=>b.onclick=()=>{calFlow=b.dataset.v;$$("#cal-flow button").forEach(x=>x.classList.toggle("on",x===b))});
 $$("#cal-src button").forEach(b=>b.onclick=()=>{calSrc=b.dataset.v;$$("#cal-src button").forEach(x=>x.classList.toggle("on",x===b))});
-$("#cal-start").onclick=()=>{post("/api/calib",{action:"start",source:calSrc,flow:calFlow||T.mode});toast("Calibration lancée")};
-$("#cal-cancel").onclick=()=>{post("/api/calib",{action:"cancel"});toast("Calibration annulée")};
+$("#cal-start").onclick=()=>{post("/api/calib",{action:"start",source:calSrc,flow:calFlow||T.mode});toast(t("js.toast.calib_started"))};
+$("#cal-cancel").onclick=()=>{post("/api/calib",{action:"cancel"});toast(t("js.toast.calib_cancelled"))};
 // ---------- appareil
 $("#ctl-send").onclick=()=>{const id=parseInt($("#ctl-id").value);const vals=$("#ctl-val").value.trim().split(/\s+/).filter(Boolean).map(x=>parseInt(x));
-  if(isNaN(id))return toast("ID invalide");post("/api/control",{ident:id,values:vals});toast("Commande envoyée")};
-$("#raw-send").onclick=()=>{post("/api/raw",{hex:$("#raw-hex").value});toast("Paquet envoyé")};
-$("#reconnect").onclick=()=>{post("/api/reconnect");toast("Reconnexion…")};
+  if(isNaN(id))return toast(t("js.toast.invalid_id"));post("/api/control",{ident:id,values:vals});toast(t("js.toast.command_sent"))};
+$("#raw-send").onclick=()=>{post("/api/raw",{hex:$("#raw-hex").value});toast(t("js.toast.packet_sent"))};
+$("#reconnect").onclick=()=>{post("/api/reconnect");toast(t("js.toast.reconnecting"))};
 $("#m-zero").onclick=()=>{q0=quat(T.att)};
 // ---------- quaternion -> CSS
 function quat(a){if(!a)return[1,0,0,0];const x=a[0]/32768,y=a[1]/32768,z=a[2]/32768;const w=Math.sqrt(Math.max(0,1-x*x-y*y-z*z));return[w,x,y,z]}
@@ -626,72 +641,72 @@ function vec(el,v,scale,unit){el.innerHTML=["X","Y","Z"].map((n,i)=>{const p=Mat
 // ---------- rendu télémétrie
 function ring(level,color){const c=2*Math.PI*36;return `<svg class="ring" viewBox="0 0 84 84"><circle class="bg" cx="42" cy="42" r="36"/><circle class="fg" cx="42" cy="42" r="36" stroke-dasharray="${c}" stroke-dashoffset="${c*(1-level/100)}" style="stroke:${color}"/><text x="42" y="47" text-anchor="middle" font-size="16" font-weight="650" fill="currentColor">${level}%</text></svg>`}
 function renderTelemetry(){
-  const t=T;const ok=t.connected&&t.live;
-  $("#side-dot").className="dot "+(ok?"ok":t.connected?"warn":"");
-  $("#side-status").textContent=ok?"Mesures en direct":(t.status||"—");
-  $("#side-rate").textContent=t.connected?`${t.rate} Hz · ${SRC[t.source]||""}`:"";
+  const tm=T;const ok=tm.connected&&tm.live;
+  $("#side-dot").className="dot "+(ok?"ok":tm.connected?"warn":"");
+  $("#side-status").textContent=ok?t("js.status.live"):(tm.status||"—");
+  $("#side-rate").textContent=tm.connected?`${tm.rate} Hz · ${SRC(tm.source)||""}`:"";
   if(page==="overview"){
-    $("#ov-state").textContent=t.paused?"En pause":(t.calib&&t.calib.active?"Calibration":"Actif");
-    $("#ov-state-sub").textContent=`${({souris:"Mode souris",pointeur:"Mode pointeur",glisse:"Mode glisse"})[t.mode]} · source ${SRC[t.source]}${t.scroll?" · défilement":""}`;
-    $("#ov-toggle").textContent=t.paused?"Reprendre":"Pause";
-    $("#ov-rate").textContent=t.connected?t.rate:"—";
-    $("#ov-gaps").textContent=t.connected?t.gaps:"—";$("#ov-gaps").style.color=t.gaps>3?"var(--orange)":"";
-    $$(".seg[data-key=mode] button").forEach(b=>b.classList.toggle("on",b.dataset.v===t.mode));
-    $$(".seg[data-key=source] button").forEach(b=>b.classList.toggle("on",b.dataset.v===t.source_cfg));
-    $("#ov-src-hint").textContent=`Détecté : ${({ear:"écouteurs portés",case:"écouteurs dans le boîtier",out:"écouteur hors de l'oreille"})[t.place]||"—"} → source ${SRC[t.source]}`;
-    const bats=(t.battery||[]).map(b=>{const col=b.level<=20?"var(--red)":b.state==="en charge"?"var(--green)":"var(--accent)";
-      return `<div class="card bat">${b.state==="déconnecté"?'<div class="ring" style="display:grid;place-items:center;color:var(--text2)">—</div>':ring(b.level,col)}<b>${b.part}</b><small>${b.state}</small></div>`});
-    const ear=t.ear?`<div class="card bat"><div class="ring" style="display:grid;place-items:center;font-size:30px">🎧</div><b>Oreilles</b><small>${t.ear.join(" · ")}</small></div>`:"";
-    $("#ov-bat").innerHTML=bats.join("")+ear||'<div class="card empty">En attente des AirPods…</div>';
+    $("#ov-state").textContent=tm.paused?t("js.ov.paused"):(tm.calib&&tm.calib.active?t("js.ov.calibration"):t("js.ov.active"));
+    $("#ov-state-sub").textContent=`${({souris:t("js.ov.mode_mouse"),pointeur:t("js.ov.mode_pointer"),glisse:t("js.ov.mode_glide")})[tm.mode]} · ${t("js.source_src",{src:SRC(tm.source)})}${tm.scroll?" · "+t("js.ov.scrolling"):""}`;
+    $("#ov-toggle").textContent=tm.paused?t("js.resume"):t("js.pause");
+    $("#ov-rate").textContent=tm.connected?tm.rate:"—";
+    $("#ov-gaps").textContent=tm.connected?tm.gaps:"—";$("#ov-gaps").style.color=tm.gaps>3?"var(--orange)":"";
+    $$(".seg[data-key=mode] button").forEach(b=>b.classList.toggle("on",b.dataset.v===tm.mode));
+    $$(".seg[data-key=source] button").forEach(b=>b.classList.toggle("on",b.dataset.v===tm.source_cfg));
+    $("#ov-src-hint").textContent=`${t("js.ov.detected",{place:({ear:t("js.place.ear"),case:t("js.place.case"),out:t("js.place.out")})[tm.place]||"—"})} → ${t("js.source_src",{src:SRC(tm.source)})}`;
+    const bats=(tm.battery||[]).map(b=>{const col=b.level<=20?"var(--red)":b.state==="charging"?"var(--green)":"var(--accent)";
+      return `<div class="card bat">${b.state==="disconnected"?'<div class="ring" style="display:grid;place-items:center;color:var(--text2)">—</div>':ring(b.level,col)}<b>${b.part}</b><small>${b.state_label}</small></div>`});
+    const ear=tm.ear?`<div class="card bat"><div class="ring" style="display:grid;place-items:center;font-size:30px">🎧</div><b>${t("js.ov.ears")}</b><small>${tm.ear.join(" · ")}</small></div>`:"";
+    $("#ov-bat").innerHTML=bats.join("")+ear||`<div class="card empty">${t("js.ov.waiting_airpods")}</div>`;
   }
   if(page==="motion"){
-    let q=quat(t.att);if(q0){const c=[q0[0],-q0[1],-q0[2],-q0[3]];q=qmul(c,q)}
+    let q=quat(tm.att);if(q0){const c=[q0[0],-q0[1],-q0[2],-q0[3]];q=qmul(c,q)}
     pod.style.transform=`scale(1.25) matrix3d(${qmat(q).join(",")})`;
-    vec($("#m-w"),t.w,200,1);vec($("#m-g"),t.g,1,2);vec($("#m-b"),t.bias,10,2);vec($("#m-a"),t.acc||[0,0,0],5,2);vec($("#m-gv"),(t.glide_v||[0,0]).concat([0]),40,1);
-    $("#m-bok").textContent=t.bias_ok?"Corrigé automatiquement (appareil immobile détecté)":"En attente d'un moment d'immobilité…";
-    const tg=t.target||[.5,.5],cu=t.cur||[.5,.5];
-    $("#scr-t").style.left=tg[0]*100+"%";$("#scr-t").style.top=tg[1]*100+"%";$("#scr-t").style.display=t.mode==="pointeur"?"":"none";
-    if(t.mode==="pointeur"){$("#scr-c").style.left=cu[0]*100+"%";$("#scr-c").style.top=cu[1]*100+"%"}
-    else{scrPos[0]=Math.min(100,Math.max(0,scrPos[0]+t.vel[0]/1920*100/30));scrPos[1]=Math.min(100,Math.max(0,scrPos[1]+t.vel[1]/1200*100/30));
+    vec($("#m-w"),tm.w,200,1);vec($("#m-g"),tm.g,1,2);vec($("#m-b"),tm.bias,10,2);vec($("#m-a"),tm.acc||[0,0,0],5,2);vec($("#m-gv"),(tm.glide_v||[0,0]).concat([0]),40,1);
+    $("#m-bok").textContent=tm.bias_ok?t("js.motion.bias_ok"):t("js.motion.bias_wait");
+    const tg=tm.target||[.5,.5],cu=tm.cur||[.5,.5];
+    $("#scr-t").style.left=tg[0]*100+"%";$("#scr-t").style.top=tg[1]*100+"%";$("#scr-t").style.display=tm.mode==="pointeur"?"":"none";
+    if(tm.mode==="pointeur"){$("#scr-c").style.left=cu[0]*100+"%";$("#scr-c").style.top=cu[1]*100+"%"}
+    else{scrPos[0]=Math.min(100,Math.max(0,scrPos[0]+tm.vel[0]/1920*100/30));scrPos[1]=Math.min(100,Math.max(0,scrPos[1]+tm.vel[1]/1200*100/30));
       $("#scr-c").style.left=scrPos[0]+"%";$("#scr-c").style.top=scrPos[1]+"%"}
-    $("#m-vel").textContent=`${t.vel[0]}, ${t.vel[1]} px/s`;
-    series=series.concat(t.series.slice(-3)).slice(-240);drawChart();
+    $("#m-vel").textContent=`${tm.vel[0]}, ${tm.vel[1]} px/s`;
+    series=series.concat(tm.series.slice(-3)).slice(-240);drawChart();
   }
-  if(page==="calib"||t.calib){renderCalib(t.calib)}
-  if(page==="gestures"){renderGestures(t.gestures,t.speech)}
+  if(page==="calib"||tm.calib){renderCalib(tm.calib)}
+  if(page==="gestures"){renderGestures(tm.gestures,tm.speech)}
 }
 // ---------- gestes
-const G_NAMES={teeth_click:"Claquement de dents",teeth_double:"Double claquement",nod:"Hochement (oui)",shake:"Secouement (non)",tilt_left:"Inclinaison gauche",tilt_right:"Inclinaison droite",look_up:"Regard haut",look_down:"Regard bas",jaw_clench:"Mâchoire serrée (exp.)",jaw_slide_left:"Mâchoire à gauche (exp.)",jaw_slide_right:"Mâchoire à droite (exp.)"};
-const G_CMDS=[["none","—"],["left_click","Clic gauche"],["right_click","Clic droit"],["middle_click","Clic milieu"],["recenter","Recentrer"],["toggle","Pause / reprise"],["scroll","Défilement"],["mode","Changer de mode"]];
+const G_NAMES=()=>({teeth_click:t("js.g.teeth_click"),teeth_double:t("js.g.teeth_double"),nod:t("js.g.nod"),shake:t("js.g.shake"),tilt_left:t("js.g.tilt_left"),tilt_right:t("js.g.tilt_right"),look_up:t("js.g.look_up"),look_down:t("js.g.look_down"),jaw_clench:t("js.g.jaw_clench"),jaw_slide_left:t("js.g.jaw_slide_left"),jaw_slide_right:t("js.g.jaw_slide_right")});
+const G_CMDS=()=>[["none","—"],["left_click",t("js.cmd.left_click")],["right_click",t("js.cmd.right_click")],["middle_click",t("js.cmd.middle_click")],["recenter",t("js.cmd.recenter")],["toggle",t("js.cmd.toggle")],["scroll",t("js.cmd.scroll")],["mode",t("js.cmd.mode")]];
 const gpost=b=>post("/api/gestures",b);
 let gEditing=null,gMapDone=false;
-$("#g-en").onchange=e=>{gpost({action:e.target.checked?"enable":"disable"});toast(e.target.checked?"Gestes activés":"Gestes désactivés")};
+$("#g-en").onchange=e=>{gpost({action:e.target.checked?"enable":"disable"});toast(e.target.checked?t("js.toast.gestures_on"):t("js.toast.gestures_off"))};
 $$("#p-gestures [data-g]").forEach(inp=>{const k=inp.dataset.g,out=inp.parentElement.querySelector("output");
   if(inp.type==="range"){inp.oninput=()=>{gEditing=k;out.textContent=fmt(+inp.value,inp.step)};
     inp.onchange=()=>{gpost({action:"set",values:{[k]:+inp.value}});setTimeout(()=>gEditing=null,800)}}
-  else inp.onchange=()=>{gpost({action:"set",values:{[k]:inp.checked}});toast("Enregistré")}});
-$("#g-rec-start").onclick=()=>{gpost({action:"rec_start",name:$("#g-rec-name").value,label:$("#g-rec-label").value});toast("Enregistrement…")};
-$("#g-rec-lab").onclick=()=>{gpost({action:"rec_label",label:$("#g-rec-label").value});toast("Étiquette : "+$("#g-rec-label").value)};
-$("#g-rec-stop").onclick=()=>{gpost({action:"rec_stop"});toast("Enregistrement arrêté")};
-$("#g-cal-start").onclick=()=>{gpost({action:"calib_start",gesture:$("#g-cal-g").value});toast("Calibration : répète le geste 10 fois")};
-$("#g-cal-cancel").onclick=()=>{gpost({action:"calib_cancel"});toast("Calibration annulée")};
+  else inp.onchange=()=>{gpost({action:"set",values:{[k]:inp.checked}});toast(t("js.toast.saved"))}});
+$("#g-rec-start").onclick=()=>{gpost({action:"rec_start",name:$("#g-rec-name").value,label:$("#g-rec-label").value});toast(t("js.rec.recording"))};
+$("#g-rec-lab").onclick=()=>{gpost({action:"rec_label",label:$("#g-rec-label").value});toast(t("js.toast.label",{label:$("#g-rec-label").value}))};
+$("#g-rec-stop").onclick=()=>{gpost({action:"rec_stop"});toast(t("js.toast.rec_stopped"))};
+$("#g-cal-start").onclick=()=>{gpost({action:"calib_start",gesture:$("#g-cal-g").value});toast(t("js.toast.gcal_started"))};
+$("#g-cal-cancel").onclick=()=>{gpost({action:"calib_cancel"});toast(t("js.toast.calib_cancelled"))};
 const sp=b=>post("/api/speech",b);
-const spDown=e=>{e.preventDefault();sp({action:"start",word:$("#sp-word").value});$("#sp-hold").textContent="Enregistrement…"};
-const spUp=()=>{if($("#sp-hold").textContent!=="Enregistrement…")return;sp({action:"stop"});$("#sp-hold").textContent="Maintenir pour enregistrer"};
+const spDown=e=>{e.preventDefault();sp({action:"start",word:$("#sp-word").value});$("#sp-hold").textContent=t("js.rec.recording")};
+const spUp=()=>{if($("#sp-hold").textContent!==t("js.rec.recording"))return;sp({action:"stop"});$("#sp-hold").textContent=t("js.sp.hold")};
 $("#sp-hold").addEventListener("mousedown",spDown);$("#sp-hold").addEventListener("touchstart",spDown);
 window.addEventListener("mouseup",spUp);window.addEventListener("touchend",spUp);
-$("#sp-eval").onclick=()=>{sp({action:"evaluate"});toast("Évaluation (500 permutations)…")};
-$("#sp-clear").onclick=()=>{if(confirm("Effacer tous les mots appris ?"))sp({action:"clear"})};
+$("#sp-eval").onclick=()=>{sp({action:"evaluate"});toast(t("js.toast.evaluating"))};
+$("#sp-clear").onclick=()=>{if(confirm(t("js.sp.confirm_clear")))sp({action:"clear"})};
 function fillGestures(){const gc=S.config&&S.config.gestures;if(!gc)return;
   $("#g-en").checked=!!gc.enabled;
   $$("#p-gestures [data-g]").forEach(inp=>{const k=inp.dataset.g;if(k===gEditing)return;const v=gc[k];if(v===undefined)return;
     if(inp.type==="range"){inp.value=v;inp.parentElement.querySelector("output").textContent=fmt(+v,inp.step)}else inp.checked=!!v});
-  if(!gMapDone&&gc.mapping){gMapDone=true;$("#g-map").innerHTML=Object.keys(G_NAMES).filter(k=>k!=="teeth_double").map(k=>
-    `<tr><td>${G_NAMES[k]}</td><td><select data-map="${k}">${G_CMDS.map(([v,l])=>`<option value="${v}"${(gc.mapping[k]||"none")===v?" selected":""}>${l}</option>`).join("")}</select></td></tr>`).join("");
-    $$("[data-map]").forEach(sel=>sel.onchange=()=>{gpost({action:"mapping",mapping:{[sel.dataset.map]:sel.value}});toast("Action enregistrée")})}
-  const st=S.gesture_stats;if(st){$("#g-rate").textContent=`${st.rate_hz} Hz (nominal ${st.nominal_hz})`;
+  if(!gMapDone&&gc.mapping){gMapDone=true;$("#g-map").innerHTML=Object.keys(G_NAMES()).filter(k=>k!=="teeth_double").map(k=>
+    `<tr><td>${G_NAMES()[k]}</td><td><select data-map="${k}">${G_CMDS().map(([v,l])=>`<option value="${v}"${(gc.mapping[k]||"none")===v?" selected":""}>${l}</option>`).join("")}</select></td></tr>`).join("");
+    $$("[data-map]").forEach(sel=>sel.onchange=()=>{gpost({action:"mapping",mapping:{[sel.dataset.map]:sel.value}});toast(t("js.toast.action_saved"))})}
+  const st=S.gesture_stats;if(st){$("#g-rate").textContent=t("js.g.rate",{rate:st.rate_hz,nominal:st.nominal_hz});
     $("#g-gaps").textContent=`${st.gaps} · max ${st.max_gap_ms} ms`;$("#g-interp").textContent=`${(st.interp_ratio*100).toFixed(1)} %`;
-    $("#g-dup").textContent=`${(st.dup_ratio*100).toFixed(1)} %${st.upsampled_suspect?" · suréchantillonné ?":""}`}}
+    $("#g-dup").textContent=`${(st.dup_ratio*100).toFixed(1)} %${st.upsampled_suspect?" · "+t("js.g.upsampled"):""}`}}
 const gcv=$("#g-chart"),gcx=gcv.getContext("2d");
 function drawGestures(g){const W=gcv.clientWidth,H=220,dpr=devicePixelRatio||1;if(gcv.width!==W*dpr){gcv.width=W*dpr;gcv.height=H*dpr}
   gcx.setTransform(dpr,0,0,dpr,0,0);gcx.clearRect(0,0,W,H);const css=getComputedStyle(document.documentElement);
@@ -702,36 +717,36 @@ function drawGestures(g){const W=gcv.clientWidth,H=220,dpr=devicePixelRatio||1;i
     tr.forEach((p,i)=>{const x=X(p[0]),y=H/2-p[k]*sc/mx*(H/2-10);i?gcx.lineTo(x,y):gcx.moveTo(x,y)});gcx.stroke()});
   (g.events||[]).forEach(e=>{const dt=e.t-g.t;if(dt<-4)return;const x=X(dt);gcx.strokeStyle=e.action?css.getPropertyValue("--green"):css.getPropertyValue("--purple");
     gcx.lineWidth=2;gcx.setLineDash([4,3]);gcx.beginPath();gcx.moveTo(x,14);gcx.lineTo(x,H);gcx.stroke();gcx.setLineDash([]);
-    gcx.fillStyle=css.getPropertyValue("--text");gcx.fillText(G_NAMES[e.type]||e.type,Math.min(x+3,W-90),12)})}
-function renderGestures(g,s){if(!g){$("#g-events").innerHTML='<tr><td colspan="3" class="empty">Module gestes indisponible (redémarre le contrôleur)</td></tr>';return}
-  $("#g-armed").textContent=g.armed>0?`ouverte · ${g.armed.toFixed(1)} s`:"fermée";$("#g-armed").style.color=g.armed>0?"var(--green)":"";
-  const f=g.flags||{},fl=[f.walking&&"marche",f.chewing&&"mastication",f.big_motion&&"grand mouvement"].filter(Boolean);
-  $("#g-flags").textContent=fl.length?fl.join(" · "):(g.enabled?"aucun":"désactivé");$("#g-flags").style.color=fl.length?"var(--orange)":"";
+    gcx.fillStyle=css.getPropertyValue("--text");gcx.fillText(G_NAMES()[e.type]||e.type,Math.min(x+3,W-90),12)})}
+function renderGestures(g,s){if(!g){$("#g-events").innerHTML=`<tr><td colspan="3" class="empty">${t("js.g.unavailable")}</td></tr>`;return}
+  $("#g-armed").textContent=g.armed>0?t("js.g.window_open",{s:g.armed.toFixed(1)}):t("js.g.window_closed");$("#g-armed").style.color=g.armed>0?"var(--green)":"";
+  const f=g.flags||{},fl=[f.walking&&t("js.g.flag_walking"),f.chewing&&t("js.g.flag_chewing"),f.big_motion&&t("js.g.flag_big_motion")].filter(Boolean);
+  $("#g-flags").textContent=fl.length?fl.join(" · "):(g.enabled?t("js.none"):t("js.disabled"));$("#g-flags").style.color=fl.length?"var(--orange)":"";
   const ev=(g.events||[]).slice().reverse();
-  $("#g-events").innerHTML=ev.length?ev.map(e=>`<tr><td>${G_NAMES[e.type]||e.type}${e.side?" ("+e.side+")":""}</td><td class="mono">${Math.round(e.conf*100)} %</td><td>${e.calib?"calibration":e.action==="activation"?'<span class="pill g">activation</span>':e.action?'<span class="pill b">'+esc(e.action)+"</span>":'<span class="hint">'+(e.blocked||"aucune")+"</span>"}</td></tr>`).join(""):'<tr><td colspan="3" class="empty">Aucun geste</td></tr>';
+  $("#g-events").innerHTML=ev.length?ev.map(e=>`<tr><td>${G_NAMES()[e.type]||e.type}${e.side?" ("+(({gauche:t("gest.side.left"),droite:t("gest.side.right")})[e.side]||e.side)+")":""}</td><td class="mono">${Math.round(e.conf*100)} %</td><td>${e.calib?t("js.g.calibration"):e.action==="activation"?`<span class="pill g">${t("js.g.activation")}</span>`:e.action?'<span class="pill b">'+esc(e.action)+"</span>":'<span class="hint">'+(e.blocked||t("js.none_f"))+"</span>"}</td></tr>`).join(""):`<tr><td colspan="3" class="empty">${t("js.g.no_gestures")}</td></tr>`;
   const c=g.calib;$("#g-cal-prog").textContent=c?`${c.peaks.length} / ${c.reps}`:"—";
-  $("#g-cal-res").textContent=c?(c.done?`Terminé : ${Object.entries(c.result).map(([k,v])=>k+" = "+v).join(", ")} (ancien ${c.old})`:"Répète le geste…"):"";
-  $("#g-rec-info").textContent=g.rec?`Enregistrement : ${g.rec.rows} lignes · étiquette « ${g.rec.label} »`:"captures/private/*.csv — rejouer : python gestures.py --replay fichier.csv";
-  $("#g-src").textContent=g.source==="raw"?"IMU brute (accéléro + gyro HID)":"devmotion6 (repli)";
-  if(g.error)$("#g-flags").textContent="erreur : "+g.error;
+  $("#g-cal-res").textContent=c?(c.done?t("js.g.cal_done",{result:Object.entries(c.result).map(([k,v])=>k+" = "+v).join(", "),old:c.old}):t("js.g.cal_repeat")):"";
+  $("#g-rec-info").textContent=g.rec?t("js.g.rec_info",{rows:g.rec.rows,label:g.rec.label}):t("js.g.rec_hint");
+  $("#g-src").textContent=g.source==="raw"?t("js.g.src_raw"):t("js.g.src_dm6");
+  if(g.error)$("#g-flags").textContent=t("js.g.error",{error:g.error});
   drawGestures(g);
-  if(s){$("#sp-words").textContent=Object.entries(s.words||{}).map(([w,n])=>`${w} (${n})`).join(", ")||"aucun";
-    const l=s.last;$("#sp-last").textContent=!l?"—":l.error?l.error:l.trained?`prise ajoutée : ${l.trained}`:(l.word?`« ${l.word} » (dist ${l.dist}, marge ${l.margin})`:`rejeté — ${l.reason}`);
-    const v=s.evaluation;$("#sp-eval-res").textContent=!v?"—":v.error?v.error:`${Math.round(v.loo_accuracy*100)} % (hasard ${Math.round(v.chance*100)} %) · p = ${v.p_value} · ${v.verdict}`}}
+  if(s){$("#sp-words").textContent=Object.entries(s.words||{}).map(([w,n])=>`${w} (${n})`).join(", ")||t("js.none");
+    const l=s.last;$("#sp-last").textContent=!l?"—":l.error?l.error:l.trained?t("js.sp.trained",{word:l.trained}):(l.word?t("js.sp.recognized",{word:l.word,dist:l.dist,margin:l.margin}):t("js.sp.rejected",{reason:l.reason}));
+    const v=s.evaluation;$("#sp-eval-res").textContent=!v?"—":v.error?v.error:t("js.sp.eval",{acc:Math.round(v.loo_accuracy*100),chance:Math.round(v.chance*100),p:v.p_value,verdict:v.verdict})}}
 const scrPos=[50,50];
 function renderCalib(c){
   const steps=$("#cal-steps");
   if(!c){steps.innerHTML="";$("#cal-ring").style.strokeDashoffset=314.16;return}
   $("#cal-instr").textContent=c.text;$("#cal-msg").textContent=c.message||"";
-  const FL={souris:"Rotation",pointeur:"Pointeur + coins",glisse:"Glisse sur table"};
-  $("#cal-hint").textContent=c.done?`Profil « ${c.key} » enregistré et appliqué.`:`${FL[c.flow]} · source ${SRC[c.source]} — étape ${Math.min(c.index+1,c.total)}/${c.total}`;
+  const FL={souris:t("js.flow.mouse"),pointeur:t("js.flow.pointer"),glisse:t("js.flow.glide")};
+  $("#cal-hint").textContent=c.done?t("js.calib.profile_saved",{key:c.key}):`${FL[c.flow]} · ${t("js.source_src",{src:SRC(c.source)})} — ${t("js.calib.step",{step:Math.min(c.index+1,c.total),total:c.total})}`;
   $("#cal-ring").style.strokeDashoffset=314.16*(1-c.progress);
   $("#cal-ring").style.stroke=c.done?"var(--green)":["still","back"].includes(c.step)?"var(--green)":"var(--accent)";
   steps.innerHTML=Array.from({length:c.total},(_,i)=>`<i class="${i<c.index?"done":i===c.index?"cur":""}"></i>`).join("");
 }
 // ---------- mode anonyme (?anon) : pour les captures d'écran publiques
 function anonymize(s){const c=JSON.parse(JSON.stringify(s));if(c.addr)c.addr="XX:XX:XX:XX:XX:XX";
-  c.info=(c.info||[]).map(i=>({label:i.label,value:/Nom/.test(i.label)?"AirPods":/série|Serial/i.test(i.label)?"••••••••••":i.value}));
+  c.info=(c.info||[]).map(i=>({key:i.key,label:i.label,value:i.key==="info.name"?"AirPods":/^info\.serial/.test(i.key)?"••••••••••":i.value}));
   c.log=(c.log||[]).filter(l=>l.op===0x17||l.op===-1);return c}
 // ---------- rendu état (1 Hz)
 function esc(s){return String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"})[c])}
@@ -739,21 +754,21 @@ const ANON=location.search.includes("anon");if(ANON)document.documentElement.cla
 function renderState(){
   const s=ANON?anonymize(S):S;
   $("#side-model").textContent=s.model||"—";
-  const name=(s.info||[]).find(i=>i.label==="Nom");
+  const name=(s.info||[]).find(i=>i.key==="info.name");
   $("#ov-name").textContent=name?name.value:(s.model||"AirPods");
-  $("#ov-sub").textContent=s.addr?`${s.model||""} · ${s.addr}`:"Recherche des AirPods…";
+  $("#ov-sub").textContent=s.addr?`${s.model||""} · ${s.addr}`:t("js.ov.searching");
   $("#ov-proto").textContent=s.protocol||"—";
-  $("#ov-prof").innerHTML=s.profile_key?(s.calibrated?`<span class="pill g">✓ ${esc(s.profile_key)}</span>`:`<span class="pill o">À calibrer</span>`):"—";
+  $("#ov-prof").innerHTML=s.profile_key?(s.calibrated?`<span class="pill g">✓ ${esc(s.profile_key)}</span>`:`<span class="pill o">${t("js.calib.todo")}</span>`):"—";
   if(s.config)fillSettings(s.config);
   if(page==="calib"){
     if(!calFlow)$$("#cal-flow button").forEach(x=>x.classList.toggle("on",x.dataset.v===(T.mode||"souris")));
     const f=a=>(a||[]).map(v=>(+v).toFixed(2)).join(", ");
-    $("#cal-prof").innerHTML=Object.entries(s.profiles||{}).map(([k,p])=>`<tr><td><b>${esc(k)}</b></td><td class="mono">${p.right?`glisse · droite [${f(p.right)}] · avant [${f(p.fwd)}]`:`axe latéral [${f(p.lat)}] · lacet ${p.yaw_sign} · roulis ${p.roll_sign}${p.range?` · coins ←${p.range.x_neg}° →${p.range.x_pos}° ↑${p.range.y_pos}° ↓${p.range.y_neg}°`:""}`}</td></tr>`).join("")||'<tr><td colspan="2" class="empty">Aucun profil</td></tr>'}
+    $("#cal-prof").innerHTML=Object.entries(s.profiles||{}).map(([k,p])=>`<tr><td><b>${esc(k)}</b></td><td class="mono">${p.right?t("js.calib.prof_glide",{right:f(p.right),fwd:f(p.fwd)}):`${t("js.calib.prof_axis",{lat:f(p.lat),yaw:p.yaw_sign,roll:p.roll_sign})}${p.range?` · ${t("js.calib.prof_corners",{xn:p.range.x_neg,xp:p.range.x_pos,yp:p.range.y_pos,yn:p.range.y_neg})}`:""}`}</td></tr>`).join("")||`<tr><td colspan="2" class="empty">${t("js.calib.no_profiles")}</td></tr>`}
   if(page==="sensors")renderSensors(s);
   if(page==="device"){
     $("#dev-info").innerHTML=(s.info||[]).map(i=>`<div class="kv"><span>${esc(i.label)}</span><span class="mono">${esc(i.value)}</span></div>`).join("")||'<div class="empty">—</div>';
-    $("#dev-state").innerHTML=[["Adresse",s.addr],["Modèle",s.model],["Product ID","0x"+(s.pid||"")],["Protocole capteurs",s.protocol],["Intervalle capteur",(s.interval_us||"—")+" µs"],
-      ["Écouteurs",(s.ear||[]).join(" · ")],...(s.battery||[]).map(b=>["Batterie "+b.part.toLowerCase(),b.level+" % · "+b.state]),["Contrôleur actif depuis",Math.round((s.uptime||0)/60)+" min"]]
+    $("#dev-state").innerHTML=[[t("js.dev.address"),s.addr],[t("js.dev.model"),s.model],["Product ID","0x"+(s.pid||"")],[t("js.dev.protocol"),s.protocol],[t("js.dev.interval"),(s.interval_us||"—")+" µs"],
+      [t("js.dev.earbuds"),(s.ear||[]).join(" · ")],...(s.battery||[]).map(b=>[t("js.dev.battery",{part:b.part.toLowerCase()}),b.level+" % · "+b.state_label]),[t("js.dev.uptime"),Math.round((s.uptime||0)/60)+" min"]]
       .map(([k,v])=>`<div class="kv"><span>${k}</span><span>${esc(v??"—")}</span></div>`).join("");
     $("#dev-ctl").innerHTML=(s.controls||[]).map(c=>`<tr><td class="mono">0x${c.ident.toString(16).padStart(2,"0")}</td><td>${esc(c.name)}</td><td class="mono">${c.values.map(v=>v.toString(16).padStart(2,"0")).join(" ")}</td></tr>`).join("")||'<tr><td colspan="3" class="empty">—</td></tr>';
   }
@@ -764,33 +779,32 @@ function renderState(){
 }
 function renderSensors(s){
   const list=$("#sens-list");
-  if(!(s.services||[]).length){list.innerHTML='<div class="card empty">Aucun service RemoteHID (AirPods Pro : protocole SensorDataWX, sans services HID).</div>';return}
+  if(!(s.services||[]).length){list.innerHTML=`<div class="card empty">${t("js.sens.none")}</div>`;return}
   const open=document.activeElement&&list.contains(document.activeElement);if(open)return;
-  list.innerHTML=s.services.map(sv=>`<div class="card"><h3>${esc(sv.name)} <span class="pill b">id ${sv.dev}</span>${sv.motion?'<span class="pill g">utilisé pour la souris</span>':""}</h3>
-    <div class="hint" style="margin-bottom:10px">${esc(sv.desc)}${sv.max_report?` · rapport max ${sv.max_report} o`:""}</div>
-    <table><thead><tr><th>Rapport</th><th>ID</th><th>Bits</th><th>Usages</th></tr></thead><tbody>${sv.reports.map(r=>`<tr><td>${r.kind}</td><td>${r.id}</td><td>${r.bits}</td><td>${esc(r.usages.join(", "))}</td></tr>`).join("")}</tbody></table>
-    <div class="kv"><span>Rapports reçus</span><span>${sv.count}${sv.last_age!=null?` · dernier il y a ${sv.last_age} s`:""}</span></div>
+  list.innerHTML=s.services.map(sv=>`<div class="card"><h3>${esc(sv.name)} <span class="pill b">id ${sv.dev}</span>${sv.motion?`<span class="pill g">${t("js.sens.used_for_mouse")}</span>`:""}</h3>
+    <div class="hint" style="margin-bottom:10px">${esc(sv.desc)}${sv.max_report?` · ${t("js.sens.max_report",{n:sv.max_report})}`:""}</div>
+    <table><thead><tr><th>${t("js.sens.report")}</th><th>ID</th><th>Bits</th><th>${t("js.sens.usages")}</th></tr></thead><tbody>${sv.reports.map(r=>`<tr><td>${r.kind_label}</td><td>${r.id}</td><td>${r.bits}</td><td>${esc(r.usages.join(", "))}</td></tr>`).join("")}</tbody></table>
+    <div class="kv"><span>${t("js.sens.received")}</span><span>${sv.count}${sv.last_age!=null?` · ${t("js.sens.last_age",{s:sv.last_age})}`:""}</span></div>
     ${sv.last_hex?`<div class="mono hint" style="word-break:break-all;margin:6px 0 10px">${esc(sv.last_hex)}</div>`:""}
     <div class="row"><select id="iv-${sv.dev}"><option value="5000">200 Hz</option><option value="10000" selected>100 Hz</option><option value="20000">50 Hz</option><option value="40000">25 Hz</option><option value="100000">10 Hz</option></select>
-      <button class="btn sm p" onclick="sensor(${sv.dev},'start')">Démarrer</button><button class="btn sm" onclick="sensor(${sv.dev},'stop')">Arrêter</button>
-      ${sv.reports.filter(r=>r.kind==="feature").map(r=>`<button class="btn sm" onclick="sensor(${sv.dev},'get',${r.id})">Lire F${r.id}</button>`).join("")}</div></div>`).join("");
+      <button class="btn sm p" onclick="sensor(${sv.dev},'start')">${t("js.sens.start")}</button><button class="btn sm" onclick="sensor(${sv.dev},'stop')">${t("js.sens.stop")}</button>
+      ${sv.reports.filter(r=>r.kind==="feature").map(r=>`<button class="btn sm" onclick="sensor(${sv.dev},'get',${r.id})">${t("js.sens.read",{id:r.id})}</button>`).join("")}</div></div>`).join("");
   $("#sens-replies").innerHTML=(s.replies||[]).slice().reverse().map(r=>`<tr><td>${r.age} s</td><td>${r.kind}</td><td>${r.dev}</td><td class="mono">${esc(r.hex)}</td></tr>`).join("")||'<tr><td colspan="4" class="empty">—</td></tr>';
 }
 window.sensor=(dev,action,report)=>{const iv=$("#iv-"+dev);post("/api/sensor",{dev,action,interval:iv?+iv.value:10000,report:report||1});
-  toast(action==="get"?"Lecture demandée":action==="start"?"Flux démarré":"Flux arrêté");setTimeout(refreshState,400)};
+  toast(action==="get"?t("js.toast.read_requested"):action==="start"?t("js.toast.stream_started"):t("js.toast.stream_stopped"));setTimeout(refreshState,400)};
 
 // ---------- Labo
-const LB_DESC={dents:"Incisives, molaires gauches, molaires droites × doux / moyen / fort, 8 claquements chacun (≈ 4 min). Mesure la force par niveau et par dent, la séparabilité gauche/droite, et propose un seuil.",
-  mouvements:"Hochement, secouement, inclinaisons gauche/droite, regard haut/bas × 5 (≈ 2 min). Taux de détection par geste avec les seuils actuels.",
-  mots:"EXPÉRIMENTAL — 5 mots articulés sans voix × 10 (≈ 2 min 40). Entraîne silent_speech (DTW) et mesure la précision contre le hasard (500 permutations). p > 0,05 : rien ne prouve que l'IMU capte les mots."};
+const LB_DESC=k=>({dents:t("js.lb.desc_teeth"),mouvements:t("js.lb.desc_moves"),mots:t("js.lb.desc_words")})[k];
+// lab movement phases (labo.MOVES) -> gesture ids, shown with the gesture's translated name
+const LB_PHASE={hoche:"nod",secoue:"shake",penche_g:"tilt_left",penche_d:"tilt_right",haut:"look_up",bas:"look_down"};
 let lbProto="dents",lbPts=[],lbT=null,lbData=null,lbTimer=null,lbLastRes=null;
-const GRP={inc:"Incisives",mol_g:"Molaires gauches",mol_d:"Molaires droites"},LVL={doux:"Doux",moyen:"Moyen",fort:"Fort"};
+const GRP=()=>({inc:t("js.lb.grp_inc"),mol_g:t("js.lb.grp_mol_g"),mol_d:t("js.lb.grp_mol_d")}),LVL=()=>({doux:t("js.lb.lvl_soft"),moyen:t("js.lb.lvl_medium"),fort:t("js.lb.lvl_strong")});
 $$("#lb-proto button").forEach(b=>b.onclick=()=>{lbProto=b.dataset.v;$$("#lb-proto button").forEach(x=>x.classList.toggle("on",x===b));
-  $("#lb-words-row").style.display=lbProto==="mots"?"flex":"none";$("#lb-proto-desc").textContent=LB_DESC[lbProto]});
-$("#lb-proto-desc").textContent=LB_DESC.dents;
+  $("#lb-words-row").style.display=lbProto==="mots"?"flex":"none";$("#lb-proto-desc").textContent=LB_DESC(lbProto)});
 $("#lb-start").onclick=()=>{const reps=+$("#lb-reps").value||undefined;
-  post("/api/labo",{action:"start",protocol:lbProto,reps,words:$("#lb-words").value}).then(r=>r.json()).then(j=>{if(j.error)toast(j.error);else toast("Session démarrée")})};
-$("#cue-cancel").onclick=()=>post("/api/labo",{action:"cancel"}).then(()=>toast("Session annulée"));
+  post("/api/labo",{action:"start",protocol:lbProto,reps,words:$("#lb-words").value}).then(r=>r.json()).then(j=>{if(j.error)toast(j.error);else toast(t("js.toast.session_started"))})};
+$("#cue-cancel").onclick=()=>post("/api/labo",{action:"cancel"}).then(()=>toast(t("js.toast.session_cancelled")));
 function lbPoll(){fetch("/api/labo"+(lbT!==null?"?since="+lbT:"")).then(r=>r.json()).then(d=>{lbData=d;const L=d.live;
   if(L){if(lbT!==null&&L.t<lbT-1)lbPts=[];L.pts.forEach(p=>lbPts.push(p));if(L.pts.length)lbT=L.pts[L.pts.length-1][0];
     const t0=L.t-5;while(lbPts.length&&lbPts[0][0]<t0)lbPts.shift()}
@@ -808,63 +822,63 @@ function drawLabo(L,real){const W=lcv.clientWidth,H=240,dpr=devicePixelRatio||1;
   [["--accent",2,Yg],["--red",1,Y]].forEach(([c,k,f])=>{lcx.strokeStyle=cv(c);lcx.lineWidth=1.3;lcx.beginPath();lbPts.forEach((p,i)=>{const x=X(p[0]),y=f(p[k]);i?lcx.lineTo(x,y):lcx.moveTo(x,y)});lcx.stroke()});
   if(!L)return;(L.spikes||[]).forEach(sp=>{if(sp.t<tN-5)return;lcx.fillStyle=sp.peak>=(real||9)?cv("--green"):cv("--text2");lcx.beginPath();lcx.arc(X(sp.t),Y(Math.min(sp.peak,ma)),4,0,7);lcx.fill()});
   (L.events||[]).forEach(e=>{if(e.t<tN-5)return;const x=X(e.t);lcx.strokeStyle=cv("--purple");lcx.lineWidth=2;lcx.setLineDash([4,3]);lcx.beginPath();lcx.moveTo(x,16);lcx.lineTo(x,H-14);lcx.stroke();lcx.setLineDash([]);
-    lcx.fillStyle=cv("--text");lcx.fillText((G_NAMES[e.type]||e.type)+(e.peak&&e.type.startsWith("teeth")?" "+e.peak.toFixed(2):""),Math.min(x+3,W-120),12)})}
+    lcx.fillStyle=cv("--text");lcx.fillText((G_NAMES()[e.type]||e.type)+(e.peak&&e.type.startsWith("teeth")?" "+e.peak.toFixed(2):""),Math.min(x+3,W-120),12)})}
 function pct(x){return x==null?"—":Math.round(x*100)+" %"}
-function pv(x){return x==null?"—":(x<0.001?"< 0,001":String(x).replace(".",","))}
+function pv(x){return x==null?"—":(x<0.001?"< 0"+t("js.decimal_sep")+"001":String(x).replace(".",t("js.decimal_sep")))}
 function renderLabo(d){const L=d.live,c=d.config||{},real=c.click_thresh;
-  $("#lb-src").textContent=!L||!L.src?"aucun échantillon":L.src==="raw"?"IMU brute ~200 Hz":"devmotion6 (50 Hz, repli)";
+  $("#lb-src").textContent=!L||!L.src?t("js.lb.no_samples"):L.src==="raw"?t("js.lb.src_raw"):t("js.lb.src_dm6");
   $("#lb-noise").textContent=L&&L.noise!=null?L.noise.toFixed(3)+" m/s²":"—";$("#lb-thr").textContent=L&&L.thr!=null?L.thr.toFixed(3)+" m/s²":"—";
-  $("#lb-real").textContent=real!=null?real+" m/s²"+(c.click_adaptive?` · adaptatif (≥ ${c.click_noise_k} × bruit)`:""):"—";
-  $("#lb-warn").textContent=!c.enabled?"Gestes désactivés : active-les (page Gestes) pour recevoir l'IMU brute.":L&&L.src==="dm6"?"IMU brute absente : 50 Hz seulement, claquements mal mesurés.":"";
+  $("#lb-real").textContent=real!=null?real+" m/s²"+(c.click_adaptive?` · ${t("js.lb.adaptive",{k:c.click_noise_k})}`:""):"—";
+  $("#lb-warn").textContent=!c.enabled?t("js.lb.warn_disabled"):L&&L.src==="dm6"?t("js.lb.warn_dm6"):"";
   if(page==="labo"){drawLabo(L,real);const sp=(L&&L.spikes||[]).slice(-8).reverse();
-    $("#lb-spikes").innerHTML=sp.length?sp.map(x=>`<tr><td class="mono">${(L.t-x.t).toFixed(1)} s</td><td class="mono"><b>${x.peak.toFixed(2)}</b> m/s²</td><td class="mono">${x.dur_ms} ms</td><td class="mono">${x.axis} (${x.vec.map(v=>v.toFixed(2)).join(", ")})</td><td class="mono">${x.gyro_mean} / ${x.gyro_max} °/s</td><td class="mono">${x.thr}</td><td>${x.peak>=real?'<span class="pill g">au-dessus</span>':'<span class="pill o">sous le seuil</span>'}</td></tr>`).join(""):'<tr><td colspan="7" class="empty">Aucune impulsion</td></tr>'}
+    $("#lb-spikes").innerHTML=sp.length?sp.map(x=>`<tr><td class="mono">${(L.t-x.t).toFixed(1)} s</td><td class="mono"><b>${x.peak.toFixed(2)}</b> m/s²</td><td class="mono">${x.dur_ms} ms</td><td class="mono">${x.axis} (${x.vec.map(v=>v.toFixed(2)).join(", ")})</td><td class="mono">${x.gyro_mean} / ${x.gyro_max} °/s</td><td class="mono">${x.thr}</td><td>${x.peak>=real?`<span class="pill g">${t("js.lb.above")}</span>`:`<span class="pill o">${t("js.lb.below")}</span>`}</td></tr>`).join(""):`<tr><td colspan="7" class="empty">${t("js.lb.no_impulses")}</td></tr>`}
   const s=d.session,cue=$("#lb-cue");
   if(s&&!s.done&&s.step){const st=s.step;cue.classList.add("on");cue.classList.toggle("go",st.kind==="click"||st.kind==="move"||st.kind==="word");cue.classList.toggle("rest",st.kind==="rest");
     $("#cue-t").textContent=st.title;$("#cue-s").textContent=st.sub;$("#cue-cd").textContent=Math.max(st.left,0).toFixed(1);
-    $("#cue-pb").style.width=Math.min(100,s.elapsed/s.total*100)+"%";$("#cue-prog").textContent=`étape ${st.i+1} / ${st.n} · ${Math.round(s.elapsed)} / ${Math.round(s.total)} s`;
-    $("#cue-n").textContent=st.kind==="click"?(s.live_count?`impulsion captée ✓ (${s.live_count})`:"en attente du claquement…"):"";$("#cue-next").textContent=st.next?"ensuite : "+st.next:""}
+    $("#cue-pb").style.width=Math.min(100,s.elapsed/s.total*100)+"%";$("#cue-prog").textContent=t("js.lb.cue_prog",{i:st.i+1,n:st.n,elapsed:Math.round(s.elapsed),total:Math.round(s.total)});
+    $("#cue-n").textContent=st.kind==="click"?(s.live_count?t("js.lb.impulse_caught",{n:s.live_count}):t("js.lb.waiting_click")):"";$("#cue-next").textContent=st.next?t("js.lb.next",{next:st.next}):""}
   else cue.classList.remove("on");
-  $("#lb-sess-info").textContent=s?(s.done?(s.cancelled?"session annulée":"session terminée")+" · "+(s.path||"").split("/").slice(-2).join("/"):"en cours…"):"";
+  $("#lb-sess-info").textContent=s?(s.done?(s.cancelled?t("js.lb.session_cancelled"):t("js.lb.session_done"))+" · "+(s.path||"").split("/").slice(-2).join("/"):t("js.lb.running")):"";
   if(s&&s.result){const key=JSON.stringify(s.result);if(key!==lbLastRes){lbLastRes=key;$("#lb-res").innerHTML=labResult(s.result,real)}}}
-function labResult(r,real){let h=`<div class="hint" style="margin-bottom:10px">Enregistrement : <code>${esc((r.path||"").split("/").slice(-3).join("/"))}</code>${r.cancelled?" (partiel, session annulée)":""} · bruit au repos p90 ${r.noise.p90??"—"} / p99 ${r.noise.p99??"—"} m/s², ${r.noise.rest_spikes} impulsion(s) au repos</div>`;
-  if(r.protocol==="dents"){const f=r.force;h+=`<div class="kv"><span>Consignes avec une impulsion captée</span><span>${r.captured.with_impulse} / ${r.captured.cues}</span></div>`;
-    if(f){h+=`<table style="margin-top:8px"><thead><tr><th>Dents</th>${Object.values(LVL).map(l=>`<th>${l} : n · médiane [min–max] m/s²</th>`).join("")}</tr></thead><tbody>`+
-      Object.keys(GRP).map(g=>`<tr><td>${GRP[g]}</td>${Object.keys(LVL).map(l=>{const x=f.by_group_level[g+":"+l];return `<td class="mono">${x?`${x.n} · <b>${x.median}</b> [${x.min}–${x.max}]`:"—"}</td>`}).join("")}</tr>`).join("")+
-      `<tr><td><b>Tous</b></td>${Object.keys(LVL).map(l=>{const x=f.by_level[l];return `<td class="mono">${x?`${x.n} · <b>${x.median}</b> [${x.min}–${x.max}]`:"—"}</td>`}).join("")}</tr></tbody></table>`}
-    const sp=r.separability;if(sp){const line=(n,x)=>`<div class="kv"><span>${n}</span><span>${x.error?x.error:`${pct(x.accuracy)} (hasard ${pct(x.chance)}, n = ${x.n}) · p = ${pv(x.p_value)} · <b>${x.verdict}</b>`}</span></div>`;
-      h+=`<h3 style="margin-top:16px">Séparabilité (direction du pic, centroïde le plus proche, leave-one-out)</h3>`+line("Molaires gauches vs droites",sp.mol_g_vs_mol_d)+line("Incisives vs molaires",sp.inc_vs_mol)+
-      `<div class="hint">Score honnête : chaque claquement est classé sans avoir servi à l'apprentissage. Le hasard = toujours répondre la classe la plus fréquente ; p = probabilité de faire au moins aussi bien par hasard (binomiale).</div>`}
-    const p=r.proposal;h+=`<h3 style="margin-top:16px">Seuil de force</h3>`;
-    if(p&&p.click_thresh){h+=`<div class="kv"><span>Claquements doux : p10</span><span class="mono">${p.soft_p10} m/s² (n = ${p.n_soft})</span></div><div class="kv"><span>Plancher de bruit</span><span class="mono">${p.floor} m/s²</span></div>
-      <div class="kv"><span>Seuil proposé</span><span><b class="mono">${p.click_thresh} m/s²</b> (actuel ${real}) — ${esc(p.reason)}</span></div>
-      <div class="kv"><span>Détectés à ce seuil</span><span>${Object.entries(r.at_proposal||{}).map(([l,v])=>`${LVL[l]} ${pct(v)}`).join(" · ")}</span></div>
-      <div class="row" style="margin-top:10px"><button class="btn p" onclick="lbApply(${p.click_thresh})">Appliquer click_thresh = ${p.click_thresh}</button><span class="hint">le seuil adaptatif reste actif : il remonte quand on parle ou mâche</span></div>`}
+function labResult(r,real){let h=`<div class="hint" style="margin-bottom:10px">${t("js.lb.res_rec",{path:esc((r.path||"").split("/").slice(-3).join("/"))})}${r.cancelled?" "+t("js.lb.res_partial"):""} · ${t("js.lb.res_noise",{p90:r.noise.p90??"—",p99:r.noise.p99??"—",n:r.noise.rest_spikes})}</div>`;
+  if(r.protocol==="dents"){const f=r.force;h+=`<div class="kv"><span>${t("js.lb.cues_with_impulse")}</span><span>${r.captured.with_impulse} / ${r.captured.cues}</span></div>`;
+    if(f){h+=`<table style="margin-top:8px"><thead><tr><th>${t("js.lb.teeth")}</th>${Object.values(LVL()).map(l=>`<th>${t("js.lb.level_head",{level:l})}</th>`).join("")}</tr></thead><tbody>`+
+      Object.keys(GRP()).map(g=>`<tr><td>${GRP()[g]}</td>${Object.keys(LVL()).map(l=>{const x=f.by_group_level[g+":"+l];return `<td class="mono">${x?`${x.n} · <b>${x.median}</b> [${x.min}–${x.max}]`:"—"}</td>`}).join("")}</tr>`).join("")+
+      `<tr><td><b>${t("js.lb.all")}</b></td>${Object.keys(LVL()).map(l=>{const x=f.by_level[l];return `<td class="mono">${x?`${x.n} · <b>${x.median}</b> [${x.min}–${x.max}]`:"—"}</td>`}).join("")}</tr></tbody></table>`}
+    const sp=r.separability;if(sp){const line=(n,x)=>`<div class="kv"><span>${n}</span><span>${x.error?x.error:t("js.lb.sep_line",{acc:pct(x.accuracy),chance:pct(x.chance),n:x.n,p:pv(x.p_value),verdict:x.verdict})}</span></div>`;
+      h+=`<h3 style="margin-top:16px">${t("js.lb.sep_title")}</h3>`+line(t("js.lb.sep_lr"),sp.mol_g_vs_mol_d)+line(t("js.lb.sep_inc_mol"),sp.inc_vs_mol)+
+      `<div class="hint">${t("js.lb.sep_hint")}</div>`}
+    const p=r.proposal;h+=`<h3 style="margin-top:16px">${t("js.lb.force_thresh")}</h3>`;
+    if(p&&p.click_thresh){h+=`<div class="kv"><span>${t("js.lb.soft_p10")}</span><span class="mono">${p.soft_p10} m/s² (n = ${p.n_soft})</span></div><div class="kv"><span>${t("js.lb.noise_floor")}</span><span class="mono">${p.floor} m/s²</span></div>
+      <div class="kv"><span>${t("js.lb.proposed")}</span><span><b class="mono">${p.click_thresh} m/s²</b> (${t("js.lb.current",{v:real})}) — ${esc(p.reason)}</span></div>
+      <div class="kv"><span>${t("js.lb.detected_at")}</span><span>${Object.entries(r.at_proposal||{}).map(([l,v])=>`${LVL()[l]} ${pct(v)}`).join(" · ")}</span></div>
+      <div class="row" style="margin-top:10px"><button class="btn p" onclick="lbApply(${p.click_thresh})">${t("js.lb.apply",{v:p.click_thresh})}</button><span class="hint">${t("js.lb.adaptive_hint")}</span></div>`}
     else h+=`<div class="hint">${esc(p?p.reason:"—")}</div>`}
-  else if(r.protocol==="mouvements"){const rt=r.rates||{};h+=`<table><thead><tr><th>Geste</th><th>Détecté</th><th>Autres gestes pendant la consigne</th></tr></thead><tbody>`+
-    Object.entries(rt).map(([ph,x])=>`<tr><td>${ph}</td><td class="mono"><b>${x.hits} / ${x.cues}</b> (${pct(x.rate)})</td><td class="mono">${Object.entries(x.other).map(([k,v])=>(G_NAMES[k]||k)+" ×"+v).join(", ")||"—"}</td></tr>`).join("")+`</tbody></table>`}
-  else if(r.protocol==="mots"){const v=r.speech||{};h+=`<div class="exp" style="margin-bottom:8px">EXPÉRIMENTAL — parole silencieuse</div><div class="kv"><span>Prises</span><span>${Object.entries(r.words||{}).map(([w,n])=>w+" ×"+n).join(", ")||"—"}</span></div>`;
-    h+=v.status?`<div class="hint">Évaluation en cours (DTW + 500 permutations, quelques dizaines de secondes)…</div>`:v.error?`<div class="hint">${esc(v.error)}</div>`:
-      `<div class="kv"><span>Précision leave-one-out</span><span><b>${pct(v.loo_accuracy)}</b> (hasard ${pct(v.chance)}) · p = ${pv(v.p_value)} · <b>${esc(v.verdict)}</b></span></div><div class="kv"><span>Prises trop courtes</span><span>${v.too_short||0}</span></div>`}
+  else if(r.protocol==="mouvements"){const rt=r.rates||{};h+=`<table><thead><tr><th>${t("js.lb.gesture")}</th><th>${t("js.lb.detected")}</th><th>${t("js.lb.other_gestures")}</th></tr></thead><tbody>`+
+    Object.entries(rt).map(([ph,x])=>`<tr><td>${esc(G_NAMES()[LB_PHASE[ph]]||ph)}</td><td class="mono"><b>${x.hits} / ${x.cues}</b> (${pct(x.rate)})</td><td class="mono">${Object.entries(x.other).map(([k,v])=>(G_NAMES()[k]||k)+" ×"+v).join(", ")||"—"}</td></tr>`).join("")+`</tbody></table>`}
+  else if(r.protocol==="mots"){const v=r.speech||{};h+=`<div class="exp" style="margin-bottom:8px">${t("js.lb.exp_speech")}</div><div class="kv"><span>${t("js.lb.takes")}</span><span>${Object.entries(r.words||{}).map(([w,n])=>w+" ×"+n).join(", ")||"—"}</span></div>`;
+    h+=v.status?`<div class="hint">${t("js.lb.eval_running")}</div>`:v.error?`<div class="hint">${esc(v.error)}</div>`:
+      `<div class="kv"><span>${t("js.lb.loo")}</span><span><b>${pct(v.loo_accuracy)}</b> (${t("js.lb.chance",{v:pct(v.chance)})}) · p = ${pv(v.p_value)} · <b>${esc(v.verdict)}</b></span></div><div class="kv"><span>${t("js.lb.too_short")}</span><span>${v.too_short||0}</span></div>`}
   return h}
 window.lbApply=v=>post("/api/gestures",{action:"set",values:{click_thresh:v}}).then(()=>toast("click_thresh = "+v))
 // ---------- Simulateurs : OpenTrack + manette virtuelle (passent par /api/opentrack)
-$("#ot-en").onchange=()=>post("/api/opentrack",{enabled:$("#ot-en").checked}).then(()=>toast($("#ot-en").checked?"OpenTrack activé":"OpenTrack désactivé"));
-$("#js-en").onchange=()=>post("/api/opentrack",{joystick:{enabled:$("#js-en").checked}}).then(()=>toast($("#js-en").checked?"Manette virtuelle activée":"Manette virtuelle désactivée"));
+$("#ot-en").onchange=()=>post("/api/opentrack",{enabled:$("#ot-en").checked}).then(()=>toast($("#ot-en").checked?t("js.toast.ot_on"):t("js.toast.ot_off")));
+$("#js-en").onchange=()=>post("/api/opentrack",{joystick:{enabled:$("#js-en").checked}}).then(()=>toast($("#js-en").checked?t("js.toast.joy_on"):t("js.toast.joy_off")));
 $("#ot-host").onchange=$("#ot-port").onchange=()=>{};
-$("#ot-apply").onclick=()=>post("/api/opentrack",{host:$("#ot-host").value,port:+$("#ot-port").value}).then(()=>toast("Destination enregistrée"));
-$("#sim-recenter").onclick=()=>post("/api/opentrack",{action:"recenter"}).then(()=>toast("Recentré"));
-$$("#ot-source button").forEach(b=>b.onclick=()=>post("/api/opentrack",{source:b.dataset.v}).then(()=>{toast("Source : "+b.textContent);$$("#ot-source button").forEach(x=>x.classList.toggle("on",x===b))}));
+$("#ot-apply").onclick=()=>post("/api/opentrack",{host:$("#ot-host").value,port:+$("#ot-port").value}).then(()=>toast(t("js.toast.dest_saved")));
+$("#sim-recenter").onclick=()=>post("/api/opentrack",{action:"recenter"}).then(()=>toast(t("js.toast.recentered")));
+$$("#ot-source button").forEach(b=>b.onclick=()=>post("/api/opentrack",{source:b.dataset.v}).then(()=>{toast(t("js.toast.source_colon",{name:b.textContent}));$$("#ot-source button").forEach(x=>x.classList.toggle("on",x===b))}));
 const simCv=$("#sim-cv"),simCx=simCv.getContext("2d");
 function drawSim(p){const W=simCv.clientWidth,H=190,dpr=devicePixelRatio||1;if(simCv.width!==W*dpr){simCv.width=W*dpr;simCv.height=H*dpr}
   simCx.setTransform(dpr,0,0,dpr,0,0);simCx.clearRect(0,0,W,H);const css=getComputedStyle(document.documentElement),cv=n=>css.getPropertyValue(n);
   const rad=d=>d*Math.PI/180,R=62,c1=[W/4,H/2+6],c2=[3*W/4,H/2+6];
-  simCx.font="11px -apple-system,sans-serif";simCx.fillStyle=cv("--text2");simCx.fillText("dessus (lacet)",c1[0]-36,14);simCx.fillText("côté (tangage)",c2[0]-38,14);
+  simCx.font="11px -apple-system,sans-serif";simCx.fillStyle=cv("--text2");simCx.fillText(t("js.sim.top"),c1[0]-36,14);simCx.fillText(t("js.sim.side"),c2[0]-38,14);
   [c1,c2].forEach(c=>{simCx.strokeStyle=cv("--line");simCx.lineWidth=1;simCx.beginPath();simCx.arc(c[0],c[1],R,0,7);simCx.stroke()});
   // dessus : tête vue d'en haut, nez vers le haut de l'écran, lacet + = vers la droite
   const y=rad(p[3]);simCx.save();simCx.translate(c1[0],c1[1]);simCx.rotate(y);simCx.fillStyle=cv("--card2");simCx.strokeStyle=cv("--text2");
   simCx.beginPath();simCx.ellipse(0,0,24,30,0,0,7);simCx.fill();simCx.stroke();simCx.strokeStyle=cv("--accent");simCx.lineWidth=3;simCx.beginPath();simCx.moveTo(0,-30);simCx.lineTo(0,-R+4);simCx.stroke();simCx.restore();
   // côté : regard vers la droite de l'écran, tangage + = vers le haut, roulis en arc
-  const t=rad(p[4]);simCx.save();simCx.translate(c2[0],c2[1]);simCx.rotate(-t);simCx.fillStyle=cv("--card2");simCx.strokeStyle=cv("--text2");simCx.lineWidth=1;
+  const pt=rad(p[4]);simCx.save();simCx.translate(c2[0],c2[1]);simCx.rotate(-pt);simCx.fillStyle=cv("--card2");simCx.strokeStyle=cv("--text2");simCx.lineWidth=1;
   simCx.beginPath();simCx.ellipse(0,0,28,24,0,0,7);simCx.fill();simCx.stroke();simCx.strokeStyle=cv("--green");simCx.lineWidth=3;simCx.beginPath();simCx.moveTo(28,0);simCx.lineTo(R-4,0);simCx.stroke();simCx.restore();
   simCx.strokeStyle=cv("--orange");simCx.lineWidth=3;simCx.beginPath();const r0=-Math.PI/2;simCx.arc(c2[0],c2[1],R+6,r0,r0+rad(p[5]),p[5]<0);simCx.stroke()}
 function refreshOT(){if(page!=="sims")return;fetch("/api/opentrack").then(r=>r.json()).then(o=>{const c=o.config||{},j=o.joystick||{};
@@ -872,31 +886,31 @@ function refreshOT(){if(page!=="sims")return;fetch("/api/opentrack").then(r=>r.j
   const outs=o.outputs||[];$("#ot-en").checked=outs.includes("udp");$("#js-en").checked=outs.includes("joystick")||!!(o.joystick_config&&o.joystick_config.enabled&&j.error);
   $$("#ot-source button").forEach(b=>b.classList.toggle("on",b.dataset.v===(c.source||"quaternion")));
   const p=o.pose||[0,0,0,0,0,0];
-  $("#sim-angles").innerHTML=[["Lacet",p[3],90],["Tangage",p[4],60],["Roulis",p[5],60]].map(([n,v,s])=>{const w=Math.max(-1,Math.min(1,v/s))*50;
+  $("#sim-angles").innerHTML=[[t("js.sim.yaw"),p[3],90],[t("js.sim.pitch"),p[4],60],[t("js.sim.roll"),p[5],60]].map(([n,v,s])=>{const w=Math.max(-1,Math.min(1,v/s))*50;
     return `<span>${n}</span><div class="bar"><i style="left:${w<0?50+w:50}%;width:${Math.abs(w)}%"></i></div><span class="mono">${v>=0?"+":""}${v.toFixed(1)}°</span>`}).join("");
-  $("#sim-src").textContent=!o.active?"—":o.source_used==="quaternion"?"quaternion des AirPods":o.source_used==="gyro"?"intégration du gyroscope"+(c.source==="quaternion"?" (quaternion pas encore reçu)":""):"en attente d'échantillons";
-  $("#sim-outs").textContent=outs.length?outs.map(x=>x==="udp"?"OpenTrack (UDP)":"manette virtuelle").join(" + "):"aucune";
-  $("#ot-status").textContent=outs.includes("udp")?`→ ${o.target}${o.forced?" (session --opentrack)":""} · ${o.packets} paquets${o.errors?" · erreurs : "+o.errors:""}`:"Inactif";
-  $("#js-status").textContent=j.error?"Erreur : "+j.error:j.active?`« ${j.name} » · ${j.writes} mises à jour${o.joystick_forced?" (session --sim-joystick)":""}`:"Inactive";
-  if(o.data_age_s!=null&&o.data_age_s>2&&o.active)$("#sim-src").textContent+=" · pas de données depuis "+o.data_age_s.toFixed(0)+" s";
+  $("#sim-src").textContent=!o.active?"—":o.source_used==="quaternion"?t("js.sim.src_quat"):o.source_used==="gyro"?t("js.sim.src_gyro")+(c.source==="quaternion"?" ("+t("js.sim.no_quat_yet")+")":""):t("js.sim.waiting_samples");
+  $("#sim-outs").textContent=outs.length?outs.map(x=>x==="udp"?"OpenTrack (UDP)":t("js.sim.joystick")).join(" + "):t("js.none_f");
+  $("#ot-status").textContent=outs.includes("udp")?`→ ${o.target}${o.forced?" (session --opentrack)":""} · ${t("js.sim.packets",{n:o.packets})}${o.errors?" · "+t("js.sim.errors",{n:o.errors}):""}`:t("js.sim.inactive_m");
+  $("#js-status").textContent=j.error?t("js.error_cap",{error:j.error}):j.active?`${t("js.sim.js_active",{name:j.name,n:j.writes})}${o.joystick_forced?" (session --sim-joystick)":""}`:t("js.sim.inactive_f");
+  if(o.data_age_s!=null&&o.data_age_s>2&&o.active)$("#sim-src").textContent+=" · "+t("js.sim.no_data",{s:o.data_age_s.toFixed(0)});
   drawSim(p)}).catch(()=>{})}
 setInterval(refreshOT,100);
 // ---------- Garmin (passe par /api/garmin ; module optionnel garmin-ble)
 let gmEdit=null;
 const gmPost=b=>post("/api/garmin",b).then(r=>r.json()).then(j=>{if(j.error)toast(j.error);setTimeout(gmPoll,150);return j}).catch(()=>({}));
-$("#gm-connect").onclick=()=>gmPost({action:"connect",address:$("#gm-addr").value.trim()}).then(j=>j.ok&&toast("Connexion à la montre…"));
-$("#gm-disconnect").onclick=()=>gmPost({action:"disconnect"}).then(j=>j.ok&&toast("Déconnexion"));
-$("#gm-recenter").onclick=()=>gmPost({action:"recenter"}).then(j=>j.ok&&toast("Main posée, immobile 1 s"));
-$("#gm-recal").onclick=()=>gmPost({action:"recalibrate"}).then(j=>j.ok&&toast("Calibration complète (5 poses)"));
-$("#gm-pause").onclick=()=>gmPost({action:"pause"}).then(j=>j.ok&&toast(j.enabled?"Souris activée":"Souris en pause"));
+$("#gm-connect").onclick=()=>gmPost({action:"connect",address:$("#gm-addr").value.trim()}).then(j=>j.ok&&toast(t("js.toast.gm_connecting")));
+$("#gm-disconnect").onclick=()=>gmPost({action:"disconnect"}).then(j=>j.ok&&toast(t("js.toast.gm_disconnect")));
+$("#gm-recenter").onclick=()=>gmPost({action:"recenter"}).then(j=>j.ok&&toast(t("js.toast.gm_recenter")));
+$("#gm-recal").onclick=()=>gmPost({action:"recalibrate"}).then(j=>j.ok&&toast(t("js.toast.gm_recal")));
+$("#gm-pause").onclick=()=>gmPost({action:"pause"}).then(j=>j.ok&&toast(j.enabled?t("js.toast.mouse_on"):t("js.toast.mouse_paused")));
 $("#gm-paired").onclick=()=>fetch("/api/garmin?paired=1").then(r=>r.json()).then(d=>{const L=d.paired||[];
-  $("#gm-paired-list").innerHTML=L.length?L.map(p=>`<button class="btn sm${p.garmin?" p":""}" data-a="${esc(p.address)}">${esc(p.name||p.address)}</button>`).join(""):'<span class="hint">Aucun appareil appairé trouvé</span>';
-  $$("#gm-paired-list button").forEach(b=>b.onclick=()=>{$("#gm-addr").value=b.dataset.a;toast("Adresse choisie")})}).catch(()=>{});
+  $("#gm-paired-list").innerHTML=L.length?L.map(p=>`<button class="btn sm${p.garmin?" p":""}" data-a="${esc(p.address)}">${esc(p.name||p.address)}</button>`).join(""):`<span class="hint">${t("js.gm.no_paired")}</span>`;
+  $$("#gm-paired-list button").forEach(b=>b.onclick=()=>{$("#gm-addr").value=b.dataset.a;toast(t("js.toast.addr_chosen"))})}).catch(()=>{});
 $$("#p-garmin [data-gm]").forEach(inp=>{const k=inp.dataset.gm,out=inp.parentElement.querySelector("output");
   if(inp.type==="range"){inp.oninput=()=>{gmEdit=k;out.textContent=fmt(+inp.value,inp.step)};
     inp.onchange=()=>{gmPost({action:"set",values:{[k]:+inp.value}});setTimeout(()=>gmEdit=null,800)}}
-  else inp.onchange=()=>gmPost({action:"set",values:{[k]:inp.checked}}).then(j=>j.ok&&toast("Enregistré"))});
-$$("#gm-mode button").forEach(b=>b.onclick=()=>gmPost({action:"set",values:{mode:b.dataset.v}}).then(j=>j.ok&&toast("Mode "+b.textContent)));
+  else inp.onchange=()=>gmPost({action:"set",values:{[k]:inp.checked}}).then(j=>j.ok&&toast(t("js.toast.saved")))});
+$$("#gm-mode button").forEach(b=>b.onclick=()=>gmPost({action:"set",values:{mode:b.dataset.v}}).then(j=>j.ok&&toast(t("js.toast.mode",{name:b.textContent}))));
 const gmCv=$("#gm-canvas"),gmCx=gmCv.getContext("2d");
 function drawGarmin(a,c){const S=260,dpr=devicePixelRatio||1;if(gmCv.width!==S*dpr){gmCv.width=S*dpr;gmCv.height=S*dpr}
   gmCx.setTransform(dpr,0,0,dpr,0,0);gmCx.clearRect(0,0,S,S);const css=getComputedStyle(document.documentElement),cv=n=>css.getPropertyValue(n),m=S/2;
@@ -913,35 +927,34 @@ function drawGarmin(a,c){const S=260,dpr=devicePixelRatio||1;if(gmCv.width!==S*d
 function gmPoll(){if(page!=="garmin")return;fetch("/api/garmin").then(r=>r.json()).then(renderGarmin).catch(()=>{})}
 setInterval(gmPoll,100);
 function renderGarmin(d){const miss=!d.available;$("#gm-missing").style.display=miss?"block":"none";$("#gm-body").style.display=miss?"none":"block";
-  if(miss){$("#gm-missing-why").textContent=d.error?d.error:"manquant : "+(d.missing||[]).join(", ");return}
+  if(miss){$("#gm-missing-why").textContent=d.error?d.error:t("js.gm.missing",{list:(d.missing||[]).join(", ")});return}
   const c=d.config||{},a=d.app&&d.app.running?d.app:null,last=d.app;
   if(document.activeElement!==$("#gm-addr")&&!$("#gm-addr").value)$("#gm-addr").value=d.address||"";
   $$("#p-garmin [data-gm]").forEach(inp=>{const k=inp.dataset.gm;if(k===gmEdit)return;const v=c[k];
     if(inp.type==="range"){if(v!=null){inp.value=v;inp.parentElement.querySelector("output").textContent=fmt(+v,inp.step)}}else inp.checked=!!v});
   $$("#gm-mode button").forEach(b=>b.classList.toggle("on",b.dataset.v===c.mode));
-  const st=a?a.status:last?last.status:"Non connectée",bad=/^Erreur/.test(st);
+  const st=a?a.status:last?last.status:t("js.gm.not_connected"),bad=!!(last&&last.failed);
   $("#gm-status").innerHTML=`<span class="pill ${a&&a.connected?"g":bad?"r":a?"o":""}">${esc(st)}</span>`;
   $("#gm-rate").textContent=a&&a.connected?a.rate.toFixed(1):"—";
-  $("#gm-mouse").textContent=!a||!a.connected?"—":a.calibrating?"calibration":!a.enabled?"en pause (bouton)":a.paused?"en pause (bras baissé)":a.frozen?"figée (tape)":"active ("+c.mode+")";
+  $("#gm-mouse").textContent=!a||!a.connected?"—":a.calibrating?t("js.g.calibration"):!a.enabled?t("js.gm.paused_button"):a.paused?t("js.gm.paused_arm"):a.frozen?t("js.gm.frozen"):t("js.gm.active_mode",{mode:c.mode});
   $("#gm-clicks").textContent=a?a.clicks:0;
-  const r=(a&&a.range_deg)||d.range_deg;$("#gm-range").textContent=r?`droite ${r.right}° · gauche ${r.left}° · haut ${r.up}° · bas ${r.down}°`:"pas encore calibrée";
+  const r=(a&&a.range_deg)||d.range_deg;$("#gm-range").textContent=r?t("js.gm.range",{right:r.right,left:r.left,up:r.up,down:r.down}):t("js.gm.not_calibrated");
   $("#gm-connect").disabled=!!a;$("#gm-disconnect").disabled=!a;$("#gm-recenter").disabled=$("#gm-pause").disabled=!a;
-  $("#gm-pause").textContent=a&&!a.enabled?"Reprendre":"Pause";
+  $("#gm-pause").textContent=a&&!a.enabled?t("js.resume"):t("js.pause");
   let pr,sub="",err="",steps="";
-  if(a&&a.calibrating){const k=a.calib;pr=k.prompt;sub=a.connected?`Étape ${k.step} / ${k.steps} · tiens la pose immobile ~1 s`:"En attente de la montre…";err=k.error;
+  if(a&&a.calibrating){const k=a.calib;pr=k.prompt;sub=a.connected?t("js.gm.cal_step",{step:k.step,steps:k.steps}):t("js.gm.waiting_watch");err=k.error;
     if(k.steps>1)steps=Array.from({length:k.steps},(_,i)=>`<i class="${i<k.step-1?"done":i===k.step-1?"cur":""}"></i>`).join("")}
-  else if(a){const off=a.paused||!a.enabled;pr=`Souris ${off?"en pause":"active"} (${c.mode})`;sub="incline pour bouger · double tape = clic · bras baissé = pause"}
-  else{pr=d.full_next||!d.calibrated?"Calibration guidée en 5 poses à la connexion":"À la connexion : position neutre réapprise (1 s)";sub="neutre, droite, gauche, main levée, main baissée"}
+  else if(a){const off=a.paused||!a.enabled;pr=off?t("js.gm.mouse_paused",{mode:c.mode}):t("js.gm.mouse_active",{mode:c.mode});sub=t("js.gm.usage")}
+  else{pr=d.full_next||!d.calibrated?t("js.gm.full_cal"):t("js.gm.quick_cal");sub=t("js.gm.poses")}
   $("#gm-prompt").textContent=pr;$("#gm-step").textContent=sub;$("#gm-err").textContent=err||"";$("#gm-steps").innerHTML=steps;
   const ms=(d.messages||[]).slice().reverse();
   $("#gm-msgs").innerHTML=ms.length?ms.map(x=>`<tr><td class="mono" style="white-space:nowrap">${new Date(x.t*1000).toLocaleTimeString()}</td><td>${esc(x.text)}</td></tr>`).join(""):'<tr><td class="empty">—</td></tr>';
   drawGarmin(a,c)}
 // ---------- boucles
 function refreshState(){fetch("/api/state").then(r=>r.json()).then(j=>{S=j;renderState();if(page==="gestures")fillGestures()}).catch(()=>{})}
-setInterval(refreshState,1000);refreshState();
 function connect(){const es=new EventSource("/api/stream");es.onmessage=e=>{T=JSON.parse(e.data);renderTelemetry()};
-  es.onerror=()=>{es.close();$("#side-dot").className="dot";$("#side-status").textContent="Contrôleur arrêté";setTimeout(connect,1500)}}
-connect();
+  es.onerror=()=>{es.close();$("#side-dot").className="dot";$("#side-status").textContent=t("js.status.stopped");setTimeout(connect,1500)}}
+loadI18n().finally(()=>{$("#lb-proto-desc").textContent=LB_DESC(lbProto);setInterval(refreshState,1000);refreshState();connect()});
 </script>
 </body>
 </html>
