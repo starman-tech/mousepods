@@ -1187,7 +1187,7 @@ function renderGarmin(d){const miss=!d.available;$("#gm-missing").style.display=
   $("#gm-msgs").innerHTML=ms.length?ms.map(x=>`<tr><td class="mono" style="white-space:nowrap">${new Date(x.t*1000).toLocaleTimeString()}</td><td>${esc(x.text)}</td></tr>`).join(""):'<tr><td class="empty">—</td></tr>';
   drawGarmin(a,c)}
 // ---------- boucles
-function refreshState(){fetch("/api/state").then(r=>r.json()).then(j=>{S=j;renderState();if(page==="gestures")fillGestures()}).catch(()=>{})}
+function refreshState(){fetch("/api/state"+(page==="gestures"?"?watch=gestures":"")).then(r=>r.json()).then(j=>{S=j;renderState();if(page==="gestures")fillGestures()}).catch(()=>{})}
 function connect(){const es=new EventSource("/api/stream");es.onmessage=e=>{T=JSON.parse(e.data);renderTelemetry()};
   es.onerror=()=>{es.close();$("#side-dot").className="dot";$("#side-status").textContent=t("js.status.stopped");setTimeout(connect,1500)}}
 // ---------- version and release notes (/api/version, from the metainfo: the same text as in Discover)

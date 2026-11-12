@@ -815,6 +815,7 @@ class GestureEngine:
         self._dec = 0
         self._src = self._src_copy = self._c = None
         self.sample_taps = []           # callbacks(sample, source) à pleine cadence (page Labo)
+        self.watch_until = 0.0          # the Gestures page is open: keep the stream stats live
 
     def _cfg(self):
         """Section gestes complète, recalculée seulement si la configuration a changé (200 Hz)."""
@@ -926,6 +927,8 @@ class GestureEngine:
                                     *[f"{v:.1f}" for v in g], lab, *[f"{v:.3f}" for v in rates], src])
             self.rec["rows"] += 1
         c = self._cfg()
+        if not (c["enabled"] or self.calib or self.sample_taps or now < self.watch_until):
+            return      # gestures off and nobody looking: skip the resampling, it runs for every sample
         if not self.calib:
             self.det.c = c
         buf = self.bufs[src]
@@ -962,6 +965,10 @@ class GestureEngine:
                 if self.command:
                     self.command(action)
         self.events.append(ev)
+
+    def watch(self, seconds=3.0):
+        """The Gestures page asks for the stream stats: keep the resampling running a while."""
+        self.watch_until = time.monotonic() + seconds
 
     def cursor_frozen(self):
         """Vrai pendant la fenêtre d'action (après le double claquement) et juste après l'action :

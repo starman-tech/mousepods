@@ -902,7 +902,10 @@ class WebUI:
                     self._json(v)
                 elif self.path == "/api/calibration":
                     self._json(ui.point_calibration_state())
-                elif self.path == "/api/state":
+                elif self.path in ("/api/state", "/api/state?watch=gestures"):
+                    g = getattr(ui.ctl, "gestures", None)
+                    if g and self.path.endswith("watch=gestures"):
+                        g.watch()           # stats on the Gestures page even while gestures are off
                     self._json(ui.state())
                 elif self.path == "/api/gestures":
                     g = getattr(ui.ctl, "gestures", None)

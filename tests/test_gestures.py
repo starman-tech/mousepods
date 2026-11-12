@@ -289,6 +289,13 @@ class TestEngine(unittest.TestCase):
         eng = gz.GestureEngine(lambda: {"enabled": False}, command=cmds.append)
         self.feed(eng, Synth().still(1).click().still(0.2).click().still(1).rows)
         self.assertEqual(list(eng.events), [])
+        self.assertEqual(eng.buf.stats()["samples"], 0)     # off and nobody looking: no work per sample
+
+    def test_disabled_but_watched_keeps_stats(self):
+        eng = gz.GestureEngine(lambda: {"enabled": False})
+        eng.watch_until = float("inf")                       # the Gestures page is open
+        self.feed(eng, Synth().still(1).click().still(0.2).click().still(1).rows)
+        self.assertEqual(list(eng.events), [])
         self.assertGreater(eng.buf.stats()["samples"], 0)
 
     def test_user_calibration_sets_threshold(self):

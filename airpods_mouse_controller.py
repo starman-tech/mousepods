@@ -24,6 +24,7 @@ Usage :
   airpods_mouse_controller.py --install-hotkeys  raccourcis GNOME (Ctrl+Alt+C/P/S/M)
 """
 import argparse
+import collections
 import json
 import logging
 import math
@@ -748,8 +749,13 @@ class MotionEngine:
         self.set_profile(profile or DEFAULT_PROFILE)
         self.bias = (0.0, 0.0, 0.0)
         self.g = None
-        self.win = []
-        self.gwin = []
+        self.win = collections.deque()
+        self.gwin = collections.deque()
+        # per axis, deques of (index, value) whose values only decrease (_hi) or increase (_lo):
+        # the window's max and min in O(1) per sample instead of rescanning 40 samples
+        self._hi = [collections.deque() for _ in range(3)]
+        self._lo = [collections.deque() for _ in range(3)]
+        self._n = 0
         self.still_t = 0.0
         self.bias_ok = False
         self._lat_h = None
@@ -758,6 +764,28 @@ class MotionEngine:
         self.p = {**DEFAULT_PROFILE, **p}
         self.lat = vnorm(tuple(self.p["lat"]))
         self._lat_h = None
+
+    def _window_range(self, w):
+        """Largest max - min of the three gyro axes over the last 40 samples (same as scanning
+        self.win, without the scan: this runs for every sample)."""
+        i = self._n
+        self._n += 1
+        first = i - 39                       # oldest index still in the 40-sample window
+        rng = 0.0
+        for k in range(3):
+            v, hi, lo = w[k], self._hi[k], self._lo[k]
+            while hi and hi[-1][1] <= v:
+                hi.pop()
+            hi.append((i, v))
+            while lo and lo[-1][1] >= v:
+                lo.pop()
+            lo.append((i, v))
+            if hi[0][0] < first:
+                hi.popleft()
+            if lo[0][0] < first:
+                lo.popleft()
+            rng = max(rng, hi[0][1] - lo[0][1])
+        return rng
 
     def step(self, w, g, dt):
         if vlen(g) > 1e-3:
@@ -769,9 +797,9 @@ class MotionEngine:
         self.win.append(w)
         self.gwin.append(self.g)
         if len(self.win) > 40:
-            del self.win[0]
-            del self.gwin[0]
-        rng = max(max(s[k] for s in self.win) - min(s[k] for s in self.win) for k in range(3))
+            self.win.popleft()
+            self.gwin.popleft()
+        rng = self._window_range(w)
         g_move = math.degrees(math.acos(min(1.0, max(-1.0, vdot(self.gwin[0], self.gwin[-1])))))
         if rng < self.bcfg["still_range_dps"] and g_move < 1.5 and len(self.win) >= 8:
             self.still_t += dt
@@ -985,6 +1013,7 @@ class Controller:
         self.pos_px = [0.0, 0.0]
         self._last_print = 0.0
         self._last_render = time.monotonic()
+        self._abs_sent_at = float("-inf")
         self._cfg_mtime = self._mtime()
         self.history = []            # [(temps, w, g, (lacet, tangage, roulis), att)] pour l'interface
         self.sample_hooks = []       # callbacks(w, g, dt) (calibration dans l'interface)
@@ -1522,6 +1551,11 @@ class Controller:
             a = 1.0 - math.exp(-dt / max(self.cfg["render_lag_s"], 0.001))
             nx = self.cur[0] + (self.target[0] - self.cur[0]) * a
             ny = self.cur[1] + (self.target[1] - self.cur[1]) * a
+            # the pointer is already there: repeat the position 4 times a second (so it still wins
+            # over a hand on the real mouse, as before) instead of every frame
+            if (nx, ny) == self.cur and now - self._abs_sent_at < 0.25:
+                return
+            self._abs_sent_at = now
             self.ptr.move_abs(nx, ny)
             self.pos_px = [nx * 1920, ny * 1200]
             self.cur = (nx, ny)
@@ -1673,7 +1707,9 @@ def run(cfg, cfg_path, diag=False, web_port=8737, opentrack=False, joystick=Fals
                     now = time.monotonic()
                     if now >= next_frame:
                         ctl.render(now)
-                        next_frame = now + frame
+                        # mouse off or paused (e.g. while a game takes the head tracking): nothing to
+                        # draw, so the loop only wakes for packets instead of render_hz times a second
+                        next_frame = now + (frame if not ctl.inactive else 0.25)
                     if now >= next_reload:
                         next_reload = now + 1.0
                         ctl.maybe_reload()
