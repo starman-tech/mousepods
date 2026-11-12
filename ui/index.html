@@ -697,25 +697,33 @@ function vec(el,v,scale,unit){el.innerHTML=["X","Y","Z"].map((n,i)=>{const p=Mat
   return `<span>${n}</span><div class="bar"><i style="left:${p<0?50+p:50}%;width:${Math.abs(p)}%"></i></div><span class="mono">${(+v[i]).toFixed(unit)}</span>`}).join("")}
 // ---------- rendu télémétrie
 function ring(level,color){const c=2*Math.PI*36;return `<svg class="ring" viewBox="0 0 84 84"><circle class="bg" cx="42" cy="42" r="36"/><circle class="fg" cx="42" cy="42" r="36" stroke-dasharray="${c}" stroke-dashoffset="${c*(1-level/100)}" style="stroke:${color}"/><text x="42" y="47" text-anchor="middle" font-size="16" font-weight="650" fill="currentColor">${level}%</text></svg>`}
+// Telemetry arrives 30 times a second. Every DOM write makes WebKit paint a new frame, and in the
+// desktop app each frame is expensive, so values are only written when they change and the
+// sample rate is shown once a second.
+function setText(el,v){if(el&&el.textContent!==v)el.textContent=v}
+function setClass(el,v){if(el&&el.className!==v)el.className=v}
+function setHtml(el,v){if(el&&el._html!==v){el._html=v;el.innerHTML=v}}
+let rateShownAt=0,ratePage=null;
 function renderTelemetry(){
   const tm=T;const ok=tm.connected&&tm.live;
-  $("#side-dot").className="dot "+(ok?"ok":tm.connected?"warn":"");
-  $("#side-status").textContent=ok?t("js.status.live"):(tm.status||"—");
+  setClass($("#side-dot"),"dot "+(ok?"ok":tm.connected?"warn":""));
+  setText($("#side-status"),ok?t("js.status.live"):(tm.status||"—"));
   renderWizard();
-  $("#side-rate").textContent=tm.connected?`${tm.rate} Hz · ${SRC(tm.source)||""}`:"";
+  const now=performance.now(),showRate=!tm.connected||now-rateShownAt>=1000||page!==ratePage;
+  if(showRate){rateShownAt=now;ratePage=page;setText($("#side-rate"),tm.connected?`${tm.rate} Hz · ${SRC(tm.source)||""}`:"")}
   if(page==="overview"){
-    $("#ov-state").textContent=tm.paused?t("js.ov.paused"):(tm.calib&&tm.calib.active?t("js.ov.calibration"):t("js.ov.active"));
-    $("#ov-state-sub").textContent=`${({souris:t("js.ov.mode_mouse"),pointeur:t("js.ov.mode_pointer"),glisse:t("js.ov.mode_glide")})[tm.mode]} · ${t("js.source_src",{src:SRC(tm.source)})}${tm.scroll?" · "+t("js.ov.scrolling"):""}`;
-    $("#ov-toggle").textContent=tm.paused?t("js.resume"):t("js.pause");
-    $("#ov-rate").textContent=tm.connected?tm.rate:"—";
-    $("#ov-gaps").textContent=tm.connected?tm.gaps:"—";$("#ov-gaps").style.color=tm.gaps>3?"var(--orange)":"";
+    setText($("#ov-state"),tm.paused?t("js.ov.paused"):(tm.calib&&tm.calib.active?t("js.ov.calibration"):t("js.ov.active")));
+    setText($("#ov-state-sub"),`${({souris:t("js.ov.mode_mouse"),pointeur:t("js.ov.mode_pointer"),glisse:t("js.ov.mode_glide")})[tm.mode]} · ${t("js.source_src",{src:SRC(tm.source)})}${tm.scroll?" · "+t("js.ov.scrolling"):""}`);
+    setText($("#ov-toggle"),tm.paused?t("js.resume"):t("js.pause"));
+    if(showRate)setText($("#ov-rate"),tm.connected?String(tm.rate):"—");
+    setText($("#ov-gaps"),tm.connected?String(tm.gaps):"—");{const c=tm.gaps>3?"var(--orange)":"";if($("#ov-gaps").style.color!==c)$("#ov-gaps").style.color=c}
     $$(".seg[data-key=mode] button").forEach(b=>b.classList.toggle("on",b.dataset.v===tm.mode));
     $$(".seg[data-key=source] button").forEach(b=>b.classList.toggle("on",b.dataset.v===tm.source_cfg));
-    $("#ov-src-hint").textContent=`${t("js.ov.detected",{place:({ear:t("js.place.ear"),case:t("js.place.case"),out:t("js.place.out")})[tm.place]||"—"})} → ${t("js.source_src",{src:SRC(tm.source)})}`;
+    setText($("#ov-src-hint"),`${t("js.ov.detected",{place:({ear:t("js.place.ear"),case:t("js.place.case"),out:t("js.place.out")})[tm.place]||"—"})} → ${t("js.source_src",{src:SRC(tm.source)})}`);
     const bats=(tm.battery||[]).map(b=>{const col=b.level!=null&&b.level<=20?"var(--red)":b.state==="charging"?"var(--green)":"var(--accent)";
       return `<div class="card bat">${b.state==="disconnected"||b.level==null?'<div class="ring" style="display:grid;place-items:center;color:var(--text2)">—</div>':ring(b.level,col)}<b>${b.part}</b><small>${b.state_label}</small></div>`});
     const ear=tm.ear?`<div class="card bat"><div class="ring" style="display:grid;place-items:center;font-size:30px">🎧</div><b>${t("js.ov.ears")}</b><small>${tm.ear.join(" · ")}</small></div>`:"";
-    $("#ov-bat").innerHTML=bats.join("")+ear||`<div class="card empty">${t("js.ov.waiting_airpods")}</div>`;
+    setHtml($("#ov-bat"),bats.join("")+ear||`<div class="card empty">${t("js.ov.waiting_airpods")}</div>`);
   }
   if(page==="motion"){
     let q=quat(tm.att);if(q0){const c=[q0[0],-q0[1],-q0[2],-q0[3]];q=qmul(c,q)}
@@ -1188,8 +1196,16 @@ function renderGarmin(d){const miss=!d.available;$("#gm-missing").style.display=
   drawGarmin(a,c)}
 // ---------- boucles
 function refreshState(){fetch("/api/state").then(r=>r.json()).then(j=>{S=j;renderState();if(page==="gestures")fillGestures()}).catch(()=>{})}
-function connect(){const es=new EventSource("/api/stream");es.onmessage=e=>{T=JSON.parse(e.data);renderTelemetry()};
-  es.onerror=()=>{es.close();$("#side-dot").className="dot";$("#side-status").textContent=t("js.status.stopped");setTimeout(connect,1500)}}
+// The live stream only runs while the page can be seen: a hidden tab, or the app window closed
+// to the tray, closes it, and it opens again when the page is shown.
+let ES=null,reconnectTimer=null;
+function connect(){clearTimeout(reconnectTimer);reconnectTimer=null;
+  if(ES||document.hidden)return;
+  const es=ES=new EventSource("/api/stream");es.onmessage=e=>{T=JSON.parse(e.data);renderTelemetry()};
+  es.onerror=()=>{es.close();if(ES!==es)return;ES=null;$("#side-dot").className="dot";$("#side-status").textContent=t("js.status.stopped");
+    reconnectTimer=setTimeout(connect,1500)}}
+function disconnect(){clearTimeout(reconnectTimer);reconnectTimer=null;if(ES){ES.close();ES=null}}
+document.addEventListener("visibilitychange",()=>{document.hidden?disconnect():connect()});
 // ---------- version and release notes (/api/version, from the metainfo: the same text as in Discover)
 let VER=null;
 function relHtml(r){return `<div class="card news-rel"><h3>${esc(r.version)}</h3><div class="hint">${esc(r.date||"")}</div>

@@ -44,7 +44,7 @@ class WizardTests(unittest.TestCase):
         h = html()
         fn = h[h.index("function renderWizard()"):h.index("\n", h.index("function renderWizard()") + 60) + 120]
         self.assertIn("tm.connected&&tm.live", fn)
-        self.assertRegex(h, r'#side-status"\)\.textContent=[^\n]*\n\s*renderWizard\(\);')   # updated with telemetry
+        self.assertRegex(h, r'setText\(\$\("#side-status"\),[^\n]*\n\s*renderWizard\(\);')   # updated with telemetry
         m_ = re.search(r"function renderWizard\(\)\{[\s\S]*?\}\n", h)
         self.assertIn('t("js.status.live")', m_.group(0))
 

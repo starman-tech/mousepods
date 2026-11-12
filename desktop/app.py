@@ -20,7 +20,11 @@ gi.require_version("WebKit", "6.0")
 from gi.repository import Gdk, Gio, GLib, Gtk, WebKit  # noqa: E402
 
 import i18n  # noqa: E402
-from desktop import controller, overlay  # noqa: E402
+from desktop import controller, overlay, renderer  # noqa: E402
+
+# GL renderer instead of Vulkan (see desktop/renderer.py). GTK reads GSK_RENDERER when it creates
+# the first window's renderer, so setting it here, before any window, is early enough.
+renderer.choose(os.environ, (Gtk.get_major_version(), Gtk.get_minor_version()))
 
 APP_ID = "io.github.starman_tech.MousePods"
 PORT = 8737
