@@ -10,3 +10,5 @@ garmin_mouse.json
 garmin_calib.json
 native/out/
 build-info.json
+windows/aap-poc/packages/
+windows/aap-poc/**/x64/
