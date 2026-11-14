@@ -46,3 +46,7 @@ Head-tracker HID headsets (hid_headtracker.py): protocol details and axis mappin
     and associated documentation files, to deal in the Software without restriction, subject to the
     condition that the above copyright notice and this permission notice shall be included in all
     copies or substantial portions of the Software.
+
+windows/aap-poc/bthcli/sys and windows/aap-poc/common are modified files from Microsoft's
+Windows-driver-samples (bluetooth/bthecho), Copyright (c) Microsoft Corporation, licensed under the
+Microsoft Public License (MS-PL), see windows/aap-poc/LICENSE-MS-PL.

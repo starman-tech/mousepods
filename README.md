@@ -213,7 +213,7 @@ Tried it in another game? [Tell us](https://github.com/starman-tech/mousepods/is
 |---|---|
 | Linux, GNOME / KDE, Wayland and X11 | ✅ (Ubuntu 24.04, Bazzite) |
 | Immutable distros (Bazzite, Fedora Atomic, SteamOS) | ✅ Flatpak, or a distrobox from source |
-| Windows | ❌ not yet: Windows doesn't let apps open the Bluetooth channel AirPods use |
+| Windows | 🧪 experimental: sensor stream and `--diag` through a test-signed driver, no mouse yet. See [docs/WINDOWS.md](docs/WINDOWS.md) |
 | macOS | ❌ not needed: Apple's own API already gives head tracking |
 | Android | ❌ not yet: needs a Bluetooth stack that allows the AirPods channel |
 

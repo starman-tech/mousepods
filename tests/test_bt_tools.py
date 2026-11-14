@@ -44,7 +44,8 @@ class BtToolTests(unittest.TestCase):
         class Reached(Exception):
             pass
         c = m.AAPClient("AA:BB:CC:DD:EE:FF", auto_connect=False)
-        with mock.patch.object(m.subprocess, "run", side_effect=MISSING), \
+        with mock.patch.object(m, "WINDOWS", False), \
+                mock.patch.object(m.subprocess, "run", side_effect=MISSING), \
                 mock.patch.object(m.socket, "AF_BLUETOOTH", 31, create=True), \
                 mock.patch.object(m.socket, "BTPROTO_L2CAP", 0, create=True), \
                 mock.patch.object(m.socket, "socket", side_effect=Reached):

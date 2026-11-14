@@ -47,7 +47,9 @@ from i18n import tr
 HERE = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_CONFIG_PATH = os.path.join(HERE, "config.json")
 CTRL_SOCK = os.path.join(os.environ.get("XDG_RUNTIME_DIR", "/tmp"), "airpods-mouse.sock")
-log = logging.getLogger("airpods-mouse")
+WINDOWS = sys.platform == "win32"
+CTRL_UDP = ("127.0.0.1", 8736)     # Windows has no AF_UNIX datagram sockets: --send uses loopback UDP there
+log =logging.getLogger("airpods-mouse")
 
 # =========================================================================== configuration
 DEFAULTS = {
@@ -467,6 +469,11 @@ class AAPClient:
         raise NoAirPodsConnected()
 
     def connect(self):
+        if WINDOWS:                      # native Bluetooth stack + the windows/aap-poc driver, see aap_windows.py
+            import aap_windows
+            s, self.addr, self.pid = aap_windows.connect(self.want)
+            self._hello(s)
+            return
         self.addr = self._pick()
         if self.auto_connect and (bluez_dbus.available() or have_bluetoothctl()) and not bt_connected(self.addr):
             try:
@@ -476,6 +483,9 @@ class AAPClient:
         self.pid = product_id(self.addr)
         s = l2cap.open_seqpacket(self.addr, 0x1001, IOS_MTU, 8)   # ctypes path if Python lacks AF_BLUETOOTH
         s.settimeout(None)
+        self._hello(s)
+
+    def _hello(self, s):
         self.sock = s
         for p, d in ((PKT_HANDSHAKE, 0.3), (PKT_FEATURES, 0.15), (PKT_NOTIFICATIONS, 0.15)):
             s.send(p)
@@ -1564,6 +1574,10 @@ class Controller:
 
 
 def open_ctrl_socket():
+    if WINDOWS:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.bind(CTRL_UDP)
+        return s
     try:
         os.unlink(CTRL_SOCK)
     except FileNotFoundError:
@@ -1576,6 +1590,12 @@ def open_ctrl_socket():
 
 def run(cfg, cfg_path, diag=False, web_port=8737, opentrack=False, joystick=False):
     ctrl = open_ctrl_socket()
+    if WINDOWS:
+        import aap_windows
+        aap_windows.raise_timer_resolution()
+        if not diag:
+            log.warning("Mouse mode is not available on Windows yet: running as --diag")
+            diag = True
     ptr = NullPointer() if diag else Pointer()
     ctl = Controller(cfg, ptr, diag=diag, cfg_path=cfg_path)
     try:                       # gestes tête / mâchoire : module optionnel, ne doit jamais bloquer la souris
@@ -1694,7 +1714,8 @@ def run(cfg, cfg_path, diag=False, web_port=8737, opentrack=False, joystick=Fals
                         last_recovery[0] = now
                         log.warning("Capteurs non annoncés — reconnexion Bluetooth complète")
                         aap.close()
-                        bt_disconnect(aap.addr)
+                        if not WINDOWS:              # no BlueZ there; reopening the driver channel is all we can do
+                            bt_disconnect(aap.addr)
                         time.sleep(2)
                         raise OSError("relance Bluetooth")
                     if aap.place == "case" and aap.pid == "2013" and not aap.rhid_devs and not warned_case:
@@ -2042,6 +2063,10 @@ def settings_window(cfg_path):
 
 # =========================================================================== CLI
 def send_command(cmd):
+    if WINDOWS:                          # UDP cannot tell whether the controller is listening
+        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as u:
+            u.sendto(cmd.encode(), CTRL_UDP)
+        return 0
     s = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
     try:
         s.sendto(cmd.encode(), CTRL_SOCK)
