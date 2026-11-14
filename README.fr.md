@@ -128,7 +128,7 @@ Testé dans un autre jeu ? [Raconte-nous](https://github.com/starman-tech/mousep
 |---|---|
 | Linux, GNOME / KDE, Wayland et X11 | ✅ (Ubuntu 24.04, Bazzite) |
 | Distributions immuables (Bazzite, Fedora Atomic, SteamOS) | ✅ Flatpak, ou distrobox depuis le code |
-| Windows | ❌ pas encore : Windows n'ouvre pas aux applis le canal Bluetooth des AirPods |
+| Windows | 🧪 expérimental : flux des capteurs et `--diag` via un pilote signé en mode test, pas encore de souris. Voir [docs/WINDOWS.md](docs/WINDOWS.md) |
 | macOS | ❌ inutile : l'API d'Apple donne déjà le suivi de tête |
 | Android | ❌ pas encore : il faut une pile Bluetooth qui autorise ce canal |
 
